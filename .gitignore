@@ -1,0 +1,143 @@
+# ========================================
+# ENVIRONMENT & SECRETS
+# ========================================
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+.env.test.local
+.DS_Store
+*.pem
+
+# ========================================
+# DEPENDENCIES
+# ========================================
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bower_components/
+
+# ========================================
+# BUILD & DIST
+# ========================================
+dist/
+dist-ssr/
+*.local
+build/
+out/
+.next/
+.nuxt/
+coverage/
+.nyc_output/
+
+# ========================================
+# TESTING
+# ========================================
+.mocha
+.nyc_output
+coverage
+test/coverage
+jest.coverage
+
+# ========================================
+# EDITOR & IDE
+# ========================================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+*.sw?
+.project
+.pydevproject
+.settings/
+.sublime-workspace
+.sublime-project
+*.iml
+*.iws
+*.ipr
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# ========================================
+# OS & FILES
+# ========================================
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# ========================================
+# LOGS
+# ========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+debug.log
+
+# ========================================
+# RUNTIME
+# ========================================
+.vercel
+.netlify
+.firebase
+.aws-sam/build/
+
+# ========================================
+# DATABASE
+# ========================================
+*.db
+*.sqlite
+*.sqlite3
+data/
+db/
+
+# ========================================
+# UPLOADS & TEMP
+# ========================================
+uploads/
+temp/
+tmp/
+cache/
+public/uploads/
+public/images/
+
+# ========================================
+# CREDENTIALS & KEYS
+# ========================================
+*.key
+*.pem
+.ssh/
+credentials.json
+service-account-key.json
+
+# ========================================
+# PACKAGE MANAGERS
+# ========================================
+.npmrc
+.yarnrc
+.yarnrc.yml
+
+# ========================================
+# MISC
+# ========================================
+.env.vault
+.cache/
+.eslintcache
+.prettierignore
+.prettierignore.local
+.stylelintcache

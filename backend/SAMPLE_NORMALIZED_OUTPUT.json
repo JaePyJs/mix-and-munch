@@ -1,0 +1,320 @@
+{
+  "status": "success",
+  "timestamp": "2025-10-30T17:46:48.534Z",
+  "data": {
+    "recipes": [
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "title": "Classic Chicken Adobo Recipe",
+        "description": "A traditional Filipino dish where chicken is braised in a savory mixture of vinegar, garlic, and soy sauce.",
+        "author": "Marty Yee",
+        "source_url": "https://panlasangpinoy.com/chicken-adobo-recipe/",
+        "source_site": "https://panlasangpinoy.com",
+        "publication_date": "2023-06-15T10:30:00Z",
+        "crawled_date": "2025-10-30T17:46:48.534Z",
+        "last_updated": "2025-10-30T17:46:48.534Z",
+        "servings": "4-6 servings",
+        "prep_time": "15 minutes",
+        "cook_time": "45 minutes",
+        "total_time": "60 minutes",
+        "primary_image_url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/chicken-adobo.jpg",
+        "image_attribution": "Image courtesy of panlasangpinoy.com",
+        "images": [
+          {
+            "url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/adobo-step1.jpg",
+            "attribution": "Image courtesy of panlasangpinoy.com",
+            "alt": "Raw chicken pieces and garlic",
+            "position": 1
+          },
+          {
+            "url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/adobo-step2.jpg",
+            "attribution": "Image courtesy of panlasangpinoy.com",
+            "alt": "Chicken browning in pan",
+            "position": 2
+          },
+          {
+            "url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/adobo-final.jpg",
+            "attribution": "Image courtesy of panlasangpinoy.com",
+            "alt": "Finished adobo dish",
+            "position": 3
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "chicken pieces",
+            "quantity": "2",
+            "unit": "lbs",
+            "notes": "cut into bite-sized pieces"
+          },
+          {
+            "item": "white vinegar",
+            "quantity": "1",
+            "unit": "cup",
+            "notes": "or palm vinegar for authentic taste"
+          },
+          {
+            "item": "soy sauce",
+            "quantity": "0.5",
+            "unit": "cup",
+            "notes": "or tamari for gluten-free"
+          },
+          {
+            "item": "garlic",
+            "quantity": "8",
+            "unit": "cloves",
+            "notes": "minced"
+          },
+          {
+            "item": "black pepper",
+            "quantity": "1",
+            "unit": "teaspoon",
+            "notes": "freshly ground"
+          },
+          {
+            "item": "bay leaves",
+            "quantity": "3",
+            "unit": "whole",
+            "notes": ""
+          },
+          {
+            "item": "olive oil",
+            "quantity": "2",
+            "unit": "tablespoons",
+            "notes": ""
+          }
+        ],
+        "instructions": [
+          {
+            "@type": "HowToStep",
+            "step_number": 1,
+            "text": "Heat olive oil in a large pan over medium-high heat.",
+            "duration": "2 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 2,
+            "text": "Add minced garlic and sauté until fragrant.",
+            "duration": "1 minute"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 3,
+            "text": "Add chicken pieces and brown on all sides.",
+            "duration": "8 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 4,
+            "text": "Pour in vinegar and soy sauce. Add bay leaves and black pepper.",
+            "duration": "2 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 5,
+            "text": "Reduce heat and simmer covered for 30-40 minutes until chicken is tender.",
+            "duration": "35 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 6,
+            "text": "Adjust seasoning and serve hot with rice.",
+            "duration": "5 minutes"
+          }
+        ],
+        "tags": ["Filipino", "Chicken", "Comfort Food", "Traditional", "Easy"],
+        "category": "Filipino",
+        "cuisine": "Filipino",
+        "meal_type": ["Lunch", "Dinner"],
+        "dietary_tags": ["Gluten-Free Optional", "Dairy-Free"],
+        "rating": 4.7,
+        "review_count": 128,
+        "nutrition": {
+          "serving_size": "1 serving",
+          "calories": 450,
+          "protein_g": 35,
+          "carbs_g": 8,
+          "fat_g": 30,
+          "fiber_g": 1
+        },
+        "is_featured": true,
+        "status": "active"
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440001",
+        "title": "Crispy Garlic Fried Rice",
+        "description": "Savory Filipino-style fried rice loaded with garlic and topped with a fried egg.",
+        "author": "Ian Corpuz",
+        "source_url": "https://www.iankewks.com/fried-rice/",
+        "source_site": "https://www.iankewks.com",
+        "publication_date": "2023-05-20T14:22:00Z",
+        "crawled_date": "2025-10-30T17:46:48.534Z",
+        "last_updated": "2025-10-30T17:46:48.534Z",
+        "servings": "3-4 servings",
+        "prep_time": "10 minutes",
+        "cook_time": "15 minutes",
+        "total_time": "25 minutes",
+        "primary_image_url": "https://www.iankewks.com/wp-content/uploads/2023/05/fried-rice.jpg",
+        "image_attribution": "Image courtesy of iankewks.com",
+        "images": [
+          {
+            "url": "https://www.iankewks.com/wp-content/uploads/2023/05/garlic-prep.jpg",
+            "attribution": "Image courtesy of iankewks.com",
+            "alt": "Minced garlic ready for cooking",
+            "position": 1
+          }
+        ],
+        "ingredients": [
+          {
+            "item": "cooked rice",
+            "quantity": "3",
+            "unit": "cups",
+            "notes": "day-old rice works best"
+          },
+          {
+            "item": "garlic",
+            "quantity": "12",
+            "unit": "cloves",
+            "notes": "minced"
+          },
+          {
+            "item": "eggs",
+            "quantity": "3",
+            "unit": "whole",
+            "notes": "for topping"
+          },
+          {
+            "item": "soy sauce",
+            "quantity": "2",
+            "unit": "tablespoons",
+            "notes": ""
+          },
+          {
+            "item": "vegetable oil",
+            "quantity": "3",
+            "unit": "tablespoons",
+            "notes": ""
+          }
+        ],
+        "instructions": [
+          {
+            "@type": "HowToStep",
+            "step_number": 1,
+            "text": "Heat oil in a wok over high heat.",
+            "duration": "2 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 2,
+            "text": "Add garlic and stir-fry until golden.",
+            "duration": "3 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 3,
+            "text": "Add rice and break up clumps. Stir-fry for 5 minutes.",
+            "duration": "5 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 4,
+            "text": "Drizzle soy sauce and mix well.",
+            "duration": "1 minute"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 5,
+            "text": "In another pan, fry eggs until sunny-side up.",
+            "duration": "3 minutes"
+          },
+          {
+            "@type": "HowToStep",
+            "step_number": 6,
+            "text": "Serve fried rice topped with fried egg.",
+            "duration": "2 minutes"
+          }
+        ],
+        "tags": ["Filipino", "Rice", "Quick & Easy", "Budget-Friendly"],
+        "category": "Filipino",
+        "cuisine": "Filipino",
+        "meal_type": ["Lunch", "Dinner"],
+        "dietary_tags": ["Vegetarian Option"],
+        "rating": 4.5,
+        "review_count": 87,
+        "is_featured": false,
+        "status": "active"
+      }
+    ],
+    "content_creators": [
+      {
+        "id": "creator-001",
+        "name": "Ninong Ry",
+        "platform": "YouTube",
+        "channel_url": "https://www.youtube.com/@NinongRy",
+        "follower_count": 125000,
+        "last_checked": "2025-10-30T17:46:48.534Z",
+        "is_active": true,
+        "content_samples": [
+          {
+            "id": "video-001",
+            "title": "How to Make Authentic Adobo",
+            "content_url": "https://www.youtube.com/watch?v=abc123",
+            "content_type": "video",
+            "thumbnail_url": "https://i.ytimg.com/vi/abc123/maxresdefault.jpg",
+            "publish_date": "2025-10-20T10:30:00Z",
+            "extracted_recipe": {
+              "title": "Authentic Chicken Adobo",
+              "ingredients": [
+                { "item": "chicken", "quantity": "2", "unit": "lbs" },
+                { "item": "vinegar", "quantity": "1", "unit": "cup" }
+              ],
+              "instructions": [
+                "Brown chicken in oil",
+                "Add vinegar and soy sauce",
+                "Simmer for 40 minutes"
+              ]
+            },
+            "needs_review": false,
+            "reviewed_date": "2025-10-25T15:30:00Z"
+          }
+        ]
+      }
+    ],
+    "crawl_statistics": {
+      "total_recipes_found": 247,
+      "new_recipes": 15,
+      "updated_recipes": 8,
+      "sites_crawled": 10,
+      "creators_parsed": 6,
+      "crawl_duration_seconds": 245,
+      "errors": [
+        {
+          "site": "https://www.foxyfolksy.com",
+          "error": "Connection timeout",
+          "timestamp": "2025-10-30T17:30:45.123Z"
+        }
+      ]
+    },
+    "image_statistics": {
+      "total_images_extracted": 892,
+      "images_with_attribution": 892,
+      "broken_images": 3,
+      "image_sources": {
+        "panlasangpinoy.com": 180,
+        "kawalingpinoy.com": 165,
+        "angsarap.net": 142,
+        "other": 405
+      }
+    }
+  },
+  "metadata": {
+    "schema_version": "1.0",
+    "generated_at": "2025-10-30T17:46:48.534Z",
+    "api_version": "v1",
+    "notes": {
+      "image_attribution": "All images include original source attribution as 'Image courtesy of [domain]'",
+      "copyright": "Recipe content respects original sources and their terms of service",
+      "deduplication": "Recipes are deduplicated using title hash and ingredient similarity scoring",
+      "data_quality": "All data validated for completeness and accuracy"
+    }
+  }
+}

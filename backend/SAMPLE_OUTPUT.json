@@ -1,0 +1,213 @@
+{
+  "recipes": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "title": "Traditional Chicken Adobo",
+      "author": "Chef María",
+      "source_url": "https://panlasangpinoy.com/chicken-adobo-recipe/",
+      "source_site": "https://panlasangpinoy.com",
+      "description": "Classic Filipino chicken adobo recipe cooked in vinegar, soy sauce, and garlic. Perfect for family gatherings.",
+      "servings": "4-6 servings",
+      "prep_time": "15 minutes",
+      "cook_time": "45 minutes",
+      "total_time": "60 minutes",
+      "ingredients": [
+        {
+          "item": "1.5 kg chicken, cut into pieces",
+          "quantity": "1.5 kg"
+        },
+        {
+          "item": "1/2 cup white vinegar",
+          "quantity": "1/2 cup"
+        },
+        {
+          "item": "1/2 cup soy sauce",
+          "quantity": "1/2 cup"
+        },
+        {
+          "item": "6 cloves garlic, crushed",
+          "quantity": "6 cloves"
+        },
+        {
+          "item": "1 teaspoon whole black peppercorns",
+          "quantity": "1 teaspoon"
+        },
+        {
+          "item": "2 tablespoons oil",
+          "quantity": "2 tablespoons"
+        },
+        {
+          "item": "1 cup water",
+          "quantity": "1 cup"
+        }
+      ],
+      "instructions": [
+        {
+          "@type": "HowToStep",
+          "text": "Heat oil in a large pan. Brown the chicken pieces on all sides. Remove and set aside."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "In the same pan, sauté garlic until fragrant. Add vinegar and soy sauce."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Return chicken to the pan. Add black peppercorns and water."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Bring to a boil, then reduce heat and simmer covered for 45 minutes until chicken is tender."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Serve hot with white rice."
+        }
+      ],
+      "tags": [
+        "Filipino",
+        "Chicken",
+        "Savory",
+        "Main Course",
+        "Weeknight Meal"
+      ],
+      "category": "Filipino",
+      "rating": 4.8,
+      "review_count": 156,
+      "primary_image_url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/chicken-adobo-1.jpg",
+      "image_attribution": "Image courtesy of panlasangpinoy.com",
+      "publication_date": "2023-06-15T10:30:00Z",
+      "crawled_date": "2025-10-30T16:42:17.359Z",
+      "last_updated": "2025-10-30T16:42:17.359Z",
+      "is_featured": true,
+      "status": "active",
+      "images": [
+        {
+          "url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/chicken-adobo-step1.jpg",
+          "attribution": "Image courtesy of panlasangpinoy.com",
+          "alt": "Browning chicken for adobo",
+          "position": 0
+        },
+        {
+          "url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/chicken-adobo-step2.jpg",
+          "attribution": "Image courtesy of panlasangpinoy.com",
+          "alt": "Sautéing garlic",
+          "position": 1
+        },
+        {
+          "url": "https://panlasangpinoy.com/wp-content/uploads/2023/06/chicken-adobo-final.jpg",
+          "attribution": "Image courtesy of panlasangpinoy.com",
+          "alt": "Final adobo dish with rice",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "title": "Sinigang na Pork",
+      "author": "Chef Juan",
+      "source_url": "https://www.kawalingpinoy.com/sinigang-recipe/",
+      "source_site": "https://www.kawalingpinoy.com",
+      "description": "Authentic Filipino sinigang - a tamarind-based stew with pork ribs and vegetables. Comfort food at its best.",
+      "servings": "6-8 servings",
+      "prep_time": "20 minutes",
+      "cook_time": "60 minutes",
+      "total_time": "80 minutes",
+      "ingredients": [
+        {
+          "item": "2 kg pork ribs or pork shoulder, cut into chunks",
+          "quantity": "2 kg"
+        },
+        {
+          "item": "1 tablespoon salt",
+          "quantity": "1 tablespoon"
+        },
+        {
+          "item": "10 pieces radish (labanos), quartered",
+          "quantity": "10 pieces"
+        },
+        {
+          "item": "1 bundle water spinach (kangkong)",
+          "quantity": "1 bundle"
+        },
+        {
+          "item": "2 pieces ginger, sliced",
+          "quantity": "2 pieces"
+        },
+        {
+          "item": "6 cloves garlic, minced",
+          "quantity": "6 cloves"
+        },
+        {
+          "item": "1 onion, quartered",
+          "quantity": "1 onion"
+        },
+        {
+          "item": "1 large tamarind fruit or 2 tablespoons tamarind paste",
+          "quantity": "1 large"
+        },
+        {
+          "item": "8 cups water or pork broth",
+          "quantity": "8 cups"
+        }
+      ],
+      "instructions": [
+        {
+          "@type": "HowToStep",
+          "text": "In a pot, bring water to boil. Add pork and salt. Boil for 30 minutes, skimming off impurities."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Add onion, garlic, and ginger. Simmer for 15 minutes."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Add tamarind and radish. Simmer for 20 minutes until pork is tender."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Add water spinach. Cook for 3-5 minutes until wilted."
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Adjust seasoning with salt and serve hot."
+        }
+      ],
+      "tags": [
+        "Filipino",
+        "Pork",
+        "Soup",
+        "Tamarind",
+        "Comfort Food"
+      ],
+      "category": "Filipino",
+      "rating": 4.6,
+      "review_count": 89,
+      "primary_image_url": "https://www.kawalingpinoy.com/wp-content/uploads/sinigang-1.jpg",
+      "image_attribution": "Image courtesy of kawalingpinoy.com",
+      "publication_date": "2023-05-20T14:15:00Z",
+      "crawled_date": "2025-10-30T16:42:17.359Z",
+      "last_updated": "2025-10-30T16:42:17.359Z",
+      "is_featured": false,
+      "status": "active",
+      "images": [
+        {
+          "url": "https://www.kawalingpinoy.com/wp-content/uploads/sinigang-pot.jpg",
+          "attribution": "Image courtesy of kawalingpinoy.com",
+          "alt": "Pot of sinigang simmering",
+          "position": 0
+        },
+        {
+          "url": "https://www.kawalingpinoy.com/wp-content/uploads/sinigang-served.jpg",
+          "attribution": "Image courtesy of kawalingpinoy.com",
+          "alt": "Sinigang served in a bowl",
+          "position": 1
+        }
+      ]
+    }
+  ],
+  "statistics": {
+    "total_recipes": 2,
+    "sample_only": true,
+    "note": "This is a sample output showing the structure of crawled recipes with proper image attribution"
+  }
+}

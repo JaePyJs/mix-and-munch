@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mix & Munch - Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            color: #4CAF50;
+            margin-top: 10px;
+        }
+
+        .dashboard-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .section-header h2 {
+            color: #333;
+            font-size: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #da190b;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .table th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table tr:hover {
+            background: #fafafa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-active {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .badge-draft {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+
+        .badge-archived {
+            background: #ffccbc;
+            color: #d84315;
+        }
+
+        .badge-pending {
+            background: #f8bbd0;
+            color: #c2185b;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: #999;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .image-preview {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .close-btn {
+            font-size: 28px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th, .table td {
+                padding: 8px;
+            }
+
+            button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍲 Mix & Munch Admin Dashboard</h1>
+            <p class="header-subtitle">Recipe Crawler & Content Management System</p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <h3>Total Recipes</h3>
+                <div class="stat-value" id="totalRecipes">--</div>
+                <div class="stat-change">+15 this week</div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Recipes</h3>
+                <div class="stat-value" id="activeRecipes">--</div>
+                <div class="stat-change">Published</div>
+            </div>
+            <div class="stat-card">
+                <h3>Content Creators</h3>
+                <div class="stat-value" id="totalCreators">--</div>
+                <div class="stat-change">Being tracked</div>
+            </div>
+            <div class="stat-card">
+                <h3>Pending Reviews</h3>
+                <div class="stat-value" id="pendingReviews">--</div>
+                <div class="stat-change">Awaiting approval</div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('recipes')">📋 Recipes</button>
+                <button class="tab" onclick="switchTab('creators')">🎥 Creators</button>
+                <button class="tab" onclick="switchTab('reviews')">👁️ Reviews</button>
+                <button class="tab" onclick="switchTab('crawls')">🕷️ Crawls</button>
+            </div>
+
+            <!-- Recipes Tab -->
+            <div id="recipes" class="tab-content active">
+                <div class="section-header">
+                    <h2>Recipe Management</h2>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="refreshRecipes()">🔄 Refresh</button>
+                        <button class="btn-primary" onclick="triggerCrawl()">🕷️ Start Crawl</button>
+                    </div>
+                </div>
+                <div id="recipesContainer" class="loading">Loading recipes...</div>
+            </div>
+
+            <!-- Creators Tab -->
+            <div id="creators" class="tab-content">
+                <div class="section-header">
+                    <h2>Content Creators</h2>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="refreshCreators()">🔄 Refresh</button>
+                        <button class="btn-primary" onclick="triggerParse()">📺 Parse Content</button>
+                    </div>
+                </div>
+                <div id="creatorsContainer" class="loading">Loading creators...</div>
+            </div>
+
+            <!-- Reviews Tab -->
+            <div id="reviews" class="tab-content">
+                <div class="section-header">
+                    <h2>Pending Content Reviews</h2>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="refreshReviews()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="reviewsContainer" class="loading">Loading pending reviews...</div>
+            </div>
+
+            <!-- Crawls Tab -->
+            <div id="crawls" class="tab-content">
+                <div class="section-header">
+                    <h2>Crawl Logs</h2>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="refreshCrawlLogs()">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div id="crawlsContainer" class="loading">Loading crawl logs...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notification" style="position: fixed; top: 20px; right: 20px; padding: 15px 20px; border-radius: 4px; display: none; z-index: 2000; min-width: 300px;"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001/api';
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabName === 'recipes') refreshRecipes();
+            else if (tabName === 'creators') refreshCreators();
+            else if (tabName === 'reviews') refreshReviews();
+            else if (tabName === 'crawls') refreshCrawlLogs();
+        }
+
+        function notify(message, type = 'success') {
+            const notif = document.getElementById('notification');
+            notif.textContent = message;
+            notif.className = type;
+            notif.style.display = 'block';
+            setTimeout(() => notif.style.display = 'none', 3000);
+        }
+
+        async function refreshRecipes() {
+            const container = document.getElementById('recipesContainer');
+            container.innerHTML = '<div class="loading">Loading recipes...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/recipes?limit=50`);
+                const data = await response.json();
+
+                const recipes = data.data || [];
+                const totalRecipes = data.pagination?.total || recipes.length;
+
+                document.getElementById('totalRecipes').textContent = totalRecipes;
+
+                if (recipes.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">No recipes found</p>';
+                    return;
+                }
+
+                let html = `<table class="table"><thead><tr>
+                    <th>Title</th>
+                    <th>Source</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr></thead><tbody>`;
+
+                recipes.forEach(recipe => {
+                    const status = recipe.status || 'active';
+                    const badgeClass = `badge-${status}`;
+                    const created = new Date(recipe.crawled_date).toLocaleDateString();
+                    
+                    html += `<tr>
+                        <td><strong>${recipe.title || 'Unknown'}</strong></td>
+                        <td>${new URL(recipe.source_site).hostname}</td>
+                        <td><span class="badge ${badgeClass}">${status}</span></td>
+                        <td>${created}</td>
+                        <td>
+                            <button class="btn-success" onclick="viewRecipe('${recipe.id}')" style="padding: 5px 10px; font-size: 12px;">View</button>
+                        </td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `<div class="error">Error loading recipes: ${error.message}</div>`;
+            }
+        }
+
+        async function refreshCreators() {
+            const container = document.getElementById('creatorsContainer');
+            container.innerHTML = '<div class="loading">Loading creators...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/recipes`);
+                const data = await response.json();
+                const recipes = data.data || [];
+                
+                // Extract unique creators
+                const creators = new Map();
+                recipes.forEach(recipe => {
+                    if (recipe.author && !creators.has(recipe.author)) {
+                        creators.set(recipe.author, recipe);
+                    }
+                });
+
+                document.getElementById('totalCreators').textContent = creators.size;
+
+                if (creators.size === 0) {
+                    container.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">No creators found</p>';
+                    return;
+                }
+
+                let html = `<table class="table"><thead><tr>
+                    <th>Creator</th>
+                    <th>Recipes</th>
+                    <th>Last Updated</th>
+                </tr></thead><tbody>`;
+
+                let index = 0;
+                creators.forEach((recipe, creatorName) => {
+                    if (index < 20) {
+                        const updated = new Date(recipe.last_updated).toLocaleDateString();
+                        html += `<tr><td>${creatorName}</td><td>1+</td><td>${updated}</td></tr>`;
+                        index++;
+                    }
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+                notify('Creators loaded');
+            } catch (error) {
+                container.innerHTML = `<div class="error">Error loading creators: ${error.message}</div>`;
+            }
+        }
+
+        async function refreshReviews() {
+            const container = document.getElementById('reviewsContainer');
+            container.innerHTML = '<div class="loading">Loading reviews...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/reviews/pending`);
+                const data = await response.json();
+                const reviews = data.data || [];
+
+                document.getElementById('pendingReviews').textContent = reviews.length;
+
+                if (reviews.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">No pending reviews</p>';
+                    return;
+                }
+
+                let html = `<table class="table"><thead><tr>
+                    <th>Title</th>
+                    <th>Creator</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr></thead><tbody>`;
+
+                reviews.slice(0, 20).forEach(review => {
+                    html += `<tr>
+                        <td>${review.title || 'Unknown'}</td>
+                        <td>${review.name || 'Unknown'}</td>
+                        <td><span class="badge badge-pending">PENDING</span></td>
+                        <td>
+                            <button class="btn-success" onclick="approveReview('${review.id}')" style="padding: 5px 10px; font-size: 12px;">Approve</button>
+                        </td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `<div class="error">Error loading reviews: ${error.message}</div>`;
+            }
+        }
+
+        async function refreshCrawlLogs() {
+            const container = document.getElementById('crawlsContainer');
+            container.innerHTML = '<div class="loading">Loading crawl logs...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE}/crawler/logs?limit=50`);
+                const data = await response.json();
+                const logs = data.data || [];
+
+                if (logs.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">No crawl logs available</p>';
+                    return;
+                }
+
+                let html = `<table class="table"><thead><tr>
+                    <th>Site</th>
+                    <th>Status</th>
+                    <th>Recipes Found</th>
+                    <th>Timestamp</th>
+                </tr></thead><tbody>`;
+
+                logs.slice(0, 30).forEach(log => {
+                    const status = log.status || 'unknown';
+                    const badgeClass = status === 'success' ? 'badge-active' : 'badge-archived';
+                    const timestamp = new Date(log.start_time).toLocaleString();
+                    
+                    html += `<tr>
+                        <td>${log.site_url || 'Unknown'}</td>
+                        <td><span class="badge ${badgeClass}">${status.toUpperCase()}</span></td>
+                        <td>${log.recipes_found || 0}</td>
+                        <td>${timestamp}</td>
+                    </tr>`;
+                });
+
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `<div class="error">Error loading crawl logs: ${error.message}</div>`;
+            }
+        }
+
+        async function triggerCrawl() {
+            try {
+                const response = await fetch(`${API_BASE}/crawler/websites`, { method: 'POST' });
+                const data = await response.json();
+                notify('Crawl started!', 'success');
+                setTimeout(refreshRecipes, 2000);
+            } catch (error) {
+                notify(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function triggerParse() {
+            try {
+                const response = await fetch(`${API_BASE}/crawler/creators`, { method: 'POST' });
+                const data = await response.json();
+                notify('Content parsing started!', 'success');
+                setTimeout(refreshCreators, 2000);
+            } catch (error) {
+                notify(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        function viewRecipe(id) {
+            notify(`Viewing recipe ${id}`, 'success');
+        }
+
+        function approveReview(id) {
+            notify(`Approved review ${id}`, 'success');
+            refreshReviews();
+        }
+
+        // Load dashboard on page load
+        window.addEventListener('load', () => {
+            refreshRecipes();
+            refreshCreators();
+            refreshReviews();
+            refreshCrawlLogs();
+
+            // Refresh every 30 seconds
+            setInterval(() => {
+                if (document.getElementById('recipes').classList.contains('active')) {
+                    refreshRecipes();
+                }
+            }, 30000);
+        });
+    </script>
+</body>
+</html>

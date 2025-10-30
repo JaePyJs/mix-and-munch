@@ -1,0 +1,33 @@
+{
+  "name": "mix-munch-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Production backend for Mix & Munch recipe crawler, parser, and image extractor",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "crawl": "node src/services/websiteCrawler.js",
+    "parse": "node src/services/contentParser.js",
+    "crawl-images": "node src/services/imageExtractor.js",
+    "test": "node --test src/**/*.test.js",
+    "admin-dashboard": "node src/admin/dashboard.js",
+    "scheduler": "node src/scheduler/cronJobs.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "better-sqlite3": "^9.0.0",
+    "dotenv": "^16.3.1",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "node-schedule": "^2.1.1",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.54.0"
+  }
+}

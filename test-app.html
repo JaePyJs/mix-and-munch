@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mix & Munch - Test App</title>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .brand-lime { background-color: #A3E635; }
+    .brand-gray-950 { background-color: #09090b; }
+    .brand-gray-900 { background-color: #18181b; }
+    .brand-gray-800 { background-color: #27272a; }
+    .text-brand-lime { color: #A3E635; }
+    .text-brand-gray-200 { color: #d4d4d8; }
+  </style>
+</head>
+<body class="brand-gray-950 text-white">
+  <div id="root"></div>
+
+  <script>
+    // State management
+    let state = {
+      currentPage: 'home',
+      ingredients: [],
+      chatMessages: [],
+      chatInput: '',
+      loading: false,
+      menuOpen: false,
+      lastRecipeImage: null
+    };
+
+    const commonIngredients = ['Rice', 'Chicken', 'Garlic', 'Onion', 'Banana', 'Ketchup', 'Egg', 'Tomato', 'Fish', 'Vinegar', 'Coconut Milk', 'Pork'];
+
+    const mockRecipes = [
+      {
+        text: '🍽️ Filipino Adobo\n\n📝 Ingredients:\n• 2 lbs chicken\n• 4 cloves garlic\n• 1 cup vinegar\n• 3 tbsp soy sauce\n• 2 cups water\n• 2 bay leaves\n• Oil and salt\n\n👨‍🍳 Steps:\n1. Heat oil and sauté garlic\n2. Add chicken and brown on all sides\n3. Pour vinegar and soy sauce\n4. Add water and bay leaves\n5. Simmer 30 minutes until tender\n6. Serve hot with rice',
+        image: 'https://via.placeholder.com/400x300/8B4513/ffffff?text=Filipino+Adobo'
+      },
+      {
+        text: '🍚 Garlic Fried Rice\n\n📝 Ingredients:\n• 3 cups cooked rice\n• 5 cloves garlic\n• 2 eggs\n• 3 tbsp oil\n• Salt and pepper\n• 1/4 cup green peas\n\n👨‍🍳 Steps:\n1. Heat oil in wok\n2. Sauté minced garlic until fragrant\n3. Add rice and stir-fry\n4. Push rice to sides, scramble eggs\n5. Mix everything together\n6. Add peas, season to taste',
+        image: 'https://via.placeholder.com/400x300/DAA520/ffffff?text=Garlic+Fried+Rice'
+      },
+      {
+        text: '🍌 Banana Cue\n\n📝 Ingredients:\n• 4 cooking bananas\n• 1 cup brown sugar\n• 4 tbsp oil\n• Pinch of salt\n\n👨‍🍳 Steps:\n1. Heat oil in pan\n2. Coat banana pieces in brown sugar\n3. Fry until golden and caramelized\n4. Remove and cool on paper towel\n5. Serve as dessert or snack',
+        image: 'https://via.placeholder.com/400x300/FFD700/ffffff?text=Banana+Cue'
+      }
+    ];
+
+    function generateMockRecipe() {
+      return mockRecipes[Math.floor(Math.random() * mockRecipes.length)];
+    }
+
+    function addIngredient(ing) {
+      if (!state.ingredients.includes(ing)) {
+        state.ingredients.push(ing);
+        render();
+      }
+    }
+
+    function removeIngredient(ing) {
+      state.ingredients = state.ingredients.filter(i => i !== ing);
+      render();
+    }
+
+    function setPage(page) {
+      state.currentPage = page;
+      state.menuOpen = false;
+      render();
+    }
+
+    function sendMessage() {
+      if (!state.chatInput.trim()) return;
+
+      // Add user message
+      state.chatMessages.push({
+        role: 'user',
+        content: state.chatInput
+      });
+
+      const userInput = state.chatInput;
+      state.chatInput = '';
+      state.loading = true;
+      state.lastRecipeImage = null;
+      render();
+
+      // Simulate API delay
+      setTimeout(() => {
+        const recipe = generateMockRecipe();
+        state.lastRecipeImage = recipe.image;
+        state.chatMessages.push({
+          role: 'assistant',
+          content: recipe.text
+        });
+        state.loading = false;
+        render();
+        
+        // Auto-scroll to bottom
+        setTimeout(() => {
+          const messagesDiv = document.getElementById('messages');
+          if (messagesDiv) messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 0);
+      }, 1500);
+    }
+
+    function renderHome() {
+      return `
+        <div class="min-h-screen brand-gray-950 text-white">
+          <!-- Header -->
+          <div class="flex justify-between items-center p-4 md:p-6 border-b border-gray-700">
+            <h1 class="text-2xl md:text-3xl font-bold">Mix & Munch</h1>
+            <button onclick="toggleMenu()" class="md:hidden brand-lime text-black px-3 py-2 rounded font-bold">☰</button>
+            <div class="${state.menuOpen ? 'block' : 'hidden'} md:block absolute md:relative top-16 md:top-0 left-0 md:left-auto right-0 md:right-auto brand-gray-900 md:brand-gray-950 p-4 md:p-0 space-y-2 md:space-y-0 md:space-x-4 z-10">
+              <button onclick="setPage('create')" class="block w-full md:inline-block brand-lime text-black px-4 py-2 rounded font-semibold hover:opacity-90">Create Recipe</button>
+              <button onclick="setPage('chat')" class="block w-full md:inline-block brand-gray-800 text-brand-lime px-4 py-2 rounded font-semibold hover:bg-gray-700">Chat</button>
+            </div>
+          </div>
+
+          <!-- Hero Section -->
+          <div class="flex flex-col items-center justify-center min-h-screen px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 text-brand-lime">Welcome to Mix & Munch</h2>
+            <p class="text-xl md:text-2xl text-brand-gray-200 mb-8">AI-Powered Filipino Recipe Generator</p>
+            <button onclick="setPage('create')" class="brand-lime text-black px-8 py-3 rounded-lg text-lg font-bold hover:opacity-90">Get Started →</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCreate() {
+      return `
+        <div class="min-h-screen brand-gray-950 text-white">
+          <!-- Header -->
+          <div class="flex justify-between items-center p-4 md:p-6 border-b border-gray-700">
+            <button onclick="setPage('home')" class="text-brand-lime font-bold">← Back</button>
+            <h1 class="text-2xl font-bold">Recipe Creator</h1>
+            <div></div>
+          </div>
+
+          <!-- Content -->
+          <div class="max-w-4xl mx-auto p-6">
+            <div class="brand-gray-900 p-6 rounded-lg mb-6">
+              <h2 class="text-xl font-bold mb-4">Select Ingredients</h2>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                ${commonIngredients.map(ing => `
+                  <button onclick="addIngredient('${ing}')" class="p-3 rounded text-sm font-medium transition ${
+                    state.ingredients.includes(ing)
+                      ? 'brand-lime text-black'
+                      : 'brand-gray-800 text-white hover:bg-gray-700'
+                  }">
+                    ${ing}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            ${state.ingredients.length > 0 ? `
+              <div class="brand-gray-900 p-6 rounded-lg mb-6">
+                <h3 class="text-lg font-bold mb-4">Selected Ingredients:</h3>
+                <div class="flex flex-wrap gap-2">
+                  ${state.ingredients.map(ing => `
+                    <span class="brand-lime text-black px-3 py-1 rounded-full flex items-center gap-2">
+                      ${ing}
+                      <button onclick="removeIngredient('${ing}')" class="ml-1 cursor-pointer hover:font-bold">✕</button>
+                    </span>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+
+            <button 
+              onclick="setPage('chat')"
+              ${state.ingredients.length === 0 ? 'disabled' : ''}
+              class="w-full brand-lime text-black px-6 py-3 rounded-lg text-lg font-bold hover:opacity-90 transition ${state.ingredients.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}">
+              Generate Recipe
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderChat() {
+      return `
+        <div class="min-h-screen brand-gray-950 text-white flex flex-col">
+          <!-- Header -->
+          <div class="flex justify-between items-center p-4 md:p-6 border-b border-gray-700">
+            <button onclick="setPage('home')" class="text-brand-lime font-bold">← Back</button>
+            <h1 class="text-2xl font-bold">Recipe Chat</h1>
+            <div></div>
+          </div>
+
+          <!-- Messages -->
+          <div id="messages" class="flex-1 overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full">
+            ${state.chatMessages.length === 0 ? `
+              <div class="text-center text-gray-400 py-12">
+                <p class="text-lg">Ask for a Filipino recipe! 🍽️</p>
+                <p class="text-sm">Ingredients: ${state.ingredients.join(', ') || 'Any available'}</p>
+              </div>
+            ` : ''}
+
+            ${state.chatMessages.map((msg, idx) => `
+              <div class="flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}">
+                <div class="max-w-xl px-4 py-3 rounded-lg whitespace-pre-wrap ${
+                  msg.role === 'user'
+                    ? 'brand-lime text-black'
+                    : 'brand-gray-800 text-white'
+                }">
+                  ${escapeHtml(msg.content)}
+                </div>
+              </div>
+            `).join('')}
+
+            ${state.loading ? `
+              <div class="flex justify-start">
+                <div class="brand-gray-800 text-white px-4 py-3 rounded-lg">
+                  ⏳ Generating recipe...
+                </div>
+              </div>
+            ` : ''}
+
+            ${state.lastRecipeImage ? `
+              <div class="flex justify-start">
+                <img src="${state.lastRecipeImage}" alt="Recipe" class="rounded-lg max-w-sm" onerror="this.src='https://via.placeholder.com/400x300?text=Recipe+Image'" />
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Input -->
+          <div class="border-t border-gray-700 p-4 md:p-6">
+            <div class="flex gap-2 max-w-4xl mx-auto">
+              <input
+                id="chatInput"
+                type="text"
+                placeholder="Ask for a recipe..."
+                class="flex-1 brand-gray-800 text-white px-4 py-2 rounded border border-gray-700 focus:outline-none focus:border-brand-lime"
+                ${state.loading ? 'disabled' : ''}
+                onkeypress="if(event.key==='Enter') sendMessage()"
+              />
+              <button
+                onclick="sendMessage()"
+                ${state.loading || !state.chatInput.trim() ? 'disabled' : ''}
+                class="brand-lime text-black px-4 py-2 rounded font-bold hover:opacity-90 transition ${state.loading || !state.chatInput.trim() ? 'opacity-50 cursor-not-allowed' : ''}">
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function toggleMenu() {
+      state.menuOpen = !state.menuOpen;
+      render();
+    }
+
+    function render() {
+      const root = document.getElementById('root');
+      let content;
+
+      switch(state.currentPage) {
+        case 'home':
+          content = renderHome();
+          break;
+        case 'create':
+          content = renderCreate();
+          break;
+        case 'chat':
+          content = renderChat();
+          break;
+        default:
+          content = renderHome();
+      }
+
+      root.innerHTML = content;
+
+      // Restore input value
+      if (state.currentPage === 'chat') {
+        const input = document.getElementById('chatInput');
+        if (input) {
+          input.value = state.chatInput;
+          if (state.chatMessages.length > 0) {
+            setTimeout(() => {
+              const messagesDiv = document.getElementById('messages');
+              if (messagesDiv) messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }, 0);
+          }
+        }
+      }
+    }
+
+    // Override sendMessage to update chatInput
+    const originalSendMessage = sendMessage;
+    window.sendMessage = function() {
+      const input = document.getElementById('chatInput');
+      if (input) state.chatInput = input.value;
+      originalSendMessage();
+    };
+
+    // Handle input changes
+    document.addEventListener('input', function(e) {
+      if (e.target.id === 'chatInput') {
+        state.chatInput = e.target.value;
+      }
+    });
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>
