@@ -15,12 +15,16 @@ interface SavedRecipe {
 export default function SavedRecipesPage() {
   const [recipes, setRecipes] = useState<SavedRecipe[]>([]);
   const [selectedRecipe, setSelectedRecipe] = useState<SavedRecipe | null>(null);
-  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
-    const saved = JSON.parse(localStorage.getItem('savedRecipes') || '[]');
-    setRecipes(saved);
+    setMounted(true);
+    try {
+      const saved = JSON.parse(localStorage.getItem('savedRecipes') || '[]');
+      setRecipes(saved);
+    } catch (error) {
+      console.error('Error loading saved recipes:', error);
+    }
   }, []);
 
   const deleteRecipe = (id: string) => {
@@ -40,7 +44,7 @@ export default function SavedRecipesPage() {
     a.click();
   };
 
-  if (!isClient) return null;
+  if (!mounted) return null;
 
   return (
     <div className="page-grid grid gap-4 pb-6 lg:gap-10 lg:grid-cols-[minmax(0,1.2fr),minmax(0,1.8fr)] lg:items-start">

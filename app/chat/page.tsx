@@ -29,17 +29,24 @@ const starterPrompts = [
 
 export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 'mix-intro',
-      role: 'assistant',
-      content:
-        '🍛 Kumusta! I am Mix, your Filipino AI culinary mentor. I transform ANY ingredients into delicious recipes.\n\n⚡ Even 2-3 items? No problem! I\'ll suggest pantry staples and create an incredible dish.\n\nTell me:\n• What ingredients do you have?\n• Any dietary preferences?\n• How much time do you have?\n\nLet\'s cook something amazing together! 🇵🇭',
-      createdAt: new Date()
-    }
-  ]);
+  const [mounted, setMounted] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Initialize with intro message only on client side
+    setMessages([
+      {
+        id: 'mix-intro',
+        role: 'assistant',
+        content:
+          '🍛 Kumusta! I am Mix, your Filipino AI culinary mentor. I transform ANY ingredients into delicious recipes.\n\n⚡ Even 2-3 items? No problem! I\'ll suggest pantry staples and create an incredible dish.\n\nTell me:\n• What ingredients do you have?\n• Any dietary preferences?\n• How much time do you have?\n\nLet\'s cook something amazing together! 🇵🇭',
+        createdAt: new Date()
+      }
+    ]);
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -127,6 +134,16 @@ export default function ChatPage() {
   const handleStarterPrompt = (prompt: string) => {
     setInput(prompt);
   };
+
+  if (!mounted) {
+    return (
+      <div className="page-grid flex items-center justify-center min-h-[500px]">
+        <div className="text-center">
+          <div className="animate-pulse text-brand-lime">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page-grid grid gap-4 pb-6 lg:gap-10 lg:grid-cols-[minmax(0,0.9fr),minmax(0,1.1fr)] lg:items-start">
