@@ -32,7 +32,28 @@ MANDATORY: Respond ONLY with the recipe card format. Be enthusiastic and proud o
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
-export async function POST(req: Request) {
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
+}
+
+export async function GET() {
+  return new Response(
+    JSON.stringify({ status: 'Chat API ready' }),
+    {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+}
+
+export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     const messages = body.messages || [];
@@ -110,7 +131,11 @@ export async function POST(req: Request) {
       });
 
       return new Response(readableStream, {
-        headers: { 'Content-Type': 'text/event-stream' },
+        status: 200,
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Access-Control-Allow-Origin': '*',
+        },
       });
 
     } catch (error) {
