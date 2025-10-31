@@ -1,6 +1,6 @@
 // FIX: Removed self-import of the 'Page' type which conflicted with its local declaration.
 
-export type Page = 'home' | 'demo' | 'meal-planner' | 'shopping-list';
+export type Page = 'home' | 'demo' | 'recipes' | 'favorites' | 'meal-planner' | 'shopping-list';
 
 export interface Ingredient {
   name: string;
@@ -17,15 +17,27 @@ export interface Comment {
 }
 
 export interface Recipe {
-  id: number;
-  name: string;
-  description: string;
-  matchScore?: number;
+  id: string;
+  title: string;
+  author?: string;
+  description?: string;
+  sourceUrl?: string;
+  sourceSite?: string;
+  servings?: string;
+  prepTime?: number;
+  cookTime?: number;
+  totalTime?: string;
   ingredients: Ingredient[];
   instructions: string[];
-  imageUrl: string;
-  comments?: Comment[];
+  image?: string;
+  primaryImageUrl?: string;
+  imageAttribution?: string;
+  rating?: number;
+  reviewCount?: number;
   category?: string;
+  tags?: string[];
+  comments?: Comment[];
+  matchScore?: number;
 }
 
 export interface ChatMessage {

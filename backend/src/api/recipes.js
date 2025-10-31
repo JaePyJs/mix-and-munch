@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from '../utils/logger.js';
 import { getDatabase } from '../database/db.js';
+import aiService from '../services/aiService.js';
 
 const router = express.Router();
 const db = getDatabase();
@@ -172,6 +173,87 @@ router.get('/stats/overview', (req, res) => {
   } catch (error) {
     logger.error(`Stats error: ${error.message}`);
     res.status(500).json({ error: 'Failed to fetch stats' });
+  }
+});
+
+// Generate recipe from ingredients (AI-powered Gemini)
+router.post('/generate', async (req, res) => {
+  try {
+    const { ingredients, preferences } = req.body;
+
+    if (!ingredients || ingredients.length === 0) {
+      return res.status(400).json({ error: 'Please provide at least one ingredient' });
+    }
+
+    logger.info(`Generating recipe for ingredients: ${ingredients.join(', ')}`);
+    
+    const result = await aiService.generateRecipe(ingredients, preferences);
+    
+    res.json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    logger.error(`Recipe generation error: ${error.message}`);
+    res.status(500).json({ 
+      error: error.message || 'Failed to generate recipe',
+      code: error.response?.status || 500
+    });
+  }
+});
+
+// Get recipe recommendations based on available ingredients
+router.post('/recommend', async (req, res) => {
+  try {
+    const { availableIngredients, preferences } = req.body;
+
+    if (!availableIngredients || availableIngredients.length === 0) {
+      return res.status(400).json({ error: 'Please provide available ingredients' });
+    }
+
+    // Search for recipes that match the ingredients
+    const placeholders = availableIngredients.map(() => '%?%').join(',');
+    const stmt = db.prepare(`
+      SELECT * FROM recipes
+      WHERE ingredients LIKE ${placeholders}
+      ORDER BY rating DESC
+      LIMIT 10
+    `);
+
+    const matchingRecipes = stmt.all(...availableIngredients.map(ing => `%${ing}%`));
+
+    matchingRecipes.forEach(r => {
+      r.ingredients = JSON.parse(r.ingredients);
+      r.instructions = JSON.parse(r.instructions);
+      r.tags = JSON.parse(r.tags || '[]');
+    });
+
+    // If no exact matches, use AI to generate
+    if (matchingRecipes.length === 0) {
+      logger.info('No matching recipes found, using AI generation');
+      const aiResult = await aiService.generateRecipe(availableIngredients, preferences);
+      
+      return res.json({
+        success: true,
+        generated: true,
+        recommendations: {
+          aiRecipe: aiResult.recipe,
+          databaseRecipes: []
+        }
+      });
+    }
+
+    res.json({
+      success: true,
+      generated: false,
+      recommendations: {
+        databaseRecipes: matchingRecipes,
+        count: matchingRecipes.length
+      }
+    });
+  } catch (error) {
+    logger.error(`Recommendation error: ${error.message}`);
+    res.status(500).json({ error: 'Failed to get recommendations' });
   }
 });
 

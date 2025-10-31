@@ -10,6 +10,9 @@
     "crawl": "node src/services/websiteCrawler.js",
     "parse": "node src/services/contentParser.js",
     "crawl-images": "node src/services/imageExtractor.js",
+    "seed": "node src/scripts/seedDatabase.js",
+    "test:comprehensive": "node src/scripts/comprehensiveTests.js",
+    "optimize": "node src/scripts/optimizeDatabase.js",
     "test": "node --test src/**/*.test.js",
     "admin-dashboard": "node src/admin/dashboard.js",
     "scheduler": "node src/scheduler/cronJobs.js"

@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from '../utils/logger.js';
 import { getDatabase } from '../database/db.js';
+import { RecipeDeduplicator } from '../utils/deduplication.js';
 import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
@@ -140,18 +141,64 @@ router.get('/dashboard/stats', (req, res) => {
 // Get duplicate/similar recipes
 router.get('/duplicates', (req, res) => {
   try {
+    const threshold = parseFloat(req.query.threshold) || 0.75;
+    
     const stmt = db.prepare(`
       SELECT * FROM recipe_fingerprints
-      WHERE similarity_score > 0.7
+      WHERE similarity_score > ?
       ORDER BY similarity_score DESC
       LIMIT 50
     `);
 
-    const duplicates = stmt.all();
+    const duplicates = stmt.all(threshold);
     res.json({ data: duplicates });
   } catch (error) {
     logger.error(`Error fetching duplicates: ${error.message}`);
     res.status(500).json({ error: 'Failed to fetch duplicates' });
+  }
+});
+
+// Find and analyze duplicates (scan all recipes)
+router.post('/scan-duplicates', (req, res) => {
+  try {
+    const threshold = parseFloat(req.body.threshold) || 0.75;
+    
+    const allRecipes = db.prepare('SELECT * FROM recipes').all();
+    
+    allRecipes.forEach(r => {
+      r.ingredients = JSON.parse(r.ingredients || '[]');
+      r.tags = JSON.parse(r.tags || '[]');
+    });
+
+    const duplicates = RecipeDeduplicator.findDuplicates(allRecipes, threshold);
+
+    logger.info(`Found ${duplicates.length} potential duplicates`);
+
+    // Save to database
+    const stmt = db.prepare(`
+      INSERT INTO recipe_fingerprints 
+      (id, recipe_id, similarity_score, matched_recipe_id)
+      VALUES (?, ?, ?, ?)
+      ON CONFLICT DO NOTHING
+    `);
+
+    for (const dup of duplicates) {
+      stmt.run(
+        uuidv4(),
+        dup.recipe1Id,
+        dup.similarity,
+        dup.recipe2Id
+      );
+    }
+
+    res.json({
+      success: true,
+      duplicatesFound: duplicates.length,
+      duplicates: duplicates.slice(0, 20)
+    });
+  } catch (error) {
+    logger.error(`Duplicate scan error: ${error.message}`);
+    res.status(500).json({ error: 'Scan failed' });
   }
 });
 
@@ -160,10 +207,34 @@ router.post('/merge-recipes', (req, res) => {
   try {
     const { keep_id, merge_ids } = req.body;
 
-    // In production, implement proper merge logic
-    logger.info(`Merging recipes into ${keep_id}`);
+    if (!keep_id || !merge_ids || merge_ids.length === 0) {
+      return res.status(400).json({ error: 'Invalid merge parameters' });
+    }
 
-    res.json({ success: true, message: 'Recipes merged' });
+    // Get recipes to merge
+    const keepRecipe = db.prepare('SELECT * FROM recipes WHERE id = ?').get(keep_id);
+    
+    if (!keepRecipe) {
+      return res.status(404).json({ error: 'Keep recipe not found' });
+    }
+
+    // Update merged recipes to point to keep_id
+    const updateStmt = db.prepare('UPDATE recipes SET status = ? WHERE id = ?');
+    
+    for (const mergeId of merge_ids) {
+      updateStmt.run('merged', mergeId);
+    }
+
+    // Update fingerprints
+    const fpStmt = db.prepare('UPDATE recipe_fingerprints SET matched_recipe_id = ? WHERE recipe_id IN (?)');
+    
+    logger.info(`Merged ${merge_ids.length} recipes into ${keep_id}`);
+
+    res.json({ 
+      success: true, 
+      message: `Merged ${merge_ids.length} recipes`,
+      keepRecipe: keep_id 
+    });
   } catch (error) {
     logger.error(`Merge error: ${error.message}`);
     res.status(500).json({ error: 'Merge failed' });

@@ -1,0 +1,9 @@
+backend/
+pages/
+services/
+scripts/
+dist/
+App.tsx
+app.js
+app-enhanced.js
+index.tsx

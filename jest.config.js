@@ -1,17 +1,19 @@
-export default {
-  testEnvironment: 'node',
-  testMatch: ['<rootDir>/tests/**/*.test.js'],
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/backend/', '<rootDir>/dist/'],
-  collectCoverageFrom: [
-    'tests/**/*.js',
-    '!node_modules/**',
-    '!dist/**',
-    '!**/*.config.js'
-  ],
-  coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/backend/'],
+import nextJest from 'next/jest.js';
+
+const createJestConfig = nextJest({
+  dir: './',
+});
+
+const customJestConfig = {
+  clearMocks: true,
+  collectCoverageFrom: ['components/**/*.{ts,tsx}', 'lib/**/*.{ts,tsx}', 'app/**/*.{ts,tsx}'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/.next/', '/dist/'],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/tests/$1'
+    '^@/(.*)$': '<rootDir>/$1',
   },
-  transform: {},
-  testTimeout: 10000
+  setupFilesAfterEnv: ['<rootDir>/tests/setupTests.ts'],
+  testEnvironment: 'node',
+  testMatch: ['<rootDir>/tests/**/*.test.(ts|tsx)'],
 };
+
+export default createJestConfig(customJestConfig);
