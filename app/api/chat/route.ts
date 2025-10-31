@@ -34,6 +34,17 @@ MANDATORY: Respond ONLY with the recipe card format. Be enthusiastic and proud o
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
+export async function GET() {
+  return new Response(
+    JSON.stringify({ 
+      message: 'Chat API is alive',
+      geminiKeySet: !!process.env.GEMINI_API_KEY,
+      availableEnv: Object.keys(process.env).filter(k => k.includes('GEMINI') || k.includes('VERCEL')).length
+    }),
+    { status: 200, headers: { 'Content-Type': 'application/json' } }
+  );
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
