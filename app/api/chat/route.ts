@@ -1,6 +1,5 @@
 export const runtime = 'nodejs';
 
-// Mock recipe database based on ingredients
 const mockRecipes: Record<string, string> = {
   'eggs': `📋 **RECIPE TITLE: Crispy Filipino Egg Omelet (Tortang Itlog)**
 
@@ -70,114 +69,12 @@ Chicken Adobo is considered the unofficial national dish of the Philippines. Eve
 ✨ **PLATING**
 Serve in a deep bowl over fluffy white rice. Drizzle the rich sauce over the rice. Pair with pickled vegetables for a complete meal.`,
 
-  'fish': `📋 **RECIPE TITLE: Pampano en Papillote (Fish in Parchment)**
-
-⏱️ **TIME & SERVINGS**
-* Prep: 15 min
-* Cook: 20 min
-* Servings: 2
-
-🥘 **INGREDIENTS**
-* 2 whole pampano or pompano fish
-* 3 tbsp butter
-* 4 garlic cloves, minced
-* 2 tomatoes, sliced
-* 1 onion, sliced
-* 2 tbsp lemon juice
-* Salt and pepper
-
-👨‍🍳 **INSTRUCTIONS**
-1. Preheat oven to 350°F
-2. Cut two large pieces of parchment paper
-3. Place fish in center of each parchment sheet
-4. Sauté garlic, tomatoes, and onions in butter
-5. Place vegetable mixture on top of each fish
-6. Drizzle with lemon juice
-7. Fold parchment paper to seal the packet
-8. Bake for 18-20 minutes until fish is flaky
-9. Carefully open packets (watch out for steam!)
-
-💡 **PRO TIP**
-Cooking in parchment keeps the fish moist and infuses it with wonderful flavors. The presentation when opening the packet at the table is spectacular!
-
-🇵🇭 **CULTURAL INSIGHT**
-This elegant preparation is inspired by French cuisine but uses fresh Philippine fish. It's often served at special occasions and upscale Filipino restaurants.
-
-✨ **PLATING**
-Serve the entire parchment packet on a plate for dramatic presentation. Open carefully to release the aromatic steam. Pair with jasmine rice and fresh vegetables.`,
-
-  'rice': `📋 **RECIPE TITLE: Perfect Steamed White Rice**
-
-⏱️ **TIME & SERVINGS**
-* Prep: 5 min
-* Cook: 20 min
-* Servings: 4
-
-🥘 **INGREDIENTS**
-* 2 cups uncooked white rice
-* 3 cups water
-* 1 tsp salt
-* 1 tbsp butter (optional)
-
-👨‍🍳 **INSTRUCTIONS**
-1. Rinse rice under cold water until water runs clear
-2. Add rice to a pot with 3 cups water
-3. Bring to a boil over high heat
-4. Once boiling, reduce heat to low
-5. Cover with a tight-fitting lid
-6. Simmer for 18 minutes without lifting the lid
-7. Remove from heat and let steam for 5 minutes
-8. Fluff with a fork and serve
-
-💡 **PRO TIP**
-Never stir the rice while it's cooking - this releases starch and makes it gummy. The 1:1.5 ratio of rice to water is perfect every time!
-
-🇵🇭 **CULTURAL INSIGHT**
-Rice is the staple of Philippine cuisine and is eaten at virtually every meal. A meal without rice is considered incomplete!
-
-✨ **PLATING**
-Serve in a rice bowl or on the side of your main dish. In the Philippines, rice is often served in its own small bowl so diners can take as much as they want.`,
-
-  'garlic': `📋 **RECIPE TITLE: Garlic Fried Rice (Sinangag)**
-
-⏱️ **TIME & SERVINGS**
-* Prep: 5 min
-* Cook: 10 min
-* Servings: 3
-
-🥘 **INGREDIENTS**
-* 3 cups cooked rice (day-old, chilled)
-* 6 garlic cloves, minced
-* 3 tbsp oil
-* 2 eggs, beaten
-* 2 tbsp soy sauce
-* Salt and pepper to taste
-
-👨‍🍳 **INSTRUCTIONS**
-1. Heat oil in a wok or large pan over high heat
-2. Add minced garlic and stir-fry until golden and fragrant
-3. Add cold rice, breaking up clumps with your spatula
-4. Stir-fry for 3-4 minutes, mixing well
-5. Push rice to the side and scramble eggs in the empty space
-6. Mix eggs with rice
-7. Add soy sauce and toss everything together
-8. Season with salt and pepper to taste
-
-💡 **PRO TIP**
-Always use day-old rice for fried rice! Fresh hot rice will become mushy. The key is high heat and constant stirring.
-
-🇵🇭 **CULTURAL INSIGHT**
-Sinangag is the ultimate Filipino comfort food, often served for breakfast with fried spam or longanisa (Filipino sausage) on the side.
-
-✨ **PLATING**
-Serve in a mound on a plate, topped with a fried egg if desired. Pair with crispy fried meat and fresh tomatoes on the side.`,
-
   'default': `📋 **RECIPE TITLE: Filipino Vegetable Lumpia (Spring Rolls)**
 
 ⏱️ **TIME & SERVINGS**
 * Prep: 20 min
 * Cook: 15 min
-* Servings: 4 (makes 12 rolls)
+* Servings: 4
 
 🥘 **INGREDIENTS**
 * 12 lumpia wrappers
@@ -220,10 +117,7 @@ export async function POST(request: Request) {
       });
     }
 
-    // Get the last user message
     const lastMessage = messages[messages.length - 1]?.content || '';
-    
-    // Find matching recipe based on keywords
     let recipe = mockRecipes.default;
     
     const lowerMessage = lastMessage.toLowerCase();
@@ -231,28 +125,24 @@ export async function POST(request: Request) {
       recipe = mockRecipes.eggs;
     } else if (lowerMessage.includes('chicken')) {
       recipe = mockRecipes.chicken;
-    } else if (lowerMessage.includes('fish')) {
-      recipe = mockRecipes.fish;
-    } else if (lowerMessage.includes('rice')) {
-      recipe = mockRecipes.rice;
-    } else if (lowerMessage.includes('garlic')) {
-      recipe = mockRecipes.garlic;
     }
 
-    // Stream response in chunks
+    const chunks: string[] = [];
+    const chunkSize = 75;
+    
+    for (let i = 0; i < recipe.length; i += chunkSize) {
+      const chunk = recipe.substring(i, i + chunkSize);
+      chunks.push(`0:${JSON.stringify({ type: 'text-delta', text: chunk })}`);
+    }
+    chunks.push(`0:${JSON.stringify({ type: 'finish', finishReason: 'stop' })}`);
+    
+    const fullResponse = chunks.join('\n') + '\n';
     const encoder = new TextEncoder();
+    const encoded = encoder.encode(fullResponse);
+    
     const stream = new ReadableStream({
       start(controller) {
-        const chunkSize = 75;
-        for (let i = 0; i < recipe.length; i += chunkSize) {
-          const chunk = recipe.substring(i, i + chunkSize);
-          controller.enqueue(
-            encoder.encode(`0:${JSON.stringify({ type: 'text-delta', text: chunk })}\n`)
-          );
-        }
-        controller.enqueue(
-          encoder.encode(`0:${JSON.stringify({ type: 'finish', finishReason: 'stop' })}\n`)
-        );
+        controller.enqueue(encoded);
         controller.close();
       },
     });
@@ -262,6 +152,7 @@ export async function POST(request: Request) {
       headers: {
         'Content-Type': 'text/event-stream',
         'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
       },
     });
   } catch (error) {
