@@ -3,6 +3,7 @@ export const NAV_ITEMS = [
   { href: '/pantry', label: 'Pantry' },
   { href: '/recipes', label: 'Recipes' },
   { href: '/chat', label: 'AI Chat' },
+  { href: '/saved', label: '💾 Saved' },
   { href: '/youtube-demo', label: 'YouTube' },
   { href: '/profile', label: 'Profile' },
 ] as const;
