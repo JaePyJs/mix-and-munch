@@ -1,5 +1,3 @@
-import { GoogleGenAI } from '@google/genai';
-
 const systemInstruction = `You are "Mix", an exuberant Filipino culinary mentor with expertise in transforming minimal ingredients into extraordinary dishes.
 
 MANDATES - RECIPE GENERATION:
@@ -34,17 +32,6 @@ MANDATORY: Respond ONLY with the recipe card format. Be enthusiastic and proud o
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
-export async function GET() {
-  return new Response(
-    JSON.stringify({ 
-      message: 'Chat API is alive',
-      geminiKeySet: !!process.env.GEMINI_API_KEY,
-      availableEnv: Object.keys(process.env).filter(k => k.includes('GEMINI') || k.includes('VERCEL')).length
-    }),
-    { status: 200, headers: { 'Content-Type': 'application/json' } }
-  );
-}
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -60,76 +47,78 @@ export async function POST(req: Request) {
     const geminiKey = process.env.GEMINI_API_KEY;
     
     if (!geminiKey) {
-      console.error('GEMINI_API_KEY is not set');
+      console.error('GEMINI_API_KEY is missing');
       return new Response(
         JSON.stringify({ 
-          error: 'GEMINI_API_KEY not configured',
-          hint: 'Add GEMINI_API_KEY to Vercel Environment Variables',
-          envKeys: Object.keys(process.env).filter(k => k.includes('GEMINI') || k.includes('API'))
+          error: 'API key not configured',
+          hint: 'Add GEMINI_API_KEY to Vercel environment'
         }),
         { status: 503, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
     try {
-      console.log('Initializing GoogleGenAI with key');
-      const ai = new GoogleGenAI({
-        apiKey: geminiKey,
-      });
-
-      const modelName = process.env.USE_GEMINI_FLASH === 'true' 
-        ? 'gemini-2.5-flash' 
-        : 'gemini-2.5-pro';
-
-      const contents = messages.map((msg: any) => ({
-        role: msg.role === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.content }]
-      }));
-
-      const response = await ai.models.generateContentStream({
-        model: modelName,
-        contents,
-        config: {
-          systemInstruction: {
-            parts: [{ text: systemInstruction }]
-          },
+      // Use Gemini REST API directly
+      const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=' + geminiKey;
+      
+      const requestBody = {
+        contents: messages.map((msg: any) => ({
+          role: msg.role === 'user' ? 'user' : 'model',
+          parts: [{ text: msg.content }]
+        })),
+        systemInstruction: {
+          parts: [{ text: systemInstruction }]
+        },
+        generationConfig: {
           temperature: 0.9,
+          maxOutputTokens: 2000,
         }
+      };
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
       });
+
+      if (!response.ok) {
+        const error = await response.text();
+        console.error('Gemini API error:', response.status, error);
+        throw new Error(`Gemini API error: ${response.status}`);
+      }
+
+      const data = await response.json() as any;
+      const recipe = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+      
+      if (!recipe) {
+        throw new Error('No recipe generated');
+      }
 
       const encoder = new TextEncoder();
       const readableStream = new ReadableStream({
-        async start(controller) {
-          try {
-            for await (const chunk of response) {
-              const text = chunk.candidates?.[0]?.content?.parts?.[0]?.text || '';
-              if (text) {
-                controller.enqueue(encoder.encode(`0:${JSON.stringify({ type: 'text-delta', text })}\n`));
-              }
-            }
-            const modelInfo = `\n\n_[${modelName}]`;
-            controller.enqueue(encoder.encode(`0:${JSON.stringify({ type: 'text-delta', text: modelInfo })}\n`));
-            controller.enqueue(encoder.encode(`0:${JSON.stringify({ type: 'finish', finishReason: 'stop' })}\n`));
-            controller.close();
-          } catch (error) {
-            console.error('Stream error:', error);
-            controller.close();
+        start(controller) {
+          // Send recipe in chunks
+          const chunkSize = 100;
+          for (let i = 0; i < recipe.length; i += chunkSize) {
+            const chunk = recipe.slice(i, i + chunkSize);
+            controller.enqueue(encoder.encode(`0:${JSON.stringify({ type: 'text-delta', text: chunk })}\n`));
           }
-        },
+          controller.enqueue(encoder.encode(`0:${JSON.stringify({ type: 'text-delta', text: '\n\n_[gemini-2.5-pro]' })}\n`));
+          controller.enqueue(encoder.encode(`0:${JSON.stringify({ type: 'finish', finishReason: 'stop' })}\n`));
+          controller.close();
+        }
       });
 
       return new Response(readableStream, {
         headers: { 'Content-Type': 'text/event-stream' },
       });
-    } catch (geminiError) {
-      console.error('Gemini API error:', geminiError);
-      console.error('Error type:', typeof geminiError);
-      console.error('Error message:', String(geminiError));
+
+    } catch (error) {
+      console.error('Gemini API call failed:', error);
       return new Response(
         JSON.stringify({ 
-          error: 'Gemini API error',
-          details: String(geminiError),
-          errorType: typeof geminiError
+          error: 'Failed to generate recipe',
+          details: String(error)
         }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
@@ -137,13 +126,8 @@ export async function POST(req: Request) {
 
   } catch (error) {
     console.error('Chat endpoint error:', error);
-    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack');
     return new Response(
-      JSON.stringify({ 
-        error: 'Server error', 
-        details: String(error),
-        timestamp: new Date().toISOString()
-      }),
+      JSON.stringify({ error: 'Server error', details: String(error) }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
