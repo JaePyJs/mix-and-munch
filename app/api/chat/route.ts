@@ -49,16 +49,19 @@ export async function POST(req: Request) {
     const geminiKey = process.env.GEMINI_API_KEY;
     
     if (!geminiKey) {
+      console.error('GEMINI_API_KEY is not set');
       return new Response(
         JSON.stringify({ 
           error: 'GEMINI_API_KEY not configured',
-          hint: 'Add GEMINI_API_KEY to Vercel Environment Variables'
+          hint: 'Add GEMINI_API_KEY to Vercel Environment Variables',
+          envKeys: Object.keys(process.env).filter(k => k.includes('GEMINI') || k.includes('API'))
         }),
         { status: 503, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
     try {
+      console.log('Initializing GoogleGenAI with key');
       const ai = new GoogleGenAI({
         apiKey: geminiKey,
       });
@@ -109,10 +112,13 @@ export async function POST(req: Request) {
       });
     } catch (geminiError) {
       console.error('Gemini API error:', geminiError);
+      console.error('Error type:', typeof geminiError);
+      console.error('Error message:', String(geminiError));
       return new Response(
         JSON.stringify({ 
           error: 'Gemini API error',
-          details: String(geminiError)
+          details: String(geminiError),
+          errorType: typeof geminiError
         }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
@@ -120,8 +126,13 @@ export async function POST(req: Request) {
 
   } catch (error) {
     console.error('Chat endpoint error:', error);
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack');
     return new Response(
-      JSON.stringify({ error: 'Server error', details: String(error) }),
+      JSON.stringify({ 
+        error: 'Server error', 
+        details: String(error),
+        timestamp: new Date().toISOString()
+      }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
