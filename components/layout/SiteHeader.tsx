@@ -6,13 +6,27 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { NAV_ITEMS } from '@/lib/constants';
 import { LogoBrand } from './LogoBrand';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useTranslation } from '@/lib/hooks/useTranslation';
 
 export function SiteHeader() {
   const pathname = usePathname() ?? '/';
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleToggle = () => setMobileOpen((prev) => !prev);
   const handleClose = () => setMobileOpen(false);
+
+  // Dynamic navigation items with translations
+  const navItems = [
+    { href: '/', label: t('navigation.home') },
+    { href: '/pantry', label: t('navigation.pantry') },
+    { href: '/recipes', label: t('navigation.recipes') },
+    { href: '/chat', label: t('navigation.aiChat') },
+    { href: '/saved-recipes', label: t('navigation.saved') },
+    { href: '/youtube-crawler', label: t('navigation.youtube') },
+    { href: '/profile', label: t('navigation.profile') },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-brand-gray-800/80 bg-brand-gray-950/90 backdrop-blur-lg">
@@ -21,7 +35,7 @@ export function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 text-sm font-medium md:flex">
-          {NAV_ITEMS.map(({ href, label }) => {
+          {navItems.map(({ href, label }) => {
             const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
             return (
               <Link
@@ -38,6 +52,7 @@ export function SiteHeader() {
               </Link>
             );
           })}
+          <LanguageSwitcher />
         </nav>
 
         {/* Mobile menu button */}
@@ -74,7 +89,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div className="page-grid pb-3 md:hidden border-t border-brand-gray-800/50 animate-in slide-in-from-top-2 duration-200">
           <div className="card-surface divide-y divide-brand-gray-800 overflow-hidden rounded-2xl">
-            {NAV_ITEMS.map(({ href, label }) => {
+            {navItems.map(({ href, label }) => {
               const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
               return (
                 <Link
@@ -92,6 +107,9 @@ export function SiteHeader() {
                 </Link>
               );
             })}
+            <div className="px-4 py-3 border-t border-brand-gray-800">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       )}

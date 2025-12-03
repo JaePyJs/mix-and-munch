@@ -1,5 +1,0 @@
-{
-  "name": "Mix & Munch: AI Filipino Recipes",
-  "description": "An AI-assisted Filipino recipe app that suggests dishes based on ingredients you have, powered by Gemini. Features real-time recipe filtering and a conversational cooking assistant.",
-  "requestFramePermissions": []
-}

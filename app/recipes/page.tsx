@@ -1,20 +1,25 @@
+'use client';
+
 import { RecipeCard } from '@/components/recipes/RecipeCard';
 import { Tag } from '@/components/ui/Tag';
 import { getAllIngredients, getAllRecipes } from '@/lib/data';
+import { useTranslation } from '@/lib/hooks/useTranslation';
 
 const recipes = getAllRecipes();
 const ingredients = getAllIngredients();
 
 export default function RecipesPage() {
+  const { t } = useTranslation();
+  
   return (
     <div className="page-grid space-y-10">
       <header className="space-y-4">
-        <Tag tone="lime" className="w-fit">Recipe gallery</Tag>
+        <Tag tone="lime" className="w-fit">{t('recipes.tag')}</Tag>
         <h1 className="text-3xl font-semibold text-white sm:text-4xl">
-          Filipino dishes reimagined for the modern home cook
+          {t('recipes.title')}
         </h1>
         <p className="max-w-2xl text-sm text-brand-gray-400">
-          Browse our curated set of chef-tested recipes. Each card indicates pantry matches when you hop over from the checklist, and includes attribution for every visual asset.
+          {t('recipes.description')}
         </p>
       </header>
 

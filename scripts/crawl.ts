@@ -14,6 +14,13 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 import { DOMParser, Element } from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts';
 import 'https://deno.land/std@0.224.0/dotenv/load.ts';
 
+// Import ingredient formatting utilities
+import { 
+  formatIngredientList, 
+  formatRecipeSteps, 
+  validateIngredientFormat 
+} from '../lib/utils/ingredient-formatter.ts';
+
 const supabaseUrl = Deno.env.get('SUPABASE_URL');
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 
@@ -57,8 +64,8 @@ async function scrapeRecipe(url: string, category: string) {
     const amount = element.querySelector('.wprm-recipe-ingredient-amount')?.textContent || '';
     const unit = element.querySelector('.wprm-recipe-ingredient-unit')?.textContent || '';
     const name = element.querySelector('.wprm-recipe-ingredient-name')?.textContent || '';
-    return { name: name.trim(), quantity: amount.trim(), unit: unit.trim() };
-  }).filter(ing => ing.name);
+    return `${amount.trim()} ${unit.trim()} ${name.trim()}`.trim();
+  }).filter(Boolean);
 
   const instructions = Array.from(doc.querySelectorAll('.wprm-recipe-instruction-text')).map(el => (el as Element).textContent.trim()).filter(Boolean);
 
@@ -66,12 +73,27 @@ async function scrapeRecipe(url: string, category: string) {
       throw new Error(`Could not extract all required data from ${url}`);
   }
 
+  // Apply formatting utilities to clean and standardize the data
+  const formattedIngredients = formatIngredientList(ingredients);
+  const formattedInstructions = formatRecipeSteps(instructions);
+
+  // Validate ingredient formatting
+  const validationResults = formattedIngredients.map(ingredient => 
+    validateIngredientFormat(ingredient)
+  );
+  
+  // Log any validation warnings (but don't fail the crawl)
+  const invalidIngredients = validationResults.filter(result => !result.isValid);
+  if (invalidIngredients.length > 0) {
+    console.warn(`Recipe "${name}" has ${invalidIngredients.length} ingredients with formatting issues`);
+  }
+
   return {
     name,
     description,
     imageUrl,
-    ingredients,
-    instructions,
+    ingredients: formattedIngredients,
+    instructions: formattedInstructions,
     source_url: url,
     category: category,
   };

@@ -1,0 +1,382 @@
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    MIX & MUNCH - COMPLETE APP SPECIFICATION               ║
+║                   AI-Powered Filipino Recipe Recommender                  ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════════════════
+📱 TECH STACK (What You Need to Build With)
+═══════════════════════════════════════════════════════════════════════════
+
+FRONTEND (User Interface)
+├─ Framework: Next.js 14+ (React 18+)
+├─ Language: JavaScript/TypeScript
+├─ Styling: Tailwind CSS + Custom CSS
+├─ UI Components: React components (reusable)
+└─ Responsive: Mobile-first design (320px to 1920px)
+
+BACKEND (Server/Logic)
+├─ Runtime: Node.js 18+ with Express.js
+├─ Language: JavaScript
+├─ API: RESTful endpoints
+└─ Server-Side Rendering: Next.js API Routes
+
+DATABASE (Data Storage)
+├─ Database: SQLite (lightweight, local)
+├─ Schema: 4 main tables (Ingredients, Recipes, RecipeIngredients, Categories)
+├─ Storage: Local filesystem (no cloud required)
+└─ Queries: SQL with better-sqlite3 library
+
+AI/MACHINE LEARNING (Smart Features)
+├─ Local AI: Ollama (offline LLM runtime)
+├─ Model: DeepSeek R1 1.5B (conversational AI)
+├─ Processing: Local device (no cloud API calls)
+├─ Algorithms: Jaccard Similarity, Levenshtein Distance, Weighted Scoring
+└─ NLP: Ingredient parsing and intent recognition
+
+EXTERNAL APIs (Optional Enhancements)
+├─ TheMealDB API: Supplementary recipe data
+├─ Open Food Facts API: Nutritional information
+└─ YouTube Transcript API: Recipe extraction from videos
+
+DEVELOPMENT TOOLS
+├─ IDE: VS Code
+├─ Version Control: Git + GitHub
+├─ Package Manager: npm or yarn
+├─ Testing: Jest (unit tests), Postman (API tests)
+└─ Deployment: Vercel, Netlify, or GitHub Pages
+
+═══════════════════════════════════════════════════════════════════════════
+🎯 CORE FEATURES (Must-Have Functionality)
+═══════════════════════════════════════════════════════════════════════════
+
+1. INGREDIENT INPUT MODULE
+   ├─ Manual Checklist
+   │  └─ Pre-populated common Filipino ingredients
+   │  └─ Multi-select checkboxes
+   │  └─ Search/filter ingredients by category
+   │
+   └─ AI Chat Interface
+      └─ Natural language input ("I have chicken, rice, and tomatoes")
+      └─ Intent parsing with Ollama
+      └─ Typo correction with Levenshtein Distance
+      └─ Bilingual support (English + Filipino)
+
+2. RECIPE RECOMMENDATION ENGINE
+   ├─ Algorithm Pipeline
+   │  └─ Step 1: Levenshtein Distance (clean user input)
+   │  └─ Step 2: Jaccard Similarity (match ingredients)
+   │  └─ Step 3: Weighted Scoring (rank recipes)
+   │  └─ Step 4: Sort and display top 20 results
+   │
+   ├─ Matching Features
+   │  └─ Partial ingredient matching (70%+ match shows recipe)
+   │  └─ Optional ingredient handling (recipes with optional items rank higher)
+   │  └─ Substitute suggestions ("no tomato? try tomato paste")
+   │
+   └─ Filtering Options
+      └─ Difficulty level (Easy, Medium, Hard)
+      └─ Cuisine type (Filipino, Filipino-fusion)
+      └─ Cooking time (<30 min, 30-60 min, 60+ min)
+      └─ Dietary preferences (vegetarian option marking)
+
+3. RECIPE DISPLAY MODULE
+   ├─ Recipe Card (List View)
+   │  └─ Recipe photo
+   │  └─ Recipe title (Filipino + English)
+   │  └─ Match percentage (85% ingredients available)
+   │  └─ Difficulty badge
+   │  └─ Cooking time
+   │  └─ Missing ingredients count
+   │
+   └─ Recipe Detail Page
+      └─ Full recipe photo
+      └─ Ingredients list (with amounts)
+      └─ Step-by-step instructions
+      └─ Cooking tips
+      └─ Nutritional information (calories, protein, carbs, fat)
+      └─ Serving size
+      └─ Source attribution (where recipe came from)
+
+4. AI CHAT ASSISTANT
+   ├─ Conversational Interface
+   │  └─ Chat bubble UI
+   │  └─ Message history (session-based)
+   │  └─ Typing indicators
+   │
+   ├─ Capabilities
+   │  └─ Ingredient input ("I have manok and kamatis")
+   │  └─ Recipe questions ("How do I cook adobo?")
+   │  └─ Substitution advice ("What can replace soy sauce?")
+   │  └─ Cooking tips ("How long to boil eggs?")
+   │
+   └─ Ollama Integration
+      └─ Local processing (no internet required after setup)
+      └─ Response generation
+      └─ Context awareness (remembers conversation)
+
+5. FILIPINO RECIPE DATABASE
+   ├─ Recipe Collection
+   │  └─ Minimum 100 authentic Filipino recipes
+   │  └─ Categories: Main dishes, Soups, Snacks, Desserts
+   │  └─ Popular dishes: Adobo, Sinigang, Pancit, Lumpia, etc.
+   │
+   ├─ Data Structure
+   │  └─ Recipe metadata (title, description, difficulty, time)
+   │  └─ Ingredient list (with Filipino + English names)
+   │  └─ Cooking instructions (numbered steps)
+   │  └─ Photos (at least 1 per recipe)
+   │  └─ Nutrition facts (optional but recommended)
+   │
+   └─ Cultural Tags
+      └─ Regional origin (Luzon, Visayas, Mindanao)
+      └─ Occasion (everyday, fiesta, Christmas, etc.)
+      └─ Popularity rating
+
+6. BILINGUAL INGREDIENT SUPPORT
+   ├─ English → Filipino mapping
+   │  └─ chicken → manok
+   │  └─ tomato → kamatis
+   │  └─ onion → sibuyas
+   │  └─ (100+ ingredient mappings)
+   │
+   └─ Fuzzy Matching
+      └─ Typo tolerance ("tomatoe" → "tomato")
+      └─ Variant recognition ("kamatis" = "kamatis na pula")
+
+7. NUTRITIONAL INFORMATION
+   ├─ Per Recipe
+   │  └─ Calories
+   │  └─ Protein (g)
+   │  └─ Carbohydrates (g)
+   │  └─ Fat (g)
+   │  └─ Sodium (mg)
+   │  └─ Serving size
+   │
+   └─ Data Source
+      └─ Open Food Facts API (auto-fetch)
+      └─ Manual entry for Filipino-specific items
+
+8. OFFLINE-FIRST FUNCTIONALITY
+   ├─ Core Features Work Offline
+   │  └─ Browse recipes (cached locally)
+   │  └─ Search with cached data
+   │  └─ AI chat (Ollama runs locally)
+   │
+   └─ Optional Online Features
+      └─ Supplementary recipe data (TheMealDB)
+      └─ Updated nutrition info
+      └─ Recipe photos (cached after first load)
+
+9. RESPONSIVE DESIGN
+   ├─ Mobile (320px - 768px)
+   │  └─ Single column layout
+   │  └─ Touch-friendly buttons (48px min)
+   │  └─ Swipe navigation
+   │
+   ├─ Tablet (768px - 1024px)
+   │  └─ Two-column layout
+   │  └─ Side panel for filters
+   │
+   └─ Desktop (1024px+)
+      └─ Three-column layout
+      └─ Sidebar navigation
+      └─ Hover effects
+
+═══════════════════════════════════════════════════════════════════════════
+✨ NICE-TO-HAVE FEATURES (Optional Enhancements)
+═══════════════════════════════════════════════════════════════════════════
+
+10. FAVORITES/BOOKMARKS
+    └─ Save recipes to favorites list
+    └─ Local storage (no login required)
+    └─ Quick access to saved recipes
+
+11. SHOPPING LIST GENERATOR
+    └─ Select multiple recipes
+    └─ Auto-generate shopping list
+    └─ Remove items user already has
+
+12. RECIPE RATING SYSTEM
+    └─ Community ratings (1-5 stars)
+    └─ User reviews/comments
+    └─ Sort by rating
+
+13. COOKING TIMER
+    └─ Built-in countdown timer
+    └─ Multiple timers for different steps
+    └─ Notification when done
+
+14. MEAL PLANNER
+    └─ Plan meals for the week
+    └─ Calendar view
+    └─ Auto-generate grocery list
+
+15. VOICE INPUT
+    └─ Speak ingredients instead of typing
+    └─ Web Speech API
+    └─ Bilingual voice recognition
+
+═══════════════════════════════════════════════════════════════════════════
+🗂️ DATABASE SCHEMA (Exact Structure)
+═══════════════════════════════════════════════════════════════════════════
+
+TABLE: IngredientCategories
+├─ category_id (INTEGER PRIMARY KEY)
+├─ category_name (TEXT) -- "Vegetables", "Meat", "Spices", etc.
+└─ created_at (DATETIME)
+
+TABLE: Ingredients
+├─ ingredient_id (INTEGER PRIMARY KEY)
+├─ name (TEXT) -- English name "chicken"
+├─ filipino_name (TEXT) -- Filipino name "manok"
+├─ category_id (INTEGER FOREIGN KEY)
+└─ created_at (DATETIME)
+
+TABLE: Recipes
+├─ recipe_id (INTEGER PRIMARY KEY)
+├─ title (TEXT) -- "Chicken Adobo"
+├─ description (TEXT)
+├─ instructions (TEXT) -- Step-by-step cooking
+├─ is_filipino (BOOLEAN) -- TRUE for Filipino recipes
+├─ difficulty (TEXT) -- "Easy", "Medium", "Hard"
+├─ prep_time (INTEGER) -- Minutes
+├─ cook_time (INTEGER) -- Minutes
+├─ servings (INTEGER)
+├─ calories (INTEGER)
+├─ protein (FLOAT)
+├─ carbs (FLOAT)
+├─ fat (FLOAT)
+├─ image_url (TEXT)
+├─ source_url (TEXT) -- Attribution
+└─ created_at (DATETIME)
+
+TABLE: RecipeIngredients (Many-to-Many Relationship)
+├─ id (INTEGER PRIMARY KEY)
+├─ recipe_id (INTEGER FOREIGN KEY)
+├─ ingredient_id (INTEGER FOREIGN KEY)
+├─ amount (TEXT) -- "2 cups", "500g", etc.
+├─ unit (TEXT) -- "cups", "grams", "pieces"
+└─ is_optional (BOOLEAN) -- Optional ingredients
+
+═══════════════════════════════════════════════════════════════════════════
+📐 UI/UX SCREENS (Pages You Need to Build)
+═══════════════════════════════════════════════════════════════════════════
+
+1. HOME PAGE
+   └─ Hero section with app description
+   └─ Quick ingredient input
+   └─ Featured Filipino recipes
+   └─ "Get Started" button
+
+2. INGREDIENT INPUT PAGE
+   └─ Checklist mode (left panel)
+   └─ AI Chat mode (right panel)
+   └─ "Find Recipes" button
+
+3. RECIPE RESULTS PAGE
+   └─ Recipe cards in grid layout
+   └─ Filter sidebar (difficulty, time, etc.)
+   └─ Sort options (match %, rating, time)
+   └─ Match percentage badges
+
+4. RECIPE DETAIL PAGE
+   └─ Large recipe photo
+   └─ Ingredient list with checkboxes
+   └─ Step-by-step instructions
+   └─ Nutritional info panel
+   └─ "Start Cooking" button
+   └─ AI chat for questions
+
+5. AI CHAT INTERFACE
+   └─ Chat window (overlay or sidebar)
+   └─ Message bubbles
+   └─ Input field
+   └─ Quick action buttons
+
+6. ABOUT/HELP PAGE
+   └─ How to use the app
+   └─ FAQ
+   └─ Contact information
+
+═══════════════════════════════════════════════════════════════════════════
+🔧 SETUP REQUIREMENTS (What Users Need)
+═══════════════════════════════════════════════════════════════════════════
+
+FOR DEVELOPERS:
+├─ Computer: Windows 10+, macOS 11+, or Linux Ubuntu 20.04+
+├─ RAM: 16GB recommended (32GB for smooth Ollama)
+├─ Storage: 512GB SSD minimum
+├─ Node.js: Version 18 or higher
+├─ npm/yarn: Latest version
+├─ Git: For version control
+├─ Ollama: Installed and running
+└─ DeepSeek R1 model: Downloaded (ollama pull deepseek-r1:1.5b)
+
+FOR END USERS:
+├─ Computer/Mobile: Any modern device
+├─ RAM: 6GB minimum (for local AI)
+├─ Storage: 4GB free space
+├─ Browser: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+├─ Internet: 2 Mbps (optional, for initial setup)
+└─ Ollama: Pre-installed (if using local AI)
+
+═══════════════════════════════════════════════════════════════════════════
+⚙️ ALGORITHM SPECIFICATIONS (How Smart Features Work)
+═══════════════════════════════════════════════════════════════════════════
+
+JACCARD SIMILARITY (Ingredient Matching)
+Formula: J(A,B) = |A ∩ B| / |A ∪ B|
+Purpose: Calculate how many user ingredients match recipe
+Example: User has 3/4 recipe ingredients = 0.75 match (75%)
+Threshold: Show recipes with ≥30% match
+
+LEVENSHTEIN DISTANCE (Typo Correction)
+Formula: Dynamic programming, O(n×m) complexity
+Purpose: Fix typos in ingredient names
+Example: "tomatoe" → "tomato" (distance = 1)
+Threshold: Accept matches with distance ≤2
+
+WEIGHTED SCORING (Recipe Ranking)
+Formula: Score = 0.5×(match) + 0.25×(rating) + 0.15×(filipino) + 0.10×(difficulty)
+Purpose: Rank recipes by multiple criteria
+Weights: Ingredient match (50%), User rating (25%), Filipino bonus (15%), Difficulty (10%)
+Output: Sorted list of top 20 recipes
+
+═══════════════════════════════════════════════════════════════════════════
+📊 PERFORMANCE REQUIREMENTS
+═══════════════════════════════════════════════════════════════════════════
+
+Speed:
+├─ Page load: <3 seconds
+├─ Recipe search: <2 seconds
+├─ Algorithm processing: <1 second
+└─ AI chat response: <5 seconds
+
+Scalability:
+├─ Support 1,000+ recipes in database
+├─ Handle 100+ concurrent users
+└─ Process 50+ ingredient inputs simultaneously
+
+Reliability:
+├─ 99% uptime
+├─ Graceful offline degradation
+└─ Error handling with user-friendly messages
+
+═══════════════════════════════════════════════════════════════════════════
+🔒 SECURITY & PRIVACY
+═══════════════════════════════════════════════════════════════════════════
+
+Data Privacy:
+├─ No user accounts required
+├─ No personal data collected
+├─ No cloud storage of user inputs
+└─ Local processing only
+
+Security Measures:
+├─ Input validation (prevent SQL injection)
+├─ Content Security Policy (CSP)
+├─ HTTPS for deployment
+└─ Regular dependency updates
+
+═══════════════════════════════════════════════════════════════════════════

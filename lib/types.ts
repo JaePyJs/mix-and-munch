@@ -14,8 +14,19 @@ export type DietaryTag =
 export interface Ingredient {
   id: string;
   name: string;
+  filipinoName: string;
   category: string;
   emoji: string;
+  substitutes: string[];
+}
+
+export interface NutritionInfo {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber?: number;
+  sodium?: number;
 }
 
 export interface RecipeIngredient {
@@ -52,6 +63,9 @@ export interface Recipe extends RecipeSummary {
   steps: string[];
   chef: string;
   sourceUrl: string;
+  nutrition?: NutritionInfo;
+  region?: string;
+  occasion?: string[];
 }
 
 export interface TranscriptChunk {
@@ -85,4 +99,37 @@ export interface MatchResult extends RecipeSummary {
   matchPercentage: number;
   missingIngredients: string[];
   matchedIngredients: string[];
+  substituteSuggestions?: SubstituteSuggestion[];
+  weightedScore?: number;
+}
+
+export interface SubstituteSuggestion {
+  missing: string;
+  substitutes: string[];
+}
+
+export interface SearchMatch {
+  ingredient: Ingredient;
+  score: number;
+  matchedOn: 'name' | 'filipinoName' | 'fuzzy';
+}
+
+export interface RecipeReview {
+  id: string;
+  recipeSlug: string;
+  rating: number;
+  comment: string;
+  author: string;
+  createdAt: string;
+}
+
+export interface MealPlan {
+  id: string;
+  date: string;
+  meals: {
+    breakfast?: string; // recipe slug
+    lunch?: string;
+    dinner?: string;
+    snack?: string;
+  };
 }

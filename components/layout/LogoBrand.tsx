@@ -18,15 +18,22 @@ export function LogoBrand({ variant = 'full', className = '' }: LogoBrandProps) 
         priority
       />
       {variant === 'full' && (
-        <span className="hidden sm:block leading-tight">
-          Mix &amp; Munch
-          <span className="block text-xs font-normal uppercase tracking-widest text-brand-gray-400">
-            Filipino AI Kitchen
+        <>
+          {/* Desktop version */}
+          <span className="hidden sm:block leading-tight">
+            Mix &amp; Munch
+            <span className="block text-xs font-normal uppercase tracking-widest text-brand-gray-400">
+              Filipino AI Kitchen
+            </span>
           </span>
-        </span>
+          {/* Mobile version - always show title */}
+          <span className="block sm:hidden leading-tight text-sm">
+            Mix &amp; Munch
+          </span>
+        </>
       )}
       {variant === 'mobile' && (
-        <span className="sm:hidden leading-tight">
+        <span className="leading-tight">
           <div className="text-brand-lime font-bold">Mix</div>
           <div className="text-xs text-brand-gray-400 font-normal">Munch</div>
         </span>

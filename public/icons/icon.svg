@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="64" fill="#0f0f0f"/>
+  <circle cx="256" cy="220" r="120" fill="#a3e635"/>
+  <ellipse cx="256" cy="230" rx="90" ry="80" fill="#0f0f0f"/>
+  <circle cx="220" cy="200" r="15" fill="#a3e635"/>
+  <circle cx="290" cy="200" r="15" fill="#a3e635"/>
+  <circle cx="256" cy="240" r="10" fill="#a3e635"/>
+  <path d="M200 280 Q256 320 312 280" stroke="#a3e635" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <text x="256" y="400" text-anchor="middle" fill="#a3e635" font-family="Arial, sans-serif" font-size="48" font-weight="bold">MIX</text>
+  <text x="256" y="450" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="32">&amp; MUNCH</text>
+</svg>

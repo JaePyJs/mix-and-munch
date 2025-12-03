@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,17 +6,47 @@ import { motion } from 'framer-motion';
 import { ButtonLink } from '@/components/ui/Button';
 import { Tag } from '@/components/ui/Tag';
 import { formatMatchPercentage } from '@/lib/utils';
-import type { Ingredient, MatchResult, RecipeSummary } from '@/lib/types';
+import { SubstituteSuggestions } from '@/components/pantry/SubstituteSuggestions';
+import type {
+  Ingredient,
+  MatchResult,
+  PantrySelection,
+  RecipeSummary,
+} from '@/lib/types';
 
 interface RecipeCardProps {
   recipe: RecipeSummary | MatchResult;
   index?: number;
   ingredients?: Ingredient[];
   showMatch?: boolean;
+  selection?: PantrySelection;
+  onAddIngredient?: (ingredientId: string) => void;
 }
 
-export function RecipeCard({ recipe, index = 0, ingredients, showMatch = false }: RecipeCardProps) {
+export function RecipeCard({
+  recipe,
+  index = 0,
+  ingredients,
+  showMatch = false,
+  selection = {},
+  onAddIngredient,
+}: RecipeCardProps) {
   const matchResult = recipe as MatchResult;
+
+  // Fallback image handling
+  const getImageSrc = (heroImage: string) => {
+    if (!heroImage || heroImage.trim() === '') {
+      return '/images/recipes/placeholder.svg';
+    }
+    return heroImage;
+  };
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    if (target.src !== '/images/recipes/placeholder.svg') {
+      target.src = '/images/recipes/placeholder.svg';
+    }
+  };
 
   return (
     <motion.article
@@ -27,11 +57,12 @@ export function RecipeCard({ recipe, index = 0, ingredients, showMatch = false }
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
-          src={recipe.heroImage}
+          src={getImageSrc(recipe.heroImage)}
           alt={recipe.title}
           fill
           className="object-cover transition duration-500 hover:scale-105"
           priority={index < 2}
+          onError={handleImageError}
         />
         {showMatch && typeof matchResult.matchPercentage === 'number' && (
           <div className="absolute left-4 top-4">
@@ -79,7 +110,8 @@ export function RecipeCard({ recipe, index = 0, ingredients, showMatch = false }
               <div>
                 <p className="text-brand-gray-400">Missing</p>
                 <ul className="mt-1 space-y-1">
-                  {matchResult.missingIngredients && matchResult.missingIngredients.length > 0 ? (
+                  {matchResult.missingIngredients &&
+                  matchResult.missingIngredients.length > 0 ? (
                     matchResult.missingIngredients.map((id) => {
                       const item = ingredients.find((ing) => ing.id === id);
                       return (
@@ -94,6 +126,15 @@ export function RecipeCard({ recipe, index = 0, ingredients, showMatch = false }
                 </ul>
               </div>
             </div>
+            {/* Substitute Suggestions */}
+            {matchResult.missingIngredients &&
+              matchResult.missingIngredients.length > 0 && (
+                <SubstituteSuggestions
+                  recipe={matchResult}
+                  selection={selection}
+                  onAddIngredient={onAddIngredient}
+                />
+              )}
           </div>
         )}
 
@@ -106,8 +147,10 @@ export function RecipeCard({ recipe, index = 0, ingredients, showMatch = false }
         </div>
 
         <div className="flex items-center justify-between">
-          <div className="text-xs uppercase tracking-widest text-brand-gray-500">View full recipe</div>
-          <ButtonLink href={`/recipes/${recipe.slug}`} variant="secondary">
+          <div className="text-xs uppercase tracking-widest text-brand-gray-500">
+            View full recipe
+          </div>
+          <ButtonLink href={`/recipes/${recipe.slug}`} variant="secondary" size="sm">
             View Recipe →
           </ButtonLink>
         </div>

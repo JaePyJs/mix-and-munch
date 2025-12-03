@@ -1,0 +1,448 @@
+{
+  "common": {
+    "loading": "Naglo-load...",
+    "save": "I-save",
+    "cancel": "Kanselahin",
+    "delete": "Tanggalin",
+    "edit": "I-edit",
+    "search": "Maghanap",
+    "clear": "Linisin",
+    "export": "I-export",
+    "settings": "Mga Setting",
+    "back": "Bumalik",
+    "next": "Susunod",
+    "previous": "Nakaraan",
+    "close": "Isara",
+    "open": "Buksan",
+    "view": "Tingnan",
+    "add": "Idagdag",
+    "remove": "Alisin",
+    "update": "I-update",
+    "create": "Gumawa",
+    "submit": "Ipasa",
+    "reset": "I-reset"
+  },
+  "navigation": {
+    "home": "Tahanan",
+    "recipes": "Mga Recipe",
+    "pantry": "Pantry",
+    "chat": "Chat",
+    "saved": "Naka-save",
+    "savedRecipes": "Mga Naka-save na Recipe",
+    "profile": "Profile",
+    "about": "Tungkol",
+    "aiChat": "AI Chat",
+    "youtube": "YouTube",
+    "tools": "Mga Kasangkapan sa Pagluluto"
+  },
+  "tools": {
+    "title": "Mga Kasangkapan sa Pagluluto",
+    "description": "Lahat ng kailangan mo para mas madali at masaya ang pagluluto!",
+    "timer": {
+      "title": "Timer sa Pagluluto",
+      "description": "Maraming timer para sa perpektong pagluluto",
+      "quickTimers": "Mabilisang Timer",
+      "customTimer": "Custom na Timer",
+      "noActiveTimers": "Walang aktibong timer",
+      "startFromPresets": "Magsimula ng timer mula sa mga preset o gumawa ng sarili"
+    },
+    "shopping": {
+      "title": "Listahan ng Bibilhin",
+      "description": "Ayusin ang iyong pamimili ng grocery",
+      "empty": "Walang laman ang listahan ng bibilhin",
+      "addManually": "Magdagdag ng item nang manu-mano o mula sa naka-save na recipes",
+      "clearDone": "Alisin ang Tapos Na",
+      "clearAll": "Alisin Lahat",
+      "copyToClipboard": "Kopyahin",
+      "download": "I-download"
+    },
+    "challenge": {
+      "title": "Pantry Challenge",
+      "description": "I-level up ang iyong cooking skills!",
+      "todaysChallenge": "Challenge Ngayon",
+      "allChallenges": "Lahat ng Challenges",
+      "achievements": "Mga Nakamit",
+      "streak": "araw na sunod-sunod",
+      "totalPoints": "Kabuuang Puntos",
+      "challengesDone": "Mga Natapos na Challenge",
+      "complete": "Kumpleto",
+      "challengeComplete": "Challenge Kumpleto Na!"
+    }
+  },
+  "home": {
+    "tagline": "Capstone-grade na Filipino Cuisine Studio",
+    "spotlight": {
+      "title": "Mga Spotlight Recipes"
+    },
+    "hero": {
+      "tag": "AI-Powered na Pagluluto",
+      "title": "Mix & Munch",
+      "subtitle": "Ang inyong AI-powered na Filipino recipe at meal planning assistant",
+      "description": "Tuklasin ang mga authentic na Filipino recipes, planuhin ang inyong mga pagkain, at makakuha ng personalized na cooking guidance na powered ng advanced AI technology.",
+      "buttons": {
+        "pantry": "Tingnan ang Pantry",
+        "explore": "Tuklasin ang mga Recipe"
+      }
+    },
+    "features": {
+      "pantryAware": {
+        "accent": "Smart Pantry",
+        "title": "Pantry-Aware na Recipe Suggestions",
+        "description": "Makakuha ng personalized na recipe recommendations base sa mga ingredients na meron na kayo sa bahay."
+      },
+      "aiSousChef": {
+        "accent": "AI Assistant",
+        "title": "AI Sous Chef",
+        "description": "Ang inyong personal na cooking assistant na gagabay sa inyo sa bawat hakbang ng Filipino cuisine preparation."
+      },
+      "chefTranscripts": {
+        "accent": "Expert na Gabay",
+        "title": "Chef Video Transcripts",
+        "description": "Matuto mula sa mga professional na Filipino chefs na may detalyadong video transcripts at cooking techniques."
+      }
+    },
+    "get_started": "Magsimula",
+    "explore_recipes": "Tuklasin ang mga Recipe",
+    "spotlight_recipes": "Spotlight Recipes",
+    "modern_makers_title": "Ginawa para sa mga modernong Filipino makers",
+    "modern_makers_description": "Kahit experienced cook kayo o nagsisimula pa lang sa culinary journey, ang Mix & Munch ay nagbibigay ng mga tools at guidance na kailangan ninyo para gumawa ng masasarap na Filipino dishes.",
+    "view_all_recipes": "Tingnan lahat ng recipes",
+    "chef_curated": "sa aming chef-curated set",
+    "makers": {
+      "title": "Ginawa para sa mga modernong Filipino na nagluluto",
+      "description": "Bawat screen ay may layuning daloy: pantry matching, AI cook-along, chef transcript demos, at profile personalization.",
+      "button": "Tingnan ang mga recipe →"
+    },
+    "signatureDish": "Signature Dish",
+    "chefCurated": "sa aming chef-curated na set"
+  },
+  "recipes": {
+    "title": "Filipino Recipe Collection",
+    "subtitle": "Tuklasin ang mga authentic na Filipino dishes na may step-by-step na gabay",
+    "description": "I-explore ang aming curated collection ng traditional at modern na Filipino recipes, bawat isa ay may detalyadong instructions at ingredient lists.",
+    "tag": "Gallery ng mga recipe",
+    "gallery_tag": "Recipe gallery",
+    "signature_plate": "Signature Filipino plate",
+    "rating": "rating",
+    "reviews": "mga review",
+    "prep_time": "Prep",
+    "cook_time": "Cook",
+    "serves": "Para sa",
+    "difficulty": "Difficulty",
+    "ingredients": "Mga Sangkap",
+    "method": "Paraan",
+    "ask_ai": "Tanungin ang AI tungkol sa recipe na ito",
+    "modernTitle": "Mga Filipino dishes na na-reimagine para sa modernong home cook",
+    "modernDescription": "I-browse ang aming curated set ng chef-tested recipes. Ang bawat card ay nagpapakita ng pantry matches kapag galing kayo sa checklist, at may attribution para sa bawat visual asset."
+  },
+  "chat": {
+    "starterPrompts": {
+      "garlicOnions": {
+        "title": "🧄 Bawang at Sibuyas",
+        "prompt": "Meron akong bawang at sibuyas. Anong Filipino dishes ang pwede kong gawin?"
+      },
+      "chickenLime": {
+        "title": "🍗 Manok at Lime",
+        "prompt": "Meron akong manok at lime. Mag-suggest ng Filipino recipes."
+      },
+      "surprise": {
+        "title": "🎲 Surprise Mo Ako",
+        "prompt": "Surprise mo ako ng masarap na Filipino recipe!"
+      }
+    },
+    "messageBubble": {
+      "defaultRecipeTitle": "Nakaimbak na Recipe",
+      "recipeSaved": "✅ Na-save na ang Recipe!",
+      "alreadySaved": "📌 Na-save na",
+      "saveRecipe": "💾 I-save ang Recipe"
+    },
+    "recipeCard": {
+      "ingredients": "Mga Sangkap",
+      "stepByStep": "Hakbang-hakbang",
+      "proTip": "Pro Tip",
+      "culturalInsight": "Kultural na Kaalaman",
+      "platingSuggestion": "Mungkahi sa Plating"
+    },
+    "title": "AI Chat Assistant",
+    "placeholder": "Magtanong tungkol sa mga Filipino recipe...",
+    "send": "Ipadala",
+    "thinking": "Nag-iisip...",
+    "error": "May nangyaring mali. Subukan ulit.",
+    "ai_assistant": "AI Recipe Assistant",
+    "beta": "Beta",
+    "loading": "Naglo-load...",
+    "introMessage": "👋 Kumusta! Ako ang inyong AI Filipino recipe assistant. Makakatulong ako sa inyo na makatuklas ng mga authentic na Filipino dishes, magmungkahi ng mga recipe base sa inyong mga ingredients, at gabayan kayo sa pagluluto ng mga traditional favorites. Ano ang gusto ninyong lutuin ngayon?"
+  },
+  "saved": {
+    "title": "💾 Mga Naka-save na Recipe",
+    "subtitle": "Ang inyong collection ng mga paboritong recipe",
+    "recipeCount": "{{count}} recipe{{plural}} na naka-save",
+    "exportAll": "📥 I-export Lahat bilang JSON",
+    "noRecipes": "Walang naka-save na recipe pa",
+    "saveInstructions": "I-click ang Save button sa kahit anong AI-generated na recipe",
+    "goToChat": "→ Pumunta sa Chat",
+    "recipeTitle": "📋 {{title}}",
+    "delete": "🗑️ Tanggalin",
+    "copySuccess": "Recipe na-copy sa clipboard!",
+    "copy": "📋 Kopyahin",
+    "download": "💾 I-download",
+    "browse_recipes": "Mag-browse ng mga recipe",
+    "delete_recipe": "Tanggalin ang recipe",
+    "view_recipe": "Tingnan ang Recipe",
+    "cook_this": "Lutuin Ito",
+    "select_recipe": "Pumili ng recipe para tingnan ang details at cooking instructions"
+  },
+  "youtubeCrawler": {
+    "tag": "🎥 YouTube Recipe Crawler",
+    "title": "YouTube Recipe Crawler",
+    "description": "Kunin ang mga sangkap mula sa YouTube cooking videos at pamahalaan ang mga content creator",
+    "noIngredientsToExport": "Walang mga sangkap na ie-export",
+    "ingredientsExtracted": "mga sangkap nakuha",
+    "exportAll": "I-export Lahat",
+    "tabs": {
+      "urlProcessor": "URL Processor",
+      "contentCreators": "Mga Content Creator",
+      "analytics": "Analytics",
+      "settings": "Mga Setting"
+    },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "Mga insight at statistics mula sa inyong ingredient extraction activities",
+      "totalIngredients": "Kabuuang Mga Sangkap",
+      "uniqueIngredients": "Natatanging Mga Sangkap",
+      "avgConfidence": "Average na Confidence",
+      "sourcesUsed": "Mga Ginamit na Source",
+      "extractionSources": "Mga Source ng Extraction",
+      "mostCommonIngredients": "Mga Pinakakaraniwang Sangkap",
+      "times": "{{count}} beses",
+      "noDataAvailable": "Walang Available na Data",
+      "startProcessing": "Simulan ang pag-process ng YouTube videos para makita ang analytics at insights.",
+      "processFirstVideo": "I-process ang Unang Video"
+    },
+    "settings": {
+      "title": "Mga Setting",
+      "description": "I-configure ang inyong YouTube crawling preferences at system behavior",
+      "saveSuccess": "Matagumpay na na-save ang mga setting!",
+      "saveError": "Hindi na-save ang mga setting",
+      "processingOptions": "Mga Processing Option",
+      "enableOCR": "I-enable ang OCR",
+      "enableOCRDescription": "Kunin ang text mula sa video frames",
+      "enableSpeechToText": "I-enable ang Speech-to-Text",
+      "enableSpeechToTextDescription": "Kunin ang mga sangkap mula sa spoken content",
+      "processLinkedResources": "I-process ang Linked Resources",
+      "processLinkedResourcesDescription": "I-crawl ang mga website na naka-link sa descriptions",
+      "performanceSettings": "Mga Performance Setting",
+      "maxVideosPerCrawl": "Max na Videos per Crawl",
+      "crawlTimeout": "Crawl Timeout (mga segundo)",
+      "confidenceThreshold": "Confidence Threshold",
+      "minimumConfidence": "minimum na confidence",
+      "exportSettings": "Mga Export Setting",
+      "autoExport": "Auto Export",
+      "autoExportDescription": "Awtomatikong i-export ang mga resulta pagkatapos ng processing",
+      "defaultExportFormat": "Default na Export Format",
+      "formatJSON": "JSON",
+      "formatCSV": "CSV",
+      "saveSettings": "I-save ang Mga Setting"
+    }
+  },
+  "saved_recipes": {
+    "title": "Ang Inyong Recipe Collection",
+    "subtitle": "Lahat ng inyong na-save na culinary creations sa isang lugar",
+    "loading": "Naglo-load ng inyong mga na-save na recipes...",
+    "stats": {
+      "saved_recipes": "Mga Na-save na Recipe",
+      "latest_save": "Pinakabagong Na-save",
+      "weeks_of_meals": "Mga Linggo ng Pagkain"
+    },
+    "showing_recipes": "Nagpapakita ng {{count}} recipes",
+    "clear_all": "I-clear Lahat",
+    "no_recipes_title": "Wala Pang Na-save na Recipes",
+    "no_recipes_description": "Simulan ang pagbuo ng inyong collection sa pag-save ng mga recipe mula sa aming AI assistant o pag-browse sa aming curated collection.",
+    "start_cooking": "Magsimulang Magluto",
+    "saved_on": "Na-save noong {{date}}",
+    "delete": "Tanggalin",
+    "chat_with_ai": "Makipag-chat sa AI"
+  },
+  "youtube_crawler": {
+    "title": "YouTube Recipe Crawler",
+    "subtitle": "Kunin ang mga ingredients at recipes mula sa YouTube cooking videos",
+    "description": "I-analyze ang YouTube cooking videos para automatic na makuha ang mga ingredients, cooking steps, at recipe information gamit ang advanced AI technology.",
+    "tag": "YouTube Recipe Crawler",
+    "ingredients_extracted": "{{count}} ingredients na nakuha",
+    "export_all": "I-export Lahat ng Ingredients",
+    "tabs": {
+      "url_processor": "URL Processor",
+      "creator_manager": "Content Creators",
+      "analytics": "Analytics",
+      "settings": "Mga Setting"
+    },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "I-track ang inyong recipe extraction performance at i-analyze ang ingredient patterns mula sa mga na-process na YouTube videos.",
+      "total_ingredients": "Kabuuang Ingredients",
+      "unique_ingredients": "Unique na Ingredients",
+      "avg_confidence": "Average Confidence",
+      "sources_used": "Mga Ginamit na Source",
+      "extraction_sources": "Mga Extraction Sources",
+      "most_common": "Mga Pinakakaraniwang Ingredients",
+      "no_data": "Walang Available na Data",
+      "no_data_description": "Magsimulang mag-process ng YouTube videos para makita ang analytics at insights tungkol sa mga na-extract na ingredients at recipes."
+    },
+    "settings": {
+      "title": "Mga Setting",
+      "description": "I-configure ang processing options at performance settings para sa YouTube video analysis.",
+      "processing_options": "Mga Processing Options",
+      "enable_ocr": "I-enable ang OCR",
+      "ocr_description": "Kunin ang text mula sa video frames",
+      "enable_speech": "I-enable ang Speech-to-Text",
+      "speech_description": "Kunin ang mga ingredients mula sa spoken content",
+      "process_links": "I-process ang Linked Resources",
+      "links_description": "I-crawl ang mga websites na naka-link sa descriptions",
+      "performance_settings": "Mga Performance Settings",
+      "max_concurrent": "Max Concurrent Requests",
+      "request_delay": "Request Delay (ms)",
+      "confidence_threshold": "Confidence Threshold",
+      "export_settings": "Mga Export Settings",
+      "auto_export": "Auto Export",
+      "auto_export_description": "Automatic na i-export ang results pagkatapos mag-process",
+      "export_format": "Export Format",
+      "save_settings": "I-save ang Settings"
+    }
+  },
+  "components": {
+    "errorBoundary": {
+      "title": "May nangyaring mali",
+      "description": "Nakatagpo kami ng hindi inaasahang error. Pakisubok na i-refresh ang page.",
+      "tryAgain": "Subukan Muli"
+    },
+    "languageSwitcher": {
+      "english": "Ingles",
+      "tagalog": "Tagalog"
+    },
+    "loading": "Naglo-load...",
+    "noResults": "Walang nahanap na resulta",
+    "error": "May naganap na error",
+    "button": {
+      "loading": "Naglo-load...",
+      "disabled": "Disabled"
+    },
+    "tag": {
+      "new": "Bago",
+      "featured": "Featured",
+      "popular": "Popular"
+    },
+    "recipe_card": {
+      "view_recipe": "Tingnan ang Recipe",
+      "save_recipe": "I-save ang Recipe",
+      "prep_time": "Prep: {{time}}",
+      "cook_time": "Cook: {{time}}",
+      "difficulty": "{{level}} difficulty"
+    },
+    "ingredient_toggle": {
+      "add_to_pantry": "Idagdag sa pantry",
+      "remove_from_pantry": "Alisin sa pantry",
+      "in_pantry": "Nasa pantry",
+      "not_in_pantry": "Wala sa pantry"
+    },
+    "error_boundary": {
+      "something_went_wrong": "May nangyaring mali",
+      "error_description": "Nakaencounter kami ng unexpected error. Subukan ninyong i-refresh ang page.",
+      "refresh_page": "I-refresh ang Page",
+      "report_issue": "I-report ang Issue"
+    }
+  },
+  "footer": {
+    "brand": {
+      "tagline": "Capstone Kitchen",
+      "description": "Ang Mix & Munch ay nagbibigay-buhay sa modernong Filipino cuisine gamit ang pantry-aware recipes, AI-powered guidance, at chef transcripts.",
+      "aiPowered": "Gemini 2.5 Pro + GLM 4.6 AI-powered Filipino recipe assistant."
+    },
+    "explore": {
+      "title": "Tuklasin"
+    },
+    "contact": {
+      "title": "Makipag-ugnayan",
+      "portfolio": "Capstone Portfolio"
+    },
+    "copyright": "© {{year}} Mix & Munch Studio. Ginawa sa Pilipinas na may lasa at code."
+  },
+  "about": {
+    "tag": "Tungkol sa Mix & Munch",
+    "title": "Capstone-grade na Filipino culinary lab",
+    "description": "Ang Mix & Munch ay isang academic portfolio project na ginawa upang ipakita ang full-stack product thinking. Bawat screen ay ginawa para sa storytelling—mula sa pantry intelligence at AI-driven chat hanggang sa chef transcript parsing demos.",
+    "productPillars": {
+      "title": "Mga haligi ng produkto",
+      "reduceWaste": "Bawasan ang ingredient waste sa pamamagitan ng pantry-first recipe surfacing.",
+      "celebrateFlavors": "Ipagdiwang ang Filipino flavors gamit ang creative AI mentorship na gumagamit ng Gemini.",
+      "showcaseWorkflow": "Ipakita ang transcript-to-recipe workflow para sa chef collaborations."
+    },
+    "technologyStack": {
+      "title": "Technology stack",
+      "nextjs": "Next.js App Router + TypeScript para sa cohesive UX flows.",
+      "tailwind": "Tailwind CSS na may custom dark theme at micro-interactions.",
+      "gemini": "Gemini AI sa pamamagitan ng @ai-sdk/google para sa conversational intelligence."
+    }
+  },
+  "pantry": {
+    "tag": "Pantry checklist",
+    "title": "Ano ang meron sa inyong kusina ngayon?",
+    "description": "I-toggle ang mga sangkap na mayroon kayo upang makita ang mga recipe matches na naka-rank ayon sa pantry compatibility at ratings.",
+    "searchPlaceholder": "Maghanap ng mga sangkap...",
+    "categoryLabel": "Kategorya",
+    "allCategories": "Lahat",
+    "availableIngredients": "Mga available na sangkap",
+    "showingResults": "Nagpapakita ng {{filtered}} sa {{total}} na mga sangkap{{searchTerm}}{{category}}",
+    "matching": "na tumugma sa",
+    "inCategory": "sa",
+    "selectedCount": "{{count}} napili",
+    "clearAll": "I-clear lahat",
+    "noResults": "Walang nahanap na sangkap na tumugma sa inyong search criteria.",
+    "clearFilters": "I-clear ang mga filter",
+    "recipeMatches": "Mga recipe matches",
+    "recipeMatchesDescription": "Nagpapakita ng {{count}} na mga putahe na naka-rank ayon sa pantry match at rating.",
+    "ingredientsSelected": "{{count}} sangkap{{plural}} napili",
+    "minMatch": "Min na Tugma"
+  },
+  "profile": {
+    "tag": "Profile at mga kagustuhan",
+    "title": "I-tune ang Mix & Munch sa inyong panlasa",
+    "description": "I-save ang mga pantry staples, dietary goals, at notification cadence. Ang mga setting na ito ay nagpe-personalize ng AI chat prompts at recipe ordering sa buong experience.",
+    "profileBasics": "Mga basic ng profile",
+    "displayName": "Display name",
+    "bio": "Bio",
+    "saveProfile": "I-save ang profile",
+    "dietaryFocus": "Dietary focus",
+    "allergyWatchlist": "Allergy watchlist",
+    "notificationCadence": "Notification cadence",
+    "notifications": {
+      "recipeDrops": "Recipe drops",
+      "chatSummaries": "Chat summaries",
+      "pantryReminders": "Pantry reminders"
+    },
+    "pinnedFavorites": "Mga paboritong naka-pin"
+  },
+  "youtubeDemo": {
+    "tag": "Live na YouTube chef extraction demo",
+    "title": "Tingnan kung paano namin ginagawang structured recipes ang chef storytelling",
+    "description": "Maghanap ng cooking videos at makita kung paano ginagawa ng aming pipeline ang real YouTube content into structured recipe data.",
+    "searchPlaceholder": "Maghanap ng cooking videos...",
+    "search": "Hanap",
+    "searching": "Naghahanap...",
+    "selectVideo": "Pumili ng video",
+    "published": "Nai-publish",
+    "transcriptHighlights": "Mga highlight ng transcript",
+    "structuredRecipe": "Structured na recipe",
+    "ingredients": "Mga sangkap",
+    "steps": "Mga hakbang",
+    "compareWithApp": "Ikumpara sa app recipe",
+    "pipelineNotes": "Mga tala ng pipeline",
+    "pipelineNote1": "Ang mga video ay kinukuha live mula sa YouTube Data API v3",
+    "pipelineNote2": "Ang transcript processing ay simulated (hindi nagbibigay ng transcripts ang YouTube API)",
+    "pipelineNote3": "Ang recipe extraction ay gumagamit ng AI-powered content analysis",
+    "pipelineNote4": "Ang mga resulta ay pumapasok sa Mix & Munch recipe models para sa review",
+    "videoThumbnail": "Video thumbnail",
+    "from": "Mula sa",
+    "networkError": "May network error habang naghahanap ng mga video",
+    "transcriptError": "May error sa pagkuha ng transcript"
+  }
+}

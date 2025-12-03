@@ -1,0 +1,437 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "clear": "Clear",
+    "export": "Export",
+    "settings": "Settings",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "open": "Open",
+    "view": "View",
+    "add": "Add",
+    "remove": "Remove",
+    "update": "Update",
+    "create": "Create",
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "navigation": {
+    "home": "Home",
+    "recipes": "Recipes",
+    "pantry": "Pantry",
+    "chat": "Chat",
+    "saved": "Saved",
+    "savedRecipes": "Saved Recipes",
+    "profile": "Profile",
+    "about": "About",
+    "aiChat": "AI Chat",
+    "youtube": "YouTube",
+    "youtube_crawler": "YouTube Crawler",
+    "tools": "Cooking Tools"
+  },
+  "tools": {
+    "title": "Cooking Tools",
+    "description": "Everything you need to make cooking easier and more fun!",
+    "timer": {
+      "title": "Cooking Timer",
+      "description": "Multiple timers for perfect cooking every time",
+      "quickTimers": "Quick Timers",
+      "customTimer": "Custom Timer",
+      "noActiveTimers": "No active timers",
+      "startFromPresets": "Start a timer from the presets above or create a custom one"
+    },
+    "shopping": {
+      "title": "Shopping List",
+      "description": "Organize your grocery shopping",
+      "empty": "Your shopping list is empty",
+      "addManually": "Add items manually or from your saved recipes",
+      "clearDone": "Clear Done",
+      "clearAll": "Clear All",
+      "copyToClipboard": "Copy to Clipboard",
+      "download": "Download"
+    },
+    "challenge": {
+      "title": "Pantry Challenge",
+      "description": "Level up your cooking skills!",
+      "todaysChallenge": "Today's Challenge",
+      "allChallenges": "All Challenges",
+      "achievements": "Achievements",
+      "streak": "day streak",
+      "totalPoints": "Total Points",
+      "challengesDone": "Challenges Done",
+      "complete": "Complete",
+      "challengeComplete": "Challenge Complete!"
+    }
+  },
+  "home": {
+    "tagline": "Capstone-grade Filipino Cuisine Studio",
+    "spotlight": {
+      "title": "Spotlight Recipes"
+    },
+    "hero": {
+      "tag": "AI-Powered Cooking",
+      "title": "Mix & Munch",
+      "subtitle": "Your AI-powered Filipino recipe and meal planning assistant",
+      "description": "Discover authentic Filipino recipes, plan your meals, and get personalized cooking guidance powered by advanced AI technology.",
+      "buttons": {
+        "pantry": "Check Pantry",
+        "explore": "Explore Recipes"
+      }
+    },
+    "features": {
+      "pantryAware": {
+        "accent": "Smart Pantry",
+        "title": "Pantry-Aware Recipe Suggestions",
+        "description": "Get personalized recipe recommendations based on ingredients you already have at home."
+      },
+      "aiSousChef": {
+        "accent": "AI Assistant",
+        "title": "AI Sous Chef",
+        "description": "Your personal cooking assistant that guides you through every step of Filipino cuisine preparation."
+      },
+      "chefTranscripts": {
+        "accent": "Expert Guidance",
+        "title": "Chef Video Transcripts",
+        "description": "Learn from professional Filipino chefs with detailed video transcripts and cooking techniques."
+      }
+    },
+    "get_started": "Get Started",
+    "explore_recipes": "Explore Recipes",
+    "spotlight_recipes": "Spotlight Recipes",
+    "modern_makers_title": "Designed for modern Filipino makers",
+    "modern_makers_description": "Whether you're a seasoned cook or just starting your culinary journey, Mix & Munch provides the tools and guidance you need to create delicious Filipino dishes.",
+    "view_all_recipes": "View all recipes",
+    "chef_curated": "in our chef-curated set",
+    "makers": {
+      "title": "Designed for modern Filipino makers",
+      "description": "Each screen delivers a purpose-built flow: pantry matching, AI cook-along, chef transcript demos, and profile personalization.",
+      "button": "Browse recipes →"
+    },
+    "signatureDish": "Signature Dish",
+    "chefCurated": "in our chef-curated set"
+  },
+  "recipes": {
+    "title": "Filipino Recipe Collection",
+    "subtitle": "Discover authentic Filipino dishes with step-by-step guidance",
+    "description": "Explore our curated collection of traditional and modern Filipino recipes, each with detailed instructions and ingredient lists.",
+    "tag": "Recipe gallery",
+    "gallery_tag": "Recipe gallery",
+    "signature_plate": "Signature Filipino plate",
+    "rating": "rating",
+    "reviews": "reviews",
+    "prep_time": "Prep",
+    "cook_time": "Cook",
+    "serves": "Serves",
+    "difficulty": "Difficulty",
+    "ingredients": "Ingredients",
+    "method": "Method",
+    "ask_ai": "Ask AI about this recipe",
+    "modernTitle": "Filipino dishes reimagined for the modern home cook",
+    "modernDescription": "Browse our curated set of chef-tested recipes. Each card indicates pantry matches when you hop over from the checklist, and includes attribution for every visual asset."
+  },
+  "chat": {
+    "starterPrompts": {
+      "garlicOnions": {
+        "title": "🧄 Garlic & Onions",
+        "prompt": "I have garlic and onions. What Filipino dishes can I make?"
+      },
+      "chickenLime": {
+        "title": "🍗 Chicken & Lime",
+        "prompt": "I have chicken and lime. Suggest some Filipino recipes."
+      },
+      "surprise": {
+        "title": "🎲 Surprise Me",
+        "prompt": "Surprise me with a delicious Filipino recipe!"
+      }
+    },
+    "messageBubble": {
+      "defaultRecipeTitle": "Saved Recipe",
+      "recipeSaved": "✅ Recipe Saved!",
+      "alreadySaved": "📌 Already Saved",
+      "saveRecipe": "💾 Save Recipe"
+    },
+    "recipeCard": {
+      "ingredients": "Ingredients",
+      "stepByStep": "Step-by-Step",
+      "proTip": "Pro Tip",
+      "culturalInsight": "Cultural Insight",
+      "platingSuggestion": "Plating Suggestion"
+    },
+    "ai_assistant": "AI Recipe Assistant",
+    "beta": "Beta",
+    "loading": "Loading...",
+    "introMessage": "👋 Kumusta! I'm your AI Filipino recipe assistant. I can help you discover authentic Filipino dishes, suggest recipes based on your ingredients, and guide you through cooking traditional favorites. What would you like to cook today?"
+  },
+  "saved": {
+    "title": "💾 Saved Recipes",
+    "subtitle": "Your collection of favorite recipes",
+    "recipeCount": "{{count}} recipe{{plural}} saved",
+    "exportAll": "📥 Export All as JSON",
+    "noRecipes": "No recipes saved yet",
+    "saveInstructions": "Click the Save button on any AI-generated recipe",
+    "goToChat": "→ Go to Chat",
+    "recipeTitle": "📋 {{title}}",
+    "delete": "🗑️ Delete",
+    "copySuccess": "Recipe copied to clipboard!",
+    "copy": "📋 Copy",
+    "download": "💾 Download",
+    "selectRecipe": "Select a recipe from the list to view details",
+    "browse_recipes": "Browse recipes",
+    "delete_recipe": "Delete recipe",
+    "view_recipe": "View Recipe",
+    "cook_this": "Cook This",
+    "select_recipe": "Select a recipe to view details and cooking instructions"
+  },
+  "youtubeCrawler": {
+    "tag": "🎥 YouTube Recipe Crawler",
+    "title": "YouTube Recipe Crawler",
+    "description": "Extract ingredients from YouTube cooking videos and manage content creators",
+    "noIngredientsToExport": "No ingredients to export",
+    "ingredientsExtracted": "ingredients extracted",
+    "exportAll": "Export All",
+    "tabs": {
+      "urlProcessor": "URL Processor",
+      "contentCreators": "Content Creators",
+      "analytics": "Analytics",
+      "settings": "Settings"
+    },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "Insights and statistics from your ingredient extraction activities",
+      "totalIngredients": "Total Ingredients",
+      "uniqueIngredients": "Unique Ingredients",
+      "avgConfidence": "Avg Confidence",
+      "sourcesUsed": "Sources Used",
+      "extractionSources": "Extraction Sources",
+      "mostCommonIngredients": "Most Common Ingredients",
+      "times": "{{count}} times",
+      "noDataAvailable": "No Data Available",
+      "startProcessing": "Start processing YouTube videos to see analytics and insights.",
+      "processFirstVideo": "Process Your First Video"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Configure your YouTube crawling preferences and system behavior",
+      "saveSuccess": "Settings saved successfully!",
+      "saveError": "Failed to save settings",
+      "processingOptions": "Processing Options",
+      "enableOCR": "Enable OCR",
+      "enableOCRDescription": "Extract text from video frames",
+      "enableSpeechToText": "Enable Speech-to-Text",
+      "enableSpeechToTextDescription": "Extract ingredients from spoken content",
+      "processLinkedResources": "Process Linked Resources",
+      "processLinkedResourcesDescription": "Crawl websites linked in descriptions",
+      "performanceSettings": "Performance Settings",
+      "maxVideosPerCrawl": "Max Videos per Crawl",
+      "crawlTimeout": "Crawl Timeout (seconds)",
+      "confidenceThreshold": "Confidence Threshold",
+      "minimumConfidence": "minimum confidence",
+      "exportSettings": "Export Settings",
+      "autoExport": "Auto Export",
+      "autoExportDescription": "Automatically export results after processing",
+      "defaultExportFormat": "Default Export Format",
+      "formatJSON": "JSON",
+      "formatCSV": "CSV",
+      "saveSettings": "Save Settings"
+    }
+  },
+  "saved_recipes": {
+    "title": "Your Recipe Collection",
+    "subtitle": "All your saved culinary creations in one place",
+    "loading": "Loading your saved recipes...",
+    "stats": {
+      "saved_recipes": "Saved Recipes",
+      "latest_save": "Latest Save",
+      "weeks_of_meals": "Weeks of Meals"
+    },
+    "showing_recipes": "Showing {{count}} recipes",
+    "clear_all": "Clear All",
+    "no_recipes_title": "No Saved Recipes Yet",
+    "no_recipes_description": "Start building your collection by saving recipes from our AI assistant or browsing our curated collection.",
+    "start_cooking": "Start Cooking",
+    "saved_on": "Saved on {{date}}",
+    "delete": "Delete",
+    "chat_with_ai": "Chat with AI"
+  },
+  "youtube_crawler": {
+    "title": "YouTube Recipe Crawler",
+    "subtitle": "Extract ingredients and recipes from YouTube cooking videos",
+    "description": "Analyze YouTube cooking videos to automatically extract ingredients, cooking steps, and recipe information using advanced AI technology.",
+    "tag": "YouTube Recipe Crawler",
+    "ingredients_extracted": "{{count}} ingredients extracted",
+    "export_all": "Export All Ingredients",
+    "tabs": {
+      "url_processor": "URL Processor",
+      "creator_manager": "Content Creators",
+      "analytics": "Analytics",
+      "settings": "Settings"
+    },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "Track your recipe extraction performance and analyze ingredient patterns from processed YouTube videos.",
+      "total_ingredients": "Total Ingredients",
+      "unique_ingredients": "Unique Ingredients",
+      "avg_confidence": "Avg Confidence",
+      "sources_used": "Sources Used",
+      "extraction_sources": "Extraction Sources",
+      "most_common": "Most Common Ingredients",
+      "no_data": "No Data Available",
+      "no_data_description": "Start processing YouTube videos to see analytics and insights about extracted ingredients and recipes."
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Configure processing options and performance settings for YouTube video analysis.",
+      "processing_options": "Processing Options",
+      "enable_ocr": "Enable OCR",
+      "ocr_description": "Extract text from video frames",
+      "enable_speech": "Enable Speech-to-Text",
+      "speech_description": "Extract ingredients from spoken content",
+      "process_links": "Process Linked Resources",
+      "links_description": "Crawl websites linked in descriptions",
+      "performance_settings": "Performance Settings",
+      "max_concurrent": "Max Concurrent Requests",
+      "request_delay": "Request Delay (ms)",
+      "confidence_threshold": "Confidence Threshold",
+      "export_settings": "Export Settings",
+      "auto_export": "Auto Export",
+      "auto_export_description": "Automatically export results after processing",
+      "export_format": "Export Format",
+      "save_settings": "Save Settings"
+    }
+  },
+  "components": {
+    "errorBoundary": {
+      "title": "Something went wrong",
+      "description": "We encountered an unexpected error. Please try refreshing the page.",
+      "tryAgain": "Try Again"
+    },
+    "button": {
+      "loading": "Loading...",
+      "disabled": "Disabled"
+    },
+    "tag": {
+      "new": "New",
+      "featured": "Featured",
+      "popular": "Popular"
+    },
+    "recipe_card": {
+      "view_recipe": "View Recipe",
+      "save_recipe": "Save Recipe",
+      "prep_time": "Prep: {{time}}",
+      "cook_time": "Cook: {{time}}",
+      "difficulty": "{{level}} difficulty"
+    },
+    "ingredient_toggle": {
+      "add_to_pantry": "Add to pantry",
+      "remove_from_pantry": "Remove from pantry",
+      "in_pantry": "In pantry",
+      "not_in_pantry": "Not in pantry"
+    },
+    "error_boundary": {
+      "something_went_wrong": "Something went wrong",
+      "error_description": "We encountered an unexpected error. Please try refreshing the page.",
+      "refresh_page": "Refresh Page",
+      "report_issue": "Report Issue"
+    }
+  },
+  "footer": {
+    "brand": {
+      "tagline": "Mix & Munch",
+      "description": "AI-powered Filipino culinary companion"
+    },
+    "explore": {
+      "title": "Explore"
+    },
+    "contact": {
+      "title": "Contact",
+      "portfolio": "Capstone Portfolio"
+    },
+    "copyright": "© {{year}} Mix & Munch Studio. Crafted in the Philippines with flavor and code."
+  },
+  "about": {
+    "tag": "About Mix & Munch",
+    "title": "Capstone-grade Filipino culinary lab",
+    "description": "Mix & Munch is an academic portfolio project crafted to demonstrate full-stack product thinking. Every screen is purpose-built for storytelling—from pantry intelligence and AI-driven chat to chef transcript parsing demos.",
+    "productPillars": {
+      "title": "Product pillars",
+      "reduceWaste": "Reduce ingredient waste through pantry-first recipe surfacing.",
+      "celebrateFlavors": "Celebrate Filipino flavors with creative AI mentorship using Gemini.",
+      "showcaseWorkflow": "Showcase transcript-to-recipe workflow for chef collaborations."
+    },
+    "technologyStack": {
+      "title": "Technology stack",
+      "nextjs": "Next.js App Router + TypeScript for cohesive UX flows.",
+      "tailwind": "Tailwind CSS with custom dark theme and micro-interactions.",
+      "gemini": "Gemini AI via @ai-sdk/google for conversational intelligence."
+    }
+  },
+  "pantry": {
+    "tag": "Pantry checklist",
+    "title": "What's in your kitchen today?",
+    "description": "Toggle ingredients you have on hand to see recipe matches ranked by pantry compatibility and ratings.",
+    "searchPlaceholder": "Search ingredients...",
+    "categoryLabel": "Category",
+    "allCategories": "All",
+    "availableIngredients": "Available ingredients",
+    "showingResults": "Showing {{filtered}} of {{total}} ingredients{{searchTerm}}{{category}}",
+    "matching": "matching",
+    "inCategory": "in",
+    "selectedCount": "{{count}} selected",
+    "clearAll": "Clear all",
+    "noResults": "No ingredients found matching your search criteria.",
+    "clearFilters": "Clear filters",
+    "recipeMatches": "Recipe matches",
+    "recipeMatchesDescription": "Showing {{count}} dishes ranked by pantry match and rating.",
+    "ingredientsSelected": "{{count}} ingredient{{plural}} selected",
+    "minMatch": "Min Match"
+  },
+  "profile": {
+    "tag": "Profile & preferences",
+    "title": "Tune Mix & Munch to your taste buds",
+    "description": "Save pantry staples, dietary goals, and notification cadence. These settings personalize AI chat prompts and recipe ordering across the experience.",
+    "profileBasics": "Profile basics",
+    "displayName": "Display name",
+    "bio": "Bio",
+    "saveProfile": "Save profile",
+    "dietaryFocus": "Dietary focus",
+    "allergyWatchlist": "Allergy watchlist",
+    "notificationCadence": "Notification cadence",
+    "notifications": {
+      "recipeDrops": "Recipe drops",
+      "chatSummaries": "Chat summaries",
+      "pantryReminders": "Pantry reminders"
+    },
+    "pinnedFavorites": "Pinned favorites"
+  },
+  "youtubeDemo": {
+    "tag": "Live YouTube chef extraction demo",
+    "title": "Watch how we translate chef storytelling into structured recipes",
+    "description": "Search for cooking videos and see how our pipeline processes real YouTube content into structured recipe data.",
+    "searchPlaceholder": "Search for cooking videos...",
+    "search": "Search",
+    "searching": "Searching...",
+    "selectVideo": "Select a video",
+    "published": "Published",
+    "transcriptHighlights": "Transcript highlights",
+    "structuredRecipe": "Structured recipe",
+    "ingredients": "Ingredients",
+    "steps": "Steps",
+    "compareWithApp": "Compare with app recipe",
+    "pipelineNotes": "Pipeline notes",
+    "pipelineNote1": "Videos are fetched live from YouTube Data API v3",
+    "pipelineNote2": "Transcript processing is simulated (YouTube API doesn't provide transcripts)",
+    "pipelineNote3": "Recipe extraction uses AI-powered content analysis",
+    "pipelineNote4": "Results feed into Mix & Munch recipe models for review",
+    "videoThumbnail": "Video thumbnail",
+    "from": "From",
+    "networkError": "Network error occurred while searching videos",
+    "transcriptError": "Error getting transcript"
+  }
+}

@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import clsx from 'clsx';
+import { ErrorBoundary } from './ErrorBoundary';
 
 interface MarkdownProps {
   content: string;
@@ -9,10 +10,11 @@ interface MarkdownProps {
 
 export function Markdown({ content, className }: MarkdownProps) {
   return (
-    <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      className={clsx('prose prose-invert max-w-none text-sm', className)}
-      components={{
+    <div className={clsx('prose prose-invert max-w-none text-sm', className)}>
+      <ErrorBoundary>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
         p: ({ node, ...props }) => <p className="text-brand-gray-300 mb-2 leading-relaxed" {...props} />,
         em: ({ node, ...props }) => <em className="text-brand-gray-200 italic" {...props} />,
         strong: ({ node, ...props }) => <strong className="text-brand-gray-100 font-semibold" {...props} />,
@@ -23,18 +25,21 @@ export function Markdown({ content, className }: MarkdownProps) {
         ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-1 text-brand-gray-300 mb-2" {...props} />,
         ol: ({ node, ...props }) => <ol className="list-decimal list-inside space-y-1 text-brand-gray-300 mb-2" {...props} />,
         li: ({ node, ...props }) => <li className="text-brand-gray-300" {...props} />,
-        code: ({ node, inline, ...props }) => inline ? (
-          <code className="bg-brand-gray-900/60 text-brand-lime px-1.5 py-0.5 rounded text-xs" {...props} />
-        ) : (
-          <code className="bg-brand-gray-900/60 text-brand-lime px-2 py-1 rounded block text-xs overflow-x-auto mb-2" {...props} />
-        ),
+        code: ({ node, inline, ...props }: any) => {
+          if (inline) {
+            return <code className="bg-brand-gray-900/60 text-brand-lime px-1.5 py-0.5 rounded text-xs" {...props} />;
+          }
+          return <code className="bg-brand-gray-900/60 text-brand-lime px-2 py-1 rounded block text-xs overflow-x-auto mb-2" {...props} />;
+        },
         blockquote: ({ node, ...props }) => (
           <blockquote className="border-l-2 border-brand-lime/50 pl-3 py-1 text-brand-gray-400 italic mb-2" {...props} />
         ),
         hr: () => <hr className="border-brand-gray-800/50 my-3" />,
       }}
-    >
-      {content}
-    </ReactMarkdown>
+        >
+          {content}
+        </ReactMarkdown>
+      </ErrorBoundary>
+    </div>
   );
 }

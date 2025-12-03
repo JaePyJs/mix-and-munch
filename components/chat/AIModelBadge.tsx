@@ -16,11 +16,11 @@ export function AIModelBadge({ model, isLoading }: AIModelBadgeProps) {
 
   return (
     <div className={clsx(
-      'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border',
+      'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border',
       info.color
     )}>
       <span>{info.icon}</span>
-      <span>{info.label}</span>
+      <span>Mix AI</span>
     </div>
   );
 }
