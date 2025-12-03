@@ -1,0 +1,97 @@
+{
+  "source": "panlasangpinoy",
+  "crawled_at": "2025-10-31T19:47:24.337Z",
+  "total_recipes": 0,
+  "recipes": [],
+  "statistics": {
+    "totalProcessed": 20,
+    "successful": 0,
+    "failed": 20,
+    "errors": [
+      {
+        "url": "/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/breakfast-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/lunch-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/breakfast-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/lunch-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/breakfast-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/lunch-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/breakfast-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/lunch-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/breakfast-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "url": "https://panlasangpinoy.com/categories/recipes/lunch-recipes/",
+        "error": "Missing essential recipe data"
+      },
+      {
+        "category": "dessert",
+        "error": "Request failed with status code 404"
+      }
+    ]
+  }
+}

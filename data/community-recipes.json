@@ -1,0 +1,460 @@
+[
+  {
+    "id": "community-1",
+    "title": "Lola's Secret Chicken Adobo",
+    "description": "My grandmother's recipe passed down for 3 generations. The secret is the coconut vinegar!",
+    "cuisine": "Filipino",
+    "difficulty": "Easy",
+    "prepTime": "15 mins",
+    "cookTime": "45 mins",
+    "servings": 6,
+    "ingredients": [
+      { "item": "Chicken thighs", "amount": "1 kg" },
+      { "item": "Coconut vinegar (sukang tuba)", "amount": "1/2 cup" },
+      { "item": "Soy sauce", "amount": "1/2 cup" },
+      { "item": "Garlic", "amount": "1 head, crushed" },
+      { "item": "Bay leaves", "amount": "3 pieces" },
+      { "item": "Black peppercorns", "amount": "1 tsp" },
+      { "item": "Brown sugar", "amount": "1 tbsp" }
+    ],
+    "instructions": [
+      "Combine chicken, vinegar, soy sauce, garlic, bay leaves, and peppercorns in a pot",
+      "Let it marinate for 30 minutes (Lola's tip: overnight is better!)",
+      "Bring to boil then simmer for 30 minutes",
+      "Add brown sugar and simmer until sauce thickens",
+      "For extra flavor, fry the chicken pieces after simmering"
+    ],
+    "tips": [
+      "Use sukang tuba for authentic taste",
+      "Don't stir when it first boils - let the vinegar cook out"
+    ],
+    "tags": ["comfort-food", "traditional", "family-recipe"],
+    "sharedBy": {
+      "name": "Maria Santos",
+      "avatar": "👵",
+      "location": "Pampanga"
+    },
+    "sharedAt": "2025-11-15T08:30:00Z",
+    "likes": 142,
+    "saves": 89
+  },
+  {
+    "id": "community-2",
+    "title": "Bicol Express na Hindi Sobrang Anghang",
+    "description": "Perfect for those who love Bicol Express but can't handle too much spice. Creamy and flavorful!",
+    "cuisine": "Filipino",
+    "difficulty": "Medium",
+    "prepTime": "20 mins",
+    "cookTime": "40 mins",
+    "servings": 4,
+    "ingredients": [
+      { "item": "Pork belly", "amount": "500g, cubed" },
+      { "item": "Coconut milk", "amount": "2 cups" },
+      { "item": "Coconut cream", "amount": "1 cup" },
+      { "item": "Siling haba (finger chilies)", "amount": "5 pieces" },
+      { "item": "Siling labuyo", "amount": "2 pieces (optional)" },
+      { "item": "Bagoong alamang", "amount": "3 tbsp" },
+      { "item": "Onion", "amount": "1, sliced" },
+      { "item": "Garlic", "amount": "4 cloves" },
+      { "item": "Ginger", "amount": "1 thumb" }
+    ],
+    "instructions": [
+      "Sauté garlic, onion, and ginger until fragrant",
+      "Add pork belly and cook until slightly browned",
+      "Pour coconut milk and simmer until pork is tender",
+      "Add bagoong and chilies, stir well",
+      "Pour coconut cream and simmer until oil separates",
+      "Adjust spice level by adding or removing chilies"
+    ],
+    "tips": ["Remove chili seeds for less heat", "Best served with hot rice"],
+    "tags": ["spicy", "bicolano", "pork"],
+    "sharedBy": {
+      "name": "Jun Villanueva",
+      "avatar": "👨‍🍳",
+      "location": "Naga City"
+    },
+    "sharedAt": "2025-11-20T14:15:00Z",
+    "likes": 98,
+    "saves": 67
+  },
+  {
+    "id": "community-3",
+    "title": "Student Budget Sisig",
+    "description": "Masarap na sisig kahit walang pig face! Perfect for college students on a budget 💸",
+    "cuisine": "Filipino",
+    "difficulty": "Easy",
+    "prepTime": "10 mins",
+    "cookTime": "20 mins",
+    "servings": 2,
+    "ingredients": [
+      { "item": "Pork liempo", "amount": "300g" },
+      { "item": "Onion", "amount": "1, minced" },
+      { "item": "Calamansi", "amount": "4 pieces" },
+      { "item": "Soy sauce", "amount": "2 tbsp" },
+      { "item": "Mayonnaise", "amount": "2 tbsp" },
+      { "item": "Egg", "amount": "1" },
+      { "item": "Chili flakes", "amount": "to taste" },
+      { "item": "Butter", "amount": "1 tbsp" }
+    ],
+    "instructions": [
+      "Boil pork until tender, then chop finely",
+      "Fry chopped pork until crispy",
+      "Add butter, onion, soy sauce, and calamansi",
+      "Mix in mayonnaise and chili flakes",
+      "Serve on sizzling plate with raw egg on top",
+      "Mix everything together while hot!"
+    ],
+    "tips": [
+      "Chicken liver adds authentic flavor if you have budget",
+      "Serve immediately while sizzling"
+    ],
+    "tags": ["budget-friendly", "student-food", "pulutan"],
+    "sharedBy": {
+      "name": "Kyle Reyes",
+      "avatar": "🧑‍🎓",
+      "location": "Manila"
+    },
+    "sharedAt": "2025-11-25T19:45:00Z",
+    "likes": 234,
+    "saves": 156
+  },
+  {
+    "id": "community-4",
+    "title": "Nanay's Sinigang na Baboy",
+    "description": "The perfect sinigang - sour enough to make you sweat but not too sour. Just like how Nanay makes it.",
+    "cuisine": "Filipino",
+    "difficulty": "Easy",
+    "prepTime": "15 mins",
+    "cookTime": "1 hour",
+    "servings": 6,
+    "ingredients": [
+      { "item": "Pork ribs", "amount": "500g" },
+      { "item": "Sampalok (tamarind)", "amount": "1 cup" },
+      { "item": "Tomatoes", "amount": "2, quartered" },
+      { "item": "Onion", "amount": "1, quartered" },
+      { "item": "Kangkong", "amount": "1 bundle" },
+      { "item": "Sitaw", "amount": "1 bundle, cut" },
+      { "item": "Radish", "amount": "1, sliced" },
+      { "item": "Eggplant", "amount": "1, sliced" },
+      { "item": "Green chili", "amount": "2-3 pieces" },
+      { "item": "Fish sauce", "amount": "to taste" }
+    ],
+    "instructions": [
+      "Boil pork ribs until tender (about 45 mins)",
+      "Add sampalok and boil for 10 minutes, then mash and strain",
+      "Add tomatoes and onion, simmer for 5 minutes",
+      "Add radish and eggplant, cook until tender",
+      "Add sitaw and green chili",
+      "Add kangkong last (it cooks fast!)",
+      "Season with fish sauce"
+    ],
+    "tips": [
+      "Fresh sampalok is better than powder",
+      "Add kangkong only when ready to serve"
+    ],
+    "tags": ["soup", "rainy-day", "comfort-food"],
+    "sharedBy": {
+      "name": "Ana Dela Cruz",
+      "avatar": "👩",
+      "location": "Batangas"
+    },
+    "sharedAt": "2025-11-28T12:00:00Z",
+    "likes": 187,
+    "saves": 134
+  },
+  {
+    "id": "community-5",
+    "title": "Crispy Tokwa't Baboy",
+    "description": "The perfect pulutan! Crispy tofu, tender pork, and that addicting sawsawan 🍺",
+    "cuisine": "Filipino",
+    "difficulty": "Easy",
+    "prepTime": "15 mins",
+    "cookTime": "30 mins",
+    "servings": 4,
+    "ingredients": [
+      { "item": "Firm tofu", "amount": "2 blocks" },
+      { "item": "Pork belly", "amount": "300g" },
+      { "item": "Soy sauce", "amount": "1/2 cup" },
+      { "item": "Vinegar", "amount": "1/4 cup" },
+      { "item": "Onion", "amount": "1, chopped" },
+      { "item": "Garlic", "amount": "4 cloves, minced" },
+      { "item": "Chili", "amount": "2 pieces, chopped" },
+      { "item": "Brown sugar", "amount": "1 tbsp" }
+    ],
+    "instructions": [
+      "Boil pork belly until tender, then slice",
+      "Deep fry tofu until golden and crispy",
+      "Cut tofu into cubes",
+      "Make sawsawan: mix soy sauce, vinegar, onion, garlic, chili, and sugar",
+      "Arrange tofu and pork on plate",
+      "Serve with sawsawan on the side"
+    ],
+    "tips": [
+      "Press tofu to remove water for extra crispiness",
+      "Best with ice cold beer!"
+    ],
+    "tags": ["pulutan", "appetizer", "crispy"],
+    "sharedBy": {
+      "name": "Tito Benjie",
+      "avatar": "🍺",
+      "location": "Quezon City"
+    },
+    "sharedAt": "2025-12-01T20:30:00Z",
+    "likes": 312,
+    "saves": 201
+  },
+  {
+    "id": "community-6",
+    "title": "Easy Champorado for Lazy Mornings",
+    "description": "5-minute champorado when you're too tamad to cook pero gusto mo ng comfort food",
+    "cuisine": "Filipino",
+    "difficulty": "Easy",
+    "prepTime": "2 mins",
+    "cookTime": "10 mins",
+    "servings": 2,
+    "ingredients": [
+      { "item": "Glutinous rice (malagkit)", "amount": "1 cup" },
+      { "item": "Tablea or cocoa powder", "amount": "4 tablets or 4 tbsp" },
+      { "item": "Sugar", "amount": "1/4 cup" },
+      { "item": "Water", "amount": "4 cups" },
+      { "item": "Evaporated milk", "amount": "for topping" },
+      { "item": "Tuyo", "amount": "for serving (optional)" }
+    ],
+    "instructions": [
+      "Boil water and add glutinous rice",
+      "Stir occasionally until rice is cooked",
+      "Add tablea/cocoa and sugar, mix until dissolved",
+      "Cook until desired thickness",
+      "Serve with evaporated milk drizzle",
+      "Pair with tuyo for the ultimate combo!"
+    ],
+    "tips": ["Leftover rice works too!", "Add more chocolate for richer taste"],
+    "tags": ["breakfast", "chocolate", "comfort-food", "rainy-day"],
+    "sharedBy": {
+      "name": "Jas Mendoza",
+      "avatar": "😴",
+      "location": "Laguna"
+    },
+    "sharedAt": "2025-12-02T07:15:00Z",
+    "likes": 89,
+    "saves": 45
+  },
+  {
+    "id": "community-7",
+    "title": "Air Fryer Lechon Kawali",
+    "description": "Crispy lechon kawali without the oil splatter! Air fryer is a game changer 🔥",
+    "cuisine": "Filipino",
+    "difficulty": "Medium",
+    "prepTime": "10 mins",
+    "cookTime": "45 mins",
+    "servings": 4,
+    "ingredients": [
+      { "item": "Pork belly", "amount": "1 kg" },
+      { "item": "Salt", "amount": "2 tbsp" },
+      { "item": "Pepper", "amount": "1 tsp" },
+      { "item": "Garlic powder", "amount": "1 tsp" },
+      { "item": "Bay leaves", "amount": "3 pieces" },
+      { "item": "Water", "amount": "for boiling" }
+    ],
+    "instructions": [
+      "Boil pork belly with salt, pepper, and bay leaves until tender (45 mins)",
+      "Remove and pat completely dry (important!)",
+      "Rub with garlic powder and extra salt",
+      "Refrigerate uncovered for 2 hours (or overnight for crispier skin)",
+      "Air fry at 400°F for 20-25 minutes, flipping halfway",
+      "Let rest for 5 minutes before slicing"
+    ],
+    "tips": ["Dry skin = crispy skin", "Poke holes in skin for extra crunch"],
+    "tags": ["air-fryer", "crispy", "pork", "modern"],
+    "sharedBy": {
+      "name": "Chef RJ",
+      "avatar": "👨‍🍳",
+      "location": "Makati"
+    },
+    "sharedAt": "2025-12-03T16:00:00Z",
+    "likes": 267,
+    "saves": 189
+  },
+  {
+    "id": "community-8",
+    "title": "Instant Pot Kare-Kare",
+    "description": "Traditional kare-kare made easy with Instant Pot. Tender beef in 1 hour! 🥜",
+    "cuisine": "Filipino",
+    "difficulty": "Medium",
+    "prepTime": "20 mins",
+    "cookTime": "1 hour",
+    "servings": 6,
+    "ingredients": [
+      { "item": "Beef tripe (tuwalya)", "amount": "500g" },
+      { "item": "Oxtail", "amount": "500g" },
+      { "item": "Peanut butter", "amount": "1 cup" },
+      { "item": "Ground toasted rice", "amount": "1/4 cup" },
+      { "item": "Annatto water", "amount": "1/4 cup" },
+      { "item": "Eggplant", "amount": "2, sliced" },
+      { "item": "String beans", "amount": "1 bundle" },
+      { "item": "Banana blossom", "amount": "1, sliced" },
+      { "item": "Bok choy", "amount": "4 pieces" },
+      { "item": "Bagoong alamang", "amount": "for serving" }
+    ],
+    "instructions": [
+      "Pressure cook oxtail and tripe for 45 minutes",
+      "Sauté garlic and onion in annatto oil",
+      "Add peanut butter and meat broth, stir well",
+      "Add ground toasted rice to thicken",
+      "Add vegetables according to cooking time",
+      "Simmer until vegetables are tender",
+      "Serve with bagoong on the side"
+    ],
+    "tips": ["Toast rice and grind for authentic thickness", "Homemade bagoong is best!"],
+    "tags": ["instant-pot", "peanut", "special-occasion"],
+    "sharedBy": {
+      "name": "Tita Nene",
+      "avatar": "👩‍🍳",
+      "location": "Bulacan"
+    },
+    "sharedAt": "2025-12-03T11:30:00Z",
+    "likes": 156,
+    "saves": 112
+  },
+  {
+    "id": "youtube-WloIceiE7GU",
+    "title": "Pork and Chicken Adobo",
+    "description": "A traditional Filipino adobo featuring both pork and chicken, cooked in a rich soy sauce and vinegar sauce with the perfect balance of savory and tangy flavors. This recipe uses the classic 2:1 vinegar to soy sauce ratio.",
+    "cuisine": "Filipino",
+    "difficulty": "Medium",
+    "prepTime": "20 mins",
+    "cookTime": "65 mins",
+    "servings": 4,
+    "ingredients": [
+      { "item": "Pork shoulder", "amount": "1 lb", "notes": "Some fat attached" },
+      { "item": "Chicken legs", "amount": "1 lb", "notes": "Legs preferred" },
+      { "item": "Silver Swan Vinegar", "amount": "2 parts" },
+      { "item": "Tapati Soy sauce", "amount": "1 part" },
+      { "item": "Garlic", "amount": "1 head" },
+      { "item": "Nori seasoning", "amount": "To taste" },
+      { "item": "Dried bay leaves", "amount": "3-4 pieces" },
+      { "item": "Sugar", "amount": "To taste" },
+      { "item": "Ground peppercorns", "amount": "To taste" },
+      { "item": "Eggs", "amount": "4 pieces", "notes": "For boiled eggs" },
+      { "item": "Mushroom seasoning", "amount": "To taste" },
+      { "item": "Cornstarch", "amount": "For slurry" },
+      { "item": "Jasmine rice", "amount": "For serving" }
+    ],
+    "instructions": [
+      "Heat pot on high heat and add pork",
+      "Add Silver Swan vinegar (2 parts) and Tapati soy sauce (1 part)",
+      "Add garlic, Nori seasoning, bay leaves, sugar, and peppercorns",
+      "Add water to cover meat and simmer 40-45 minutes",
+      "Add chicken and cook another 20 minutes covered",
+      "Boil eggs for 11 minutes, then ice bath and peel",
+      "Remove meat, reduce sauce on high heat with mushroom seasoning",
+      "Add cornstarch slurry to thicken",
+      "Return meat and add boiled eggs, rest 10 minutes",
+      "Serve with jasmine rice, garnish with crispy onions, garlic, Thai chili, and scallions"
+    ],
+    "tips": [
+      "Chicken legs don't dry out easily",
+      "Adding fat from pork makes it more flavorful",
+      "Adobo tastes even better the next day"
+    ],
+    "tags": ["traditional", "comfort-food", "adobo", "youtube"],
+    "sharedBy": {
+      "name": "YouTube Chef",
+      "avatar": "📺",
+      "location": "YouTube"
+    },
+    "sharedAt": "2025-01-10T12:00:00Z",
+    "likes": 45,
+    "saves": 32,
+    "source": "youtube",
+    "videoId": "WloIceiE7GU",
+    "videoUrl": "https://www.youtube.com/watch?v=WloIceiE7GU"
+  },
+  {
+    "id": "youtube-30dMSPxGxCo",
+    "title": "Crispy Pork Belly",
+    "description": "A Filipino dish featuring crispy pork belly with a savory sauce made with apple, sesame oil, peanut butter, and honey.",
+    "cuisine": "Filipino",
+    "difficulty": "Medium",
+    "prepTime": "20 mins",
+    "cookTime": "60 mins",
+    "servings": 4,
+    "ingredients": [
+      { "item": "Pork belly", "amount": "1 slab", "notes": "Shaved close" },
+      { "item": "Onions", "amount": "1-2", "notes": "Roughly chopped" },
+      { "item": "Salt", "amount": "To taste" },
+      { "item": "Pepper", "amount": "To taste" },
+      { "item": "Bay leaves", "amount": "2-3 pieces" },
+      { "item": "Beef fat", "amount": "1-2 tbsp", "notes": "For frying" },
+      { "item": "Apple", "amount": "1/2", "notes": "Chopped for sauce" },
+      { "item": "Sesame oil", "amount": "1 tbsp" },
+      { "item": "Garlic", "amount": "2-3 cloves", "notes": "Minced" },
+      { "item": "Peanut butter", "amount": "1 tbsp" },
+      { "item": "Soy sauce", "amount": "To taste" },
+      { "item": "Honey", "amount": "To taste" }
+    ],
+    "instructions": [
+      "Boil pork belly in water with onions, salt, pepper, and bay leaves until tender",
+      "Break the skin of the pork belly",
+      "Dry the pork belly in the oven",
+      "Fry the pork belly in beef fat until crispy",
+      "Prepare sauce with apple, sesame oil, garlic, onions, salt, peanut butter, soy sauce, and honey"
+    ],
+    "tips": [
+      "Break the skin to dry it out properly",
+      "Peanut butter adds extra flavor to the sauce"
+    ],
+    "tags": ["crispy", "pork", "savory", "youtube"],
+    "sharedBy": {
+      "name": "YouTube Chef",
+      "avatar": "📺",
+      "location": "YouTube"
+    },
+    "sharedAt": "2025-01-10T12:30:00Z",
+    "likes": 38,
+    "saves": 25,
+    "source": "youtube",
+    "videoId": "30dMSPxGxCo",
+    "videoUrl": "https://www.youtube.com/shorts/30dMSPxGxCo"
+  },
+  {
+    "id": "youtube-nDpb7_44-RU",
+    "title": "Garlic Butter Chicken",
+    "description": "A simple and flavorful Filipino chicken dish cooked with garlic and butter. Quick and easy to make!",
+    "cuisine": "Filipino",
+    "difficulty": "Easy",
+    "prepTime": "5 mins",
+    "cookTime": "20 mins",
+    "servings": 4,
+    "ingredients": [
+      { "item": "Garlic", "amount": "4-5 cloves", "notes": "Minced" },
+      { "item": "Chicken seasoning", "amount": "8 grams" },
+      { "item": "Chicken", "amount": "500g", "notes": "Cut into pieces" },
+      { "item": "Butter", "amount": "3 tbsp" }
+    ],
+    "instructions": [
+      "Melt butter in a pan over low-medium heat",
+      "Add minced garlic and cook for around one minute until fragrant",
+      "Add the chicken seasoning",
+      "Add the chicken pieces",
+      "Cook the chicken until fully cooked and absorbed the flavors",
+      "Serve hot"
+    ],
+    "tips": [
+      "Don't burn the garlic - use low-medium heat",
+      "Let chicken absorb all the buttery garlic flavor"
+    ],
+    "tags": ["easy", "chicken", "garlic", "butter", "quick", "youtube"],
+    "sharedBy": {
+      "name": "YouTube Chef",
+      "avatar": "📺",
+      "location": "YouTube"
+    },
+    "sharedAt": "2025-01-10T13:00:00Z",
+    "likes": 52,
+    "saves": 41,
+    "source": "youtube",
+    "videoId": "nDpb7_44-RU",
+    "videoUrl": "https://www.youtube.com/watch?v=nDpb7_44-RU"
+  }
+]

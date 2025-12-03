@@ -1,0 +1,30 @@
+[
+  {
+    "id": "chef-arnold-adobo",
+    "title": "Chef Arnold’s Ultimate Chicken Adobo",
+    "channel": "Chef Arnold Filipino Eats",
+    "videoUrl": "https://www.youtube.com/watch?v=dQ_adoboChef",
+    "embedUrl": "https://www.youtube.com/embed/dQ_adoboChef",
+    "thumbnail": "https://images.unsplash.com/photo-1585032082335-349c8c69d3bb?auto=format&fit=crop&w=800&q=80",
+    "imageAttribution": "Image courtesy of unsplash.com / Lefteris kallergis",
+    "transcript": [
+      { "time": "00:03", "text": "Hey Mix & Munch fam! Chef Arnold here with my ultimate adobo secrets." },
+      { "time": "00:45", "text": "We’ll render chicken fat first – that’s your liquid gold base." },
+      { "time": "01:22", "text": "Garlic trio: crushed, minced, and fried chips for layered aroma." },
+      { "time": "03:15", "text": "Deglaze with cane vinegar and calamansi, never stir until boil breaks." },
+      { "time": "05:02", "text": "Finish with coconut milk for velvet glaze – trust the process." }
+    ],
+    "extractedRecipe": {
+      "title": "Chef Arnold’s Velvet Chicken Adobo",
+      "ingredients": [
+        "1 kg chicken thigh", "6 garlic cloves", "1/3 cup soy sauce", "1/4 cup cane vinegar", "1/4 cup calamansi juice", "1/2 cup coconut milk"
+      ],
+      "steps": [
+        "Render chicken fat and crisp skin.",
+        "Toast garlic in three textures for layered aroma.",
+        "Deglaze with soy, vinegar, and calamansi; simmer until glossy.",
+        "Finish with coconut milk and baste constantly for shine."
+      ]
+    }
+  }
+]

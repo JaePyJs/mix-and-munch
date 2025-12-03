@@ -103,7 +103,8 @@ debug.log
 *.db
 *.sqlite
 *.sqlite3
-data/
+# Keep data/ tracked for static JSON files
+# data/
 db/
 
 # ========================================

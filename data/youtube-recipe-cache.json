@@ -1,0 +1,43 @@
+{
+  "videos": [
+    {
+      "id": "yt-WloIceiE7GU",
+      "videoId": "WloIceiE7GU",
+      "url": "https://www.youtube.com/watch?v=WloIceiE7GU&t=8s",
+      "title": "How A Filipino Chef Makes Traditional Adobo | Passport Kitchen | Epicurious",
+      "channelTitle": "Epicurious",
+      "thumbnailUrl": "https://i.ytimg.com/vi/WloIceiE7GU/hqdefault.jpg",
+      "recipe": null,
+      "extractedIngredients": [
+        {
+          "name": ":00 Pork and Chicken Adobo",
+          "quantity": "0",
+          "unit": ":00 Pork and Chicken Adobo",
+          "confidence": 0.8,
+          "source": "description"
+        },
+        {
+          "name": ":02 Part 2",
+          "quantity": "1",
+          "unit": ":02 Part 2",
+          "confidence": 0.8,
+          "source": "description"
+        },
+        {
+          "name": ":51 Part 3",
+          "quantity": "3",
+          "unit": ":51 Part 3",
+          "confidence": 0.8,
+          "source": "description"
+        }
+      ],
+      "createdAt": "2025-12-03T21:09:17.651Z",
+      "viewCount": 1,
+      "extractedBy": "Anonymous"
+    }
+  ],
+  "metadata": {
+    "description": "Cached YouTube recipe extractions by video ID",
+    "lastUpdated": "2025-12-03T21:09:17.651Z"
+  }
+}

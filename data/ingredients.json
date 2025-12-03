@@ -1,0 +1,826 @@
+[
+  {
+    "id": "garlic",
+    "name": "Garlic",
+    "filipinoName": "Bawang",
+    "category": "Aromatics",
+    "emoji": "🧄",
+    "substitutes": ["shallots", "onion"]
+  },
+  {
+    "id": "onion",
+    "name": "Red Onion",
+    "filipinoName": "Sibuyas",
+    "category": "Aromatics",
+    "emoji": "🧅",
+    "substitutes": ["shallots", "scallions"]
+  },
+  {
+    "id": "ginger",
+    "name": "Ginger",
+    "filipinoName": "Luya",
+    "category": "Aromatics",
+    "emoji": "🫚",
+    "substitutes": []
+  },
+  {
+    "id": "shallots",
+    "name": "Shallots",
+    "filipinoName": "Sibuyas na Maliit",
+    "category": "Aromatics",
+    "emoji": "🧅",
+    "substitutes": ["onion", "scallions"]
+  },
+  {
+    "id": "scallions",
+    "name": "Scallions",
+    "filipinoName": "Sibuyas na Dahon",
+    "category": "Aromatics",
+    "emoji": "🌱",
+    "substitutes": ["onion", "shallots"]
+  },
+  {
+    "id": "lemongrass",
+    "name": "Lemongrass",
+    "filipinoName": "Tanglad",
+    "category": "Aromatics",
+    "emoji": "🌿",
+    "substitutes": ["calamansi"]
+  },
+  {
+    "id": "cilantro",
+    "name": "Cilantro",
+    "filipinoName": "Wansoy",
+    "category": "Aromatics",
+    "emoji": "🌿",
+    "substitutes": ["basil"]
+  },
+  {
+    "id": "basil",
+    "name": "Thai Basil",
+    "filipinoName": "Balanoy",
+    "category": "Aromatics",
+    "emoji": "🌿",
+    "substitutes": ["cilantro"]
+  },
+
+  {
+    "id": "chili",
+    "name": "Bird's Eye Chili",
+    "filipinoName": "Siling Labuyo",
+    "category": "Spices",
+    "emoji": "🌶️",
+    "substitutes": ["paprika", "black-pepper"]
+  },
+  {
+    "id": "black-pepper",
+    "name": "Black Pepper",
+    "filipinoName": "Paminta",
+    "category": "Spices",
+    "emoji": "⚫",
+    "substitutes": ["chili"]
+  },
+  {
+    "id": "bay-leaves",
+    "name": "Bay Leaves",
+    "filipinoName": "Dahon ng Laurel",
+    "category": "Spices",
+    "emoji": "🍃",
+    "substitutes": []
+  },
+  {
+    "id": "star-anise",
+    "name": "Star Anise",
+    "filipinoName": "Sangke",
+    "category": "Spices",
+    "emoji": "⭐",
+    "substitutes": []
+  },
+  {
+    "id": "turmeric",
+    "name": "Turmeric",
+    "filipinoName": "Dilaw",
+    "category": "Spices",
+    "emoji": "🟡",
+    "substitutes": ["paprika"]
+  },
+  {
+    "id": "paprika",
+    "name": "Paprika",
+    "filipinoName": "Paprika",
+    "category": "Spices",
+    "emoji": "🌶️",
+    "substitutes": ["chili", "turmeric"]
+  },
+  {
+    "id": "cumin",
+    "name": "Cumin",
+    "filipinoName": "Komino",
+    "category": "Spices",
+    "emoji": "🟤",
+    "substitutes": ["coriander"]
+  },
+  {
+    "id": "coriander",
+    "name": "Coriander Seeds",
+    "filipinoName": "Buto ng Wansoy",
+    "category": "Spices",
+    "emoji": "🌰",
+    "substitutes": ["cumin"]
+  },
+
+  {
+    "id": "tomato",
+    "name": "Tomato",
+    "filipinoName": "Kamatis",
+    "category": "Produce",
+    "emoji": "🍅",
+    "substitutes": ["banana-ketchup"]
+  },
+  {
+    "id": "calamansi",
+    "name": "Calamansi",
+    "filipinoName": "Calamansi",
+    "category": "Produce",
+    "emoji": "🍋",
+    "substitutes": ["vinegar"]
+  },
+  {
+    "id": "eggplant",
+    "name": "Eggplant",
+    "filipinoName": "Talong",
+    "category": "Produce",
+    "emoji": "🍆",
+    "substitutes": ["squash"]
+  },
+  {
+    "id": "okra",
+    "name": "Okra",
+    "filipinoName": "Okra",
+    "category": "Produce",
+    "emoji": "🌱",
+    "substitutes": ["green-beans"]
+  },
+  {
+    "id": "kangkong",
+    "name": "Water Spinach",
+    "filipinoName": "Kangkong",
+    "category": "Produce",
+    "emoji": "🥬",
+    "substitutes": ["pechay", "cabbage"]
+  },
+  {
+    "id": "ube",
+    "name": "Purple Yam",
+    "filipinoName": "Ube",
+    "category": "Produce",
+    "emoji": "🍠",
+    "substitutes": ["sweet-potato"]
+  },
+  {
+    "id": "mushroom",
+    "name": "Mushroom",
+    "filipinoName": "Kabute",
+    "category": "Produce",
+    "emoji": "🍄",
+    "substitutes": ["tofu"]
+  },
+  {
+    "id": "bell-pepper",
+    "name": "Bell Pepper",
+    "filipinoName": "Siling Berde",
+    "category": "Produce",
+    "emoji": "🫑",
+    "substitutes": ["chili"]
+  },
+  {
+    "id": "cabbage",
+    "name": "Cabbage",
+    "filipinoName": "Repolyo",
+    "category": "Produce",
+    "emoji": "🥬",
+    "substitutes": ["pechay", "kangkong"]
+  },
+  {
+    "id": "carrots",
+    "name": "Carrots",
+    "filipinoName": "Karot",
+    "category": "Produce",
+    "emoji": "🥕",
+    "substitutes": ["potatoes", "sweet-potato"]
+  },
+  {
+    "id": "potatoes",
+    "name": "Potatoes",
+    "filipinoName": "Patatas",
+    "category": "Produce",
+    "emoji": "🥔",
+    "substitutes": ["sweet-potato", "carrots"]
+  },
+  {
+    "id": "sweet-potato",
+    "name": "Sweet Potato",
+    "filipinoName": "Kamote",
+    "category": "Produce",
+    "emoji": "🍠",
+    "substitutes": ["potatoes", "ube"]
+  },
+  {
+    "id": "green-beans",
+    "name": "Green Beans",
+    "filipinoName": "Baguio Beans",
+    "category": "Produce",
+    "emoji": "🫘",
+    "substitutes": ["sitaw", "okra"]
+  },
+  {
+    "id": "bitter-melon",
+    "name": "Bitter Melon",
+    "filipinoName": "Ampalaya",
+    "category": "Produce",
+    "emoji": "🥒",
+    "substitutes": ["eggplant"]
+  },
+  {
+    "id": "malunggay",
+    "name": "Moringa Leaves",
+    "filipinoName": "Malunggay",
+    "category": "Produce",
+    "emoji": "🌿",
+    "substitutes": ["kangkong", "pechay"]
+  },
+  {
+    "id": "pechay",
+    "name": "Bok Choy",
+    "filipinoName": "Pechay",
+    "category": "Produce",
+    "emoji": "🥬",
+    "substitutes": ["kangkong", "cabbage"]
+  },
+  {
+    "id": "sayote",
+    "name": "Chayote",
+    "filipinoName": "Sayote",
+    "category": "Produce",
+    "emoji": "🥒",
+    "substitutes": ["potatoes", "squash"]
+  },
+  {
+    "id": "sitaw",
+    "name": "Long Beans",
+    "filipinoName": "Sitaw",
+    "category": "Produce",
+    "emoji": "🫘",
+    "substitutes": ["green-beans"]
+  },
+  {
+    "id": "banana",
+    "name": "Saba Banana",
+    "filipinoName": "Saging na Saba",
+    "category": "Produce",
+    "emoji": "🍌",
+    "substitutes": ["sweet-potato"]
+  },
+  {
+    "id": "mango",
+    "name": "Philippine Mango",
+    "filipinoName": "Mangga",
+    "category": "Produce",
+    "emoji": "🥭",
+    "substitutes": []
+  },
+  {
+    "id": "squash",
+    "name": "Squash",
+    "filipinoName": "Kalabasa",
+    "category": "Produce",
+    "emoji": "🎃",
+    "substitutes": ["sweet-potato", "carrots"]
+  },
+  {
+    "id": "string-beans",
+    "name": "String Beans",
+    "filipinoName": "Habitsuelas",
+    "category": "Produce",
+    "emoji": "🫘",
+    "substitutes": ["sitaw", "green-beans"]
+  },
+  {
+    "id": "radish",
+    "name": "White Radish",
+    "filipinoName": "Labanos",
+    "category": "Produce",
+    "emoji": "🥕",
+    "substitutes": ["carrots"]
+  },
+  {
+    "id": "corn",
+    "name": "Sweet Corn",
+    "filipinoName": "Mais",
+    "category": "Produce",
+    "emoji": "🌽",
+    "substitutes": []
+  },
+
+  {
+    "id": "chicken-thigh",
+    "name": "Chicken Thigh",
+    "filipinoName": "Hita ng Manok",
+    "category": "Proteins",
+    "emoji": "🍗",
+    "substitutes": ["chicken-breast", "pork-shoulder"]
+  },
+  {
+    "id": "chicken-breast",
+    "name": "Chicken Breast",
+    "filipinoName": "Dibdib ng Manok",
+    "category": "Proteins",
+    "emoji": "🐔",
+    "substitutes": ["chicken-thigh", "tofu"]
+  },
+  {
+    "id": "chicken-wings",
+    "name": "Chicken Wings",
+    "filipinoName": "Pakpak ng Manok",
+    "category": "Proteins",
+    "emoji": "🍗",
+    "substitutes": ["chicken-thigh"]
+  },
+  {
+    "id": "whole-chicken",
+    "name": "Whole Chicken",
+    "filipinoName": "Buong Manok",
+    "category": "Proteins",
+    "emoji": "🐔",
+    "substitutes": ["chicken-thigh"]
+  },
+  {
+    "id": "pork-belly",
+    "name": "Pork Belly",
+    "filipinoName": "Liempo",
+    "category": "Proteins",
+    "emoji": "🥓",
+    "substitutes": ["pork-shoulder"]
+  },
+  {
+    "id": "pork-shoulder",
+    "name": "Pork Shoulder",
+    "filipinoName": "Kasim",
+    "category": "Proteins",
+    "emoji": "🥩",
+    "substitutes": ["pork-belly", "chicken-thigh"]
+  },
+  {
+    "id": "pork-ribs",
+    "name": "Pork Ribs",
+    "filipinoName": "Tadyang ng Baboy",
+    "category": "Proteins",
+    "emoji": "🍖",
+    "substitutes": ["pork-belly"]
+  },
+  {
+    "id": "pork-hock",
+    "name": "Pork Hock",
+    "filipinoName": "Pata",
+    "category": "Proteins",
+    "emoji": "🍖",
+    "substitutes": ["pork-belly"]
+  },
+  {
+    "id": "beef-brisket",
+    "name": "Beef Brisket",
+    "filipinoName": "Brisket ng Baka",
+    "category": "Proteins",
+    "emoji": "🥩",
+    "substitutes": ["beef-short-ribs"]
+  },
+  {
+    "id": "beef-short-ribs",
+    "name": "Beef Short Ribs",
+    "filipinoName": "Tadyang ng Baka",
+    "category": "Proteins",
+    "emoji": "🥩",
+    "substitutes": ["beef-brisket"]
+  },
+  {
+    "id": "beef-shank",
+    "name": "Beef Shank",
+    "filipinoName": "Bulalo/Buto-buto",
+    "category": "Proteins",
+    "emoji": "🦴",
+    "substitutes": ["beef-brisket"]
+  },
+  {
+    "id": "ground-beef",
+    "name": "Ground Beef",
+    "filipinoName": "Giniling na Baka",
+    "category": "Proteins",
+    "emoji": "🥩",
+    "substitutes": ["ground-pork"]
+  },
+  {
+    "id": "ground-pork",
+    "name": "Ground Pork",
+    "filipinoName": "Giniling na Baboy",
+    "category": "Proteins",
+    "emoji": "🥓",
+    "substitutes": ["ground-beef"]
+  },
+  {
+    "id": "oxtail",
+    "name": "Oxtail",
+    "filipinoName": "Buntot ng Baka",
+    "category": "Proteins",
+    "emoji": "🥩",
+    "substitutes": ["beef-shank"]
+  },
+  {
+    "id": "egg",
+    "name": "Egg",
+    "filipinoName": "Itlog",
+    "category": "Proteins",
+    "emoji": "🥚",
+    "substitutes": ["tofu"]
+  },
+  {
+    "id": "tofu",
+    "name": "Firm Tofu",
+    "filipinoName": "Tokwa",
+    "category": "Proteins",
+    "emoji": "🧊",
+    "substitutes": ["egg", "tempeh"]
+  },
+  {
+    "id": "tempeh",
+    "name": "Tempeh",
+    "filipinoName": "Tempeh",
+    "category": "Proteins",
+    "emoji": "🟫",
+    "substitutes": ["tofu"]
+  },
+
+  {
+    "id": "shrimp",
+    "name": "Shrimp",
+    "filipinoName": "Hipon",
+    "category": "Seafood",
+    "emoji": "🦐",
+    "substitutes": ["squid", "fish-fillet"]
+  },
+  {
+    "id": "fish-fillet",
+    "name": "White Fish Fillet",
+    "filipinoName": "Fillet ng Isda",
+    "category": "Seafood",
+    "emoji": "🐟",
+    "substitutes": ["tilapia", "bangus"]
+  },
+  {
+    "id": "bangus",
+    "name": "Milkfish",
+    "filipinoName": "Bangus",
+    "category": "Seafood",
+    "emoji": "🐟",
+    "substitutes": ["tilapia", "fish-fillet"]
+  },
+  {
+    "id": "tilapia",
+    "name": "Tilapia",
+    "filipinoName": "Tilapia",
+    "category": "Seafood",
+    "emoji": "🐟",
+    "substitutes": ["bangus", "fish-fillet"]
+  },
+  {
+    "id": "crab",
+    "name": "Mud Crab",
+    "filipinoName": "Alimango",
+    "category": "Seafood",
+    "emoji": "🦀",
+    "substitutes": ["shrimp"]
+  },
+  {
+    "id": "squid",
+    "name": "Squid",
+    "filipinoName": "Pusit",
+    "category": "Seafood",
+    "emoji": "🦑",
+    "substitutes": ["shrimp"]
+  },
+  {
+    "id": "mussels",
+    "name": "Green Mussels",
+    "filipinoName": "Tahong",
+    "category": "Seafood",
+    "emoji": "🦪",
+    "substitutes": ["shrimp"]
+  },
+  {
+    "id": "clams",
+    "name": "Clams",
+    "filipinoName": "Halaan",
+    "category": "Seafood",
+    "emoji": "🦪",
+    "substitutes": ["mussels"]
+  },
+
+  {
+    "id": "soy-sauce",
+    "name": "Soy Sauce",
+    "filipinoName": "Toyo",
+    "category": "Sauces",
+    "emoji": "🥣",
+    "substitutes": ["fish-sauce"]
+  },
+  {
+    "id": "vinegar",
+    "name": "Cane Vinegar",
+    "filipinoName": "Suka",
+    "category": "Sauces",
+    "emoji": "🍶",
+    "substitutes": ["coconut-vinegar", "calamansi"]
+  },
+  {
+    "id": "fish-sauce",
+    "name": "Fish Sauce",
+    "filipinoName": "Patis",
+    "category": "Sauces",
+    "emoji": "🐟",
+    "substitutes": ["soy-sauce", "salt"]
+  },
+  {
+    "id": "oyster-sauce",
+    "name": "Oyster Sauce",
+    "filipinoName": "Oyster Sauce",
+    "category": "Sauces",
+    "emoji": "🦪",
+    "substitutes": ["soy-sauce"]
+  },
+  {
+    "id": "sesame-oil",
+    "name": "Sesame Oil",
+    "filipinoName": "Langis ng Sesame",
+    "category": "Sauces",
+    "emoji": "🫒",
+    "substitutes": ["vegetable-oil"]
+  },
+  {
+    "id": "coconut-vinegar",
+    "name": "Coconut Vinegar",
+    "filipinoName": "Sukang Tuba",
+    "category": "Sauces",
+    "emoji": "🥥",
+    "substitutes": ["vinegar"]
+  },
+
+  {
+    "id": "banana-ketchup",
+    "name": "Banana Ketchup",
+    "filipinoName": "Banana Ketchup",
+    "category": "Condiments",
+    "emoji": "🍌",
+    "substitutes": ["tomato"]
+  },
+  {
+    "id": "bagoong",
+    "name": "Shrimp Paste",
+    "filipinoName": "Bagoong Alamang",
+    "category": "Condiments",
+    "emoji": "🦐",
+    "substitutes": ["fish-sauce"]
+  },
+  {
+    "id": "lechon-sauce",
+    "name": "Lechon Sauce",
+    "filipinoName": "Sarsa ng Lechon",
+    "category": "Condiments",
+    "emoji": "🥣",
+    "substitutes": ["soy-sauce", "vinegar"]
+  },
+  {
+    "id": "chili-garlic",
+    "name": "Chili Garlic Sauce",
+    "filipinoName": "Sawsawang Sili at Bawang",
+    "category": "Condiments",
+    "emoji": "🌶️",
+    "substitutes": ["chili"]
+  },
+  {
+    "id": "atchara",
+    "name": "Pickled Papaya",
+    "filipinoName": "Atchara",
+    "category": "Condiments",
+    "emoji": "🥗",
+    "substitutes": []
+  },
+
+  {
+    "id": "rice",
+    "name": "Jasmine Rice",
+    "filipinoName": "Bigas",
+    "category": "Pantry",
+    "emoji": "🍚",
+    "substitutes": ["glutinous-rice"]
+  },
+  {
+    "id": "coconut-milk",
+    "name": "Coconut Milk",
+    "filipinoName": "Gata",
+    "category": "Pantry",
+    "emoji": "🥥",
+    "substitutes": ["coconut-cream", "milk"]
+  },
+  {
+    "id": "coconut-sugar",
+    "name": "Coconut Sugar",
+    "filipinoName": "Asukal ng Niyog",
+    "category": "Pantry",
+    "emoji": "🧂",
+    "substitutes": ["brown-sugar", "sugar"]
+  },
+  {
+    "id": "tamarind",
+    "name": "Tamarind",
+    "filipinoName": "Sampalok",
+    "category": "Pantry",
+    "emoji": "🍈",
+    "substitutes": ["calamansi", "vinegar"]
+  },
+  {
+    "id": "coconut-oil",
+    "name": "Coconut Oil",
+    "filipinoName": "Langis ng Niyog",
+    "category": "Pantry",
+    "emoji": "🥥",
+    "substitutes": ["vegetable-oil"]
+  },
+  {
+    "id": "vegetable-oil",
+    "name": "Vegetable Oil",
+    "filipinoName": "Mantika",
+    "category": "Pantry",
+    "emoji": "🫒",
+    "substitutes": ["coconut-oil"]
+  },
+  {
+    "id": "salt",
+    "name": "Salt",
+    "filipinoName": "Asin",
+    "category": "Pantry",
+    "emoji": "🧂",
+    "substitutes": ["fish-sauce"]
+  },
+  {
+    "id": "sugar",
+    "name": "White Sugar",
+    "filipinoName": "Asukal",
+    "category": "Pantry",
+    "emoji": "🧂",
+    "substitutes": ["brown-sugar", "coconut-sugar"]
+  },
+  {
+    "id": "brown-sugar",
+    "name": "Brown Sugar",
+    "filipinoName": "Brown Sugar",
+    "category": "Pantry",
+    "emoji": "🟤",
+    "substitutes": ["sugar", "coconut-sugar"]
+  },
+  {
+    "id": "flour",
+    "name": "All-Purpose Flour",
+    "filipinoName": "Harina",
+    "category": "Pantry",
+    "emoji": "🌾",
+    "substitutes": ["cornstarch"]
+  },
+  {
+    "id": "cornstarch",
+    "name": "Cornstarch",
+    "filipinoName": "Gawgaw",
+    "category": "Pantry",
+    "emoji": "🌽",
+    "substitutes": ["flour"]
+  },
+  {
+    "id": "baking-powder",
+    "name": "Baking Powder",
+    "filipinoName": "Baking Powder",
+    "category": "Pantry",
+    "emoji": "🥄",
+    "substitutes": []
+  },
+  {
+    "id": "glutinous-rice",
+    "name": "Glutinous Rice",
+    "filipinoName": "Malagkit",
+    "category": "Pantry",
+    "emoji": "🍚",
+    "substitutes": ["rice"]
+  },
+  {
+    "id": "rice-noodles",
+    "name": "Rice Noodles",
+    "filipinoName": "Bihon",
+    "category": "Pantry",
+    "emoji": "🍜",
+    "substitutes": ["sotanghon"]
+  },
+  {
+    "id": "sotanghon",
+    "name": "Glass Noodles",
+    "filipinoName": "Sotanghon",
+    "category": "Pantry",
+    "emoji": "🍜",
+    "substitutes": ["rice-noodles"]
+  },
+  {
+    "id": "canton-noodles",
+    "name": "Egg Noodles",
+    "filipinoName": "Pancit Canton",
+    "category": "Pantry",
+    "emoji": "🍜",
+    "substitutes": ["rice-noodles"]
+  },
+  {
+    "id": "coconut-cream",
+    "name": "Coconut Cream",
+    "filipinoName": "Kakang Gata",
+    "category": "Pantry",
+    "emoji": "🥥",
+    "substitutes": ["coconut-milk"]
+  },
+  {
+    "id": "peanuts",
+    "name": "Peanuts",
+    "filipinoName": "Mani",
+    "category": "Pantry",
+    "emoji": "🥜",
+    "substitutes": []
+  },
+  {
+    "id": "peanut-butter",
+    "name": "Peanut Butter",
+    "filipinoName": "Peanut Butter",
+    "category": "Pantry",
+    "emoji": "🥜",
+    "substitutes": ["peanuts"]
+  },
+  {
+    "id": "annatto",
+    "name": "Annatto Seeds",
+    "filipinoName": "Atsuete",
+    "category": "Pantry",
+    "emoji": "🔴",
+    "substitutes": ["paprika", "turmeric"]
+  },
+
+  {
+    "id": "butter",
+    "name": "Butter",
+    "filipinoName": "Mantikilya",
+    "category": "Dairy",
+    "emoji": "🧈",
+    "substitutes": ["coconut-oil", "vegetable-oil"]
+  },
+  {
+    "id": "milk",
+    "name": "Fresh Milk",
+    "filipinoName": "Gatas",
+    "category": "Dairy",
+    "emoji": "🥛",
+    "substitutes": ["coconut-milk", "evaporated-milk"]
+  },
+  {
+    "id": "cheese",
+    "name": "Cheese",
+    "filipinoName": "Keso",
+    "category": "Dairy",
+    "emoji": "🧀",
+    "substitutes": []
+  },
+  {
+    "id": "cream",
+    "name": "Heavy Cream",
+    "filipinoName": "Krema",
+    "category": "Dairy",
+    "emoji": "🥛",
+    "substitutes": ["coconut-cream"]
+  },
+  {
+    "id": "condensed-milk",
+    "name": "Condensed Milk",
+    "filipinoName": "Condensada",
+    "category": "Dairy",
+    "emoji": "🥛",
+    "substitutes": ["evaporated-milk"]
+  },
+  {
+    "id": "evaporated-milk",
+    "name": "Evaporated Milk",
+    "filipinoName": "Evaporada",
+    "category": "Dairy",
+    "emoji": "🥛",
+    "substitutes": ["milk", "condensed-milk"]
+  }
+]
