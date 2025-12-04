@@ -41,8 +41,8 @@ interface TabsListProps {
 export function TabsList({ children, className }: TabsListProps) {
   return (
     <div className={clsx(
-      'inline-flex h-10 items-center justify-center rounded-md bg-brand-gray-900/50 p-1 text-brand-gray-400',
-      'border border-brand-gray-800/70',
+      'inline-flex h-auto min-h-[2.5rem] items-center justify-center rounded-md bg-brand-gray-900/50 p-1 text-brand-gray-400',
+      'border border-brand-gray-800/70 flex-wrap w-full',
       className
     )}>
       {children}
@@ -67,9 +67,10 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
   return (
     <button
       className={clsx(
-        'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium',
+        'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium',
         'ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2',
         'focus-visible:ring-brand-lime focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+        'flex-1 min-w-0',
         isActive 
           ? 'bg-brand-lime text-brand-gray-900 shadow-sm' 
           : 'text-brand-gray-400 hover:text-brand-gray-200 hover:bg-brand-gray-800/50',

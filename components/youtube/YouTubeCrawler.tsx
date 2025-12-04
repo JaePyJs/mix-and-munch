@@ -288,19 +288,19 @@ export default function YouTubeCrawler({ onIngredientsExtracted }: YouTubeCrawle
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 lg:px-6 space-y-4 sm:space-y-6 overflow-x-hidden">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-white mb-2">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2">
           YouTube Recipe Ingredient Extractor
         </h1>
-        <p className="text-brand-gray-400">
+        <p className="text-brand-gray-400 text-sm sm:text-base">
           Extract ingredients from YouTube cooking videos using AI-powered analysis
         </p>
       </div>
 
       {/* URL Input */}
-      <Card className="p-6 bg-brand-gray-900/50 border-brand-gray-800/70">
+      <Card className="p-4 sm:p-6 bg-brand-gray-900/50 border-brand-gray-800/70">
         <div className="space-y-4">
           <div>
             <label
@@ -309,22 +309,22 @@ export default function YouTubeCrawler({ onIngredientsExtracted }: YouTubeCrawle
             >
               YouTube Video URL
             </label>
-            <div className="flex space-x-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <input
                 id="youtube-url"
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://www.youtube.com/watch?v=..."
-                className="flex-1 px-3 py-2 bg-brand-gray-800/50 border border-brand-gray-700 rounded-md text-white placeholder-brand-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-lime focus:border-transparent"
+                className="flex-1 px-3 py-2 bg-brand-gray-800/50 border border-brand-gray-700 rounded-md text-white placeholder-brand-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-lime focus:border-transparent text-sm sm:text-base"
                 disabled={processing}
               />
               <Button
                 onClick={processUrl}
                 disabled={processing || !url.trim()}
-                className="px-6"
+                className="px-4 sm:px-6 w-full sm:w-auto"
               >
-                {processing ? 'Processing...' : 'Extract Ingredients'}
+                {processing ? 'Processing...' : 'Extract'}
               </Button>
             </div>
           </div>
@@ -390,24 +390,24 @@ export default function YouTubeCrawler({ onIngredientsExtracted }: YouTubeCrawle
       {processedVideo && (
         <div className="space-y-6">
           {/* Video Information */}
-          <Card className="p-6 bg-brand-gray-900/50 border-brand-gray-800/70">
-            <div className="flex items-start space-x-4">
+          <Card className="p-4 sm:p-6 bg-brand-gray-900/50 border-brand-gray-800/70">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
               <img
                 src={
                   processedVideo.thumbnails.medium?.url ||
                   processedVideo.thumbnails.default?.url
                 }
                 alt={processedVideo.title}
-                className="w-32 h-24 object-cover rounded-lg"
+                className="w-full sm:w-32 h-auto sm:h-24 object-cover rounded-lg"
               />
-              <div className="flex-1">
-                <h2 className="text-xl font-semibold text-white mb-2">
+              <div className="flex-1 min-w-0">
+                <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 break-words">
                   {processedVideo.title}
                 </h2>
-                <p className="text-brand-gray-400 mb-2">
+                <p className="text-brand-gray-400 mb-2 text-sm sm:text-base">
                   by {processedVideo.channelTitle}
                 </p>
-                <p className="text-sm text-brand-gray-500">
+                <p className="text-xs sm:text-sm text-brand-gray-500">
                   Published: {new Date(processedVideo.publishedAt).toLocaleDateString()}
                 </p>
               </div>
@@ -415,37 +415,37 @@ export default function YouTubeCrawler({ onIngredientsExtracted }: YouTubeCrawle
           </Card>
 
           {/* Processing Metadata */}
-          <Card className="p-6 bg-brand-gray-900/50 border-brand-gray-800/70">
-            <h3 className="text-lg font-semibold text-white mb-4">Processing Results</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Card className="p-4 sm:p-6 bg-brand-gray-900/50 border-brand-gray-800/70">
+            <h3 className="text-base sm:text-lg font-semibold text-white mb-4">Processing Results</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-brand-lime">
+                <div className="text-xl sm:text-2xl font-bold text-brand-lime">
                   {processedVideo.extractedIngredients.length}
                 </div>
-                <div className="text-sm text-brand-gray-400">Ingredients Found</div>
+                <div className="text-xs sm:text-sm text-brand-gray-400">Ingredients</div>
               </div>
               <div className="text-center">
                 <div
-                  className={`text-2xl font-bold ${getConfidenceColor(processedVideo.processingMetadata.confidence)}`}
+                  className={`text-xl sm:text-2xl font-bold ${getConfidenceColor(processedVideo.processingMetadata.confidence)}`}
                 >
                   {formatConfidence(processedVideo.processingMetadata.confidence)}
                 </div>
-                <div className="text-sm text-brand-gray-400">Confidence</div>
+                <div className="text-xs sm:text-sm text-brand-gray-400">Confidence</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-green-400">
+                <div className="text-xl sm:text-2xl font-bold text-green-400">
                   {processedVideo.processingMetadata.sourcesProcessed.length}
                 </div>
-                <div className="text-sm text-brand-gray-400">Sources Processed</div>
+                <div className="text-xs sm:text-sm text-brand-gray-400">Sources</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-purple-400">
+                <div className="text-xl sm:text-2xl font-bold text-purple-400">
                   {Math.round(
                     processedVideo.processingMetadata.processingDuration / 1000
                   )}
                   s
                 </div>
-                <div className="text-sm text-brand-gray-400">Processing Time</div>
+                <div className="text-xs sm:text-sm text-brand-gray-400">Time</div>
               </div>
             </div>
 

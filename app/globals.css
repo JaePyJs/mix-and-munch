@@ -78,7 +78,8 @@ body {
   }
 
   /* Prevent horizontal overflow on iPad */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
     max-width: 100vw;
     width: 100%;

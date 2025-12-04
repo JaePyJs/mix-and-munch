@@ -52,9 +52,9 @@ export default function YouTubeCrawlerPage() {
         <Tag tone="lime" className="w-fit">
           {t('youtubeCrawler.tag')}
         </Tag>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h1 className="text-3xl font-semibold text-white sm:text-4xl">
+            <h1 className="text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
               {t('youtubeCrawler.title')}
             </h1>
             <p className="max-w-2xl text-sm text-brand-gray-400 mt-2">
@@ -63,14 +63,14 @@ export default function YouTubeCrawlerPage() {
           </div>
 
           {extractedIngredients.length > 0 && (
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
               <div className="text-sm text-brand-gray-400">
                 <span className="font-medium text-brand-lime">
                   {extractedIngredients.length}
                 </span>{' '}
                 {t('youtubeCrawler.ingredientsExtracted')}
               </div>
-              <Button onClick={exportAllIngredients} variant="secondary">
+              <Button onClick={exportAllIngredients} variant="secondary" className="w-full sm:w-auto">
                 {t('youtubeCrawler.exportAll')}
               </Button>
             </div>
@@ -81,17 +81,17 @@ export default function YouTubeCrawlerPage() {
       {/* Main Content */}
       <section>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="url-processor">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 gap-1">
+            <TabsTrigger value="url-processor" className="text-xs sm:text-sm px-2 py-2">
               {t('youtubeCrawler.tabs.urlProcessor')}
             </TabsTrigger>
-            <TabsTrigger value="creator-manager">
+            <TabsTrigger value="creator-manager" className="text-xs sm:text-sm px-2 py-2">
               {t('youtubeCrawler.tabs.contentCreators')}
             </TabsTrigger>
-            <TabsTrigger value="analytics">
+            <TabsTrigger value="analytics" className="text-xs sm:text-sm px-2 py-2">
               {t('youtubeCrawler.tabs.analytics')}
             </TabsTrigger>
-            <TabsTrigger value="settings">
+            <TabsTrigger value="settings" className="text-xs sm:text-sm px-2 py-2">
               {t('youtubeCrawler.tabs.settings')}
             </TabsTrigger>
           </TabsList>
@@ -166,37 +166,37 @@ function AnalyticsTab({
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="p-6 text-center">
-          <div className="text-3xl font-bold text-blue-400 mb-2">{totalIngredients}</div>
-          <div className="text-sm text-gray-300">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+        <Card className="p-4 sm:p-6 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-1 sm:mb-2">{totalIngredients}</div>
+          <div className="text-xs sm:text-sm text-gray-300">
             {t('youtubeCrawler.analytics.totalIngredients')}
           </div>
         </Card>
 
-        <Card className="p-6 text-center">
-          <div className="text-3xl font-bold text-green-400 mb-2">
+        <Card className="p-4 sm:p-6 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-green-400 mb-1 sm:mb-2">
             {uniqueIngredients}
           </div>
-          <div className="text-sm text-gray-300">
+          <div className="text-xs sm:text-sm text-gray-300">
             {t('youtubeCrawler.analytics.uniqueIngredients')}
           </div>
         </Card>
 
-        <Card className="p-6 text-center">
-          <div className="text-3xl font-bold text-purple-400 mb-2">
+        <Card className="p-4 sm:p-6 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-1 sm:mb-2">
             {Math.round(averageConfidence * 100)}%
           </div>
-          <div className="text-sm text-gray-300">
+          <div className="text-xs sm:text-sm text-gray-300">
             {t('youtubeCrawler.analytics.avgConfidence')}
           </div>
         </Card>
 
-        <Card className="p-6 text-center">
-          <div className="text-3xl font-bold text-orange-400 mb-2">
+        <Card className="p-4 sm:p-6 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-orange-400 mb-1 sm:mb-2">
             {Object.keys(sourceBreakdown).length}
           </div>
-          <div className="text-sm text-gray-300">
+          <div className="text-xs sm:text-sm text-gray-300">
             {t('youtubeCrawler.analytics.sourcesUsed')}
           </div>
         </Card>
@@ -379,7 +379,7 @@ function SettingsTab() {
         <h3 className="text-lg font-semibold text-white mb-4">
           {t('youtubeCrawler.settings.performanceSettings')}
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-200 mb-2">
               {t('youtubeCrawler.settings.maxVideosPerCrawl')}
@@ -395,7 +395,7 @@ function SettingsTab() {
               }
               min="1"
               max="100"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-brand-gray-800 border border-brand-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-brand-lime"
             />
           </div>
 
@@ -414,7 +414,7 @@ function SettingsTab() {
               }
               min="60"
               max="1800"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 bg-brand-gray-800 border border-brand-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-brand-lime"
             />
           </div>
 
