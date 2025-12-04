@@ -8,7 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Recipe } from '@/lib/types';
+import { RecipeSummary } from '@/lib/types';
 import { api } from '@/lib/api';
 
 const BRAND_COLORS = {
@@ -22,7 +22,7 @@ const BRAND_COLORS = {
 const SAVED_RECIPES_KEY = 'mix_munch_saved_recipes';
 
 export default function SavedScreen() {
-  const [savedRecipes, setSavedRecipes] = useState<Recipe[]>([]);
+  const [savedRecipes, setSavedRecipes] = useState<RecipeSummary[]>([]);
   const [savedSlugs, setSavedSlugs] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -113,15 +113,11 @@ export default function SavedScreen() {
               {recipe.title}
             </Text>
             <Text style={styles.recipeDescription} numberOfLines={2}>
-              {recipe.description || 'A delicious Filipino recipe'}
+              {recipe.summary || 'A delicious Filipino recipe'}
             </Text>
             <View style={styles.recipeMeta}>
-              {recipe.prepTime && (
-                <Text style={styles.metaText}>⏱️ {recipe.prepTime}</Text>
-              )}
-              {recipe.servings && (
-                <Text style={styles.metaText}>👥 {recipe.servings}</Text>
-              )}
+              <Text style={styles.metaText}>⭐ {recipe.rating?.toFixed(1) || '4.5'}</Text>
+              <Text style={styles.metaText}>📊 {recipe.difficulty || 'Medium'}</Text>
             </View>
           </View>
           <TouchableOpacity

@@ -99,7 +99,7 @@ export default function CommunityPage() {
         .filter((line) => line.trim())
         .map((line) => ({ item: line.trim(), amount: '' }));
 
-      // Parse instructions (one per line)  
+      // Parse instructions (one per line)
       const instructions = newRecipe.instructions
         .split('\n')
         .filter((line) => line.trim())
@@ -235,9 +235,12 @@ export default function CommunityPage() {
             <Tag tone="lime" className="w-fit">
               👨‍👩‍👧‍👦 Community Kitchen
             </Tag>
-            <h1 className="text-3xl font-semibold text-white sm:text-4xl">Shared Recipes</h1>
+            <h1 className="text-3xl font-semibold text-white sm:text-4xl">
+              Shared Recipes
+            </h1>
             <p className="max-w-2xl text-sm text-brand-gray-400">
-              Recipes shared by our community of home cooks. Try them out and share your own!
+              Recipes shared by our community of home cooks. Try them out and share your
+              own!
             </p>
           </div>
           <div className="flex gap-2">
@@ -249,7 +252,10 @@ export default function CommunityPage() {
               Share Recipe
             </Button>
             <Link href="/chat">
-              <Button variant="secondary" className="border-brand-lime/30 text-brand-lime">
+              <Button
+                variant="secondary"
+                className="border-brand-lime/30 text-brand-lime"
+              >
                 <span className="mr-2">🤖</span>
                 AI Chef
               </Button>
@@ -584,7 +590,9 @@ export default function CommunityPage() {
                 </label>
                 <textarea
                   value={newRecipe.description}
-                  onChange={(e) => setNewRecipe({ ...newRecipe, description: e.target.value })}
+                  onChange={(e) =>
+                    setNewRecipe({ ...newRecipe, description: e.target.value })
+                  }
                   placeholder="A brief description of your dish..."
                   rows={2}
                   className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none resize-none"
@@ -594,40 +602,59 @@ export default function CommunityPage() {
               {/* Time & Servings */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-sm text-brand-gray-400 mb-2">Prep Time</label>
+                  <label className="block text-sm text-brand-gray-400 mb-2">
+                    Prep Time
+                  </label>
                   <input
                     type="text"
                     value={newRecipe.prepTime}
-                    onChange={(e) => setNewRecipe({ ...newRecipe, prepTime: e.target.value })}
+                    onChange={(e) =>
+                      setNewRecipe({ ...newRecipe, prepTime: e.target.value })
+                    }
                     placeholder="15 mins"
                     className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-brand-gray-400 mb-2">Cook Time</label>
+                  <label className="block text-sm text-brand-gray-400 mb-2">
+                    Cook Time
+                  </label>
                   <input
                     type="text"
                     value={newRecipe.cookTime}
-                    onChange={(e) => setNewRecipe({ ...newRecipe, cookTime: e.target.value })}
+                    onChange={(e) =>
+                      setNewRecipe({ ...newRecipe, cookTime: e.target.value })
+                    }
                     placeholder="30 mins"
                     className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-brand-gray-400 mb-2">Servings</label>
+                  <label className="block text-sm text-brand-gray-400 mb-2">
+                    Servings
+                  </label>
                   <input
                     type="number"
                     value={newRecipe.servings}
-                    onChange={(e) => setNewRecipe({ ...newRecipe, servings: parseInt(e.target.value) || 4 })}
+                    onChange={(e) =>
+                      setNewRecipe({
+                        ...newRecipe,
+                        servings: parseInt(e.target.value) || 4,
+                      })
+                    }
                     min="1"
                     className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-brand-gray-400 mb-2">Difficulty</label>
+                  <label className="block text-sm text-brand-gray-400 mb-2">
+                    Difficulty
+                  </label>
                   <select
                     value={newRecipe.difficulty}
-                    onChange={(e) => setNewRecipe({ ...newRecipe, difficulty: e.target.value })}
+                    onChange={(e) =>
+                      setNewRecipe({ ...newRecipe, difficulty: e.target.value })
+                    }
                     className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
                   >
                     <option value="Easy">Easy</option>
@@ -644,7 +671,9 @@ export default function CommunityPage() {
                 </label>
                 <textarea
                   value={newRecipe.ingredients}
-                  onChange={(e) => setNewRecipe({ ...newRecipe, ingredients: e.target.value })}
+                  onChange={(e) =>
+                    setNewRecipe({ ...newRecipe, ingredients: e.target.value })
+                  }
                   placeholder="1 kg chicken&#10;1/2 cup soy sauce&#10;1/4 cup vinegar&#10;..."
                   rows={5}
                   className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none resize-none font-mono text-sm"
@@ -658,7 +687,9 @@ export default function CommunityPage() {
                 </label>
                 <textarea
                   value={newRecipe.instructions}
-                  onChange={(e) => setNewRecipe({ ...newRecipe, instructions: e.target.value })}
+                  onChange={(e) =>
+                    setNewRecipe({ ...newRecipe, instructions: e.target.value })
+                  }
                   placeholder="Marinate chicken in soy sauce and vinegar for 30 minutes&#10;Heat oil in a pan over medium heat&#10;..."
                   rows={6}
                   className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none resize-none font-mono text-sm"
@@ -676,7 +707,9 @@ export default function CommunityPage() {
                     <input
                       type="text"
                       value={newRecipe.chefName}
-                      onChange={(e) => setNewRecipe({ ...newRecipe, chefName: e.target.value })}
+                      onChange={(e) =>
+                        setNewRecipe({ ...newRecipe, chefName: e.target.value })
+                      }
                       placeholder="e.g., Tita Maria"
                       className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none"
                     />

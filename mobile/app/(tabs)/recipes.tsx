@@ -9,7 +9,7 @@ import {
   TextInput,
 } from 'react-native';
 import { api } from '@/lib/api';
-import { Recipe } from '@/lib/types';
+import { RecipeSummary } from '@/lib/types';
 
 const BRAND_COLORS = {
   lime: '#A3E635',
@@ -20,8 +20,8 @@ const BRAND_COLORS = {
 };
 
 export default function RecipesScreen() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>([]);
+  const [recipes, setRecipes] = useState<RecipeSummary[]>([]);
+  const [filteredRecipes, setFilteredRecipes] = useState<RecipeSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -54,12 +54,14 @@ export default function RecipesScreen() {
       filtered = filtered.filter(
         (r) =>
           r.title.toLowerCase().includes(query) ||
-          r.description?.toLowerCase().includes(query)
+          r.summary?.toLowerCase().includes(query)
       );
     }
 
     if (selectedCategory) {
-      filtered = filtered.filter((r) => r.tags?.includes(selectedCategory));
+      filtered = filtered.filter((r) => 
+        r.dietaryTags?.some((tag: string) => tag.toLowerCase().includes(selectedCategory.toLowerCase()))
+      );
     }
 
     setFilteredRecipes(filtered);
@@ -142,19 +144,15 @@ export default function RecipesScreen() {
                 {recipe.title}
               </Text>
               <Text style={styles.recipeDescription} numberOfLines={2}>
-                {recipe.description || 'A delicious Filipino recipe'}
+                {recipe.summary || 'A delicious Filipino recipe'}
               </Text>
               <View style={styles.recipeMeta}>
-                {recipe.prepTime && (
-                  <Text style={styles.metaText}>⏱️ {recipe.prepTime}</Text>
-                )}
-                {recipe.servings && (
-                  <Text style={styles.metaText}>👥 {recipe.servings}</Text>
-                )}
+                <Text style={styles.metaText}>⭐ {recipe.rating?.toFixed(1) || '4.5'}</Text>
+                <Text style={styles.metaText}>📊 {recipe.difficulty || 'Medium'}</Text>
               </View>
-              {recipe.tags && recipe.tags.length > 0 && (
+              {recipe.dietaryTags && recipe.dietaryTags.length > 0 && (
                 <View style={styles.tagContainer}>
-                  {recipe.tags.slice(0, 3).map((tag) => (
+                  {recipe.dietaryTags.slice(0, 3).map((tag: string) => (
                     <View key={tag} style={styles.tag}>
                       <Text style={styles.tagText}>{tag}</Text>
                     </View>
