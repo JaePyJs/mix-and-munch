@@ -36,7 +36,8 @@ export function SiteHeader() {
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 text-sm font-medium md:flex">
           {navItems.map(({ href, label }) => {
-            const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
+            const isActive =
+              pathname === href || (href !== '/' && pathname.startsWith(href));
             return (
               <Link
                 key={href}
@@ -64,7 +65,10 @@ export function SiteHeader() {
           aria-expanded={mobileOpen}
         >
           <svg
-            className={clsx('h-5 w-5 transition-transform duration-300', mobileOpen && 'rotate-90')}
+            className={clsx(
+              'h-5 w-5 transition-transform duration-300',
+              mobileOpen && 'rotate-90'
+            )}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -90,7 +94,8 @@ export function SiteHeader() {
         <div className="page-grid pb-3 md:hidden border-t border-brand-gray-800/50 animate-in slide-in-from-top-2 duration-200">
           <div className="card-surface divide-y divide-brand-gray-800 overflow-hidden rounded-2xl">
             {navItems.map(({ href, label }) => {
-              const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
+              const isActive =
+                pathname === href || (href !== '/' && pathname.startsWith(href));
               return (
                 <Link
                   key={href}

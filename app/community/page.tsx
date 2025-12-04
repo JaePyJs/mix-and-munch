@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Tag } from '@/components/ui/Tag';
 import { useTranslation } from '@/lib/hooks/useTranslation';
+import Link from 'next/link';
 
 interface CommunityRecipe {
   id: string;
@@ -30,12 +31,41 @@ interface CommunityRecipe {
   sourceUrl?: string;
 }
 
+interface NewRecipeForm {
+  title: string;
+  description: string;
+  prepTime: string;
+  cookTime: string;
+  servings: number;
+  difficulty: string;
+  ingredients: string;
+  instructions: string;
+  chefName: string;
+  avatar: string;
+}
+
 export default function CommunityPage() {
   const { t } = useTranslation();
   const [recipes, setRecipes] = useState<CommunityRecipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedRecipe, setSelectedRecipe] = useState<CommunityRecipe | null>(null);
   const [filter, setFilter] = useState<string>('all');
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [newRecipe, setNewRecipe] = useState<NewRecipeForm>({
+    title: '',
+    description: '',
+    prepTime: '15 mins',
+    cookTime: '30 mins',
+    servings: 4,
+    difficulty: 'Medium',
+    ingredients: '',
+    instructions: '',
+    chefName: '',
+    avatar: '👨‍🍳',
+  });
+
+  const avatars = ['👨‍🍳', '👩‍🍳', '🧑‍🍳', '👵', '👴', '🧑', '👩', '👨', '🍳', '🥘'];
 
   useEffect(() => {
     fetchRecipes();
@@ -52,6 +82,79 @@ export default function CommunityPage() {
       console.error('Failed to fetch community recipes:', error);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleCreateRecipe() {
+    if (!newRecipe.title.trim() || !newRecipe.chefName.trim()) {
+      alert('Please enter a recipe title and your name');
+      return;
+    }
+
+    setCreating(true);
+    try {
+      // Parse ingredients (one per line)
+      const ingredients = newRecipe.ingredients
+        .split('\n')
+        .filter((line) => line.trim())
+        .map((line) => ({ item: line.trim(), amount: '' }));
+
+      // Parse instructions (one per line)  
+      const instructions = newRecipe.instructions
+        .split('\n')
+        .filter((line) => line.trim())
+        .map((line) => line.trim());
+
+      const res = await fetch('/api/community', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          recipe: {
+            title: newRecipe.title,
+            description: newRecipe.description,
+            prep_time: newRecipe.prepTime,
+            cook_time: newRecipe.cookTime,
+            servings: newRecipe.servings,
+            difficulty: newRecipe.difficulty,
+            ingredients,
+            instructions,
+            tags: ['community', 'homemade'],
+          },
+          sharedBy: {
+            name: newRecipe.chefName,
+            avatar: newRecipe.avatar,
+            location: 'Philippines',
+          },
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        // Refresh recipes list
+        fetchRecipes();
+        setShowCreateModal(false);
+        // Reset form
+        setNewRecipe({
+          title: '',
+          description: '',
+          prepTime: '15 mins',
+          cookTime: '30 mins',
+          servings: 4,
+          difficulty: 'Medium',
+          ingredients: '',
+          instructions: '',
+          chefName: '',
+          avatar: '👨‍🍳',
+        });
+        alert('🎉 Recipe shared successfully!');
+      } else {
+        alert('Failed to share recipe: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Create recipe error:', error);
+      alert('Failed to share recipe');
+    } finally {
+      setCreating(false);
     }
   }
 
@@ -127,13 +230,32 @@ export default function CommunityPage() {
     <div className="page-grid space-y-8">
       {/* Header */}
       <header className="space-y-4">
-        <Tag tone="lime" className="w-fit">
-          👨‍👩‍👧‍👦 Community Kitchen
-        </Tag>
-        <h1 className="text-3xl font-semibold text-white sm:text-4xl">Shared Recipes</h1>
-        <p className="max-w-2xl text-sm text-brand-gray-400">
-          Recipes shared by our community of home cooks. Try them out and share your own!
-        </p>
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="space-y-4">
+            <Tag tone="lime" className="w-fit">
+              👨‍👩‍👧‍👦 Community Kitchen
+            </Tag>
+            <h1 className="text-3xl font-semibold text-white sm:text-4xl">Shared Recipes</h1>
+            <p className="max-w-2xl text-sm text-brand-gray-400">
+              Recipes shared by our community of home cooks. Try them out and share your own!
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              onClick={() => setShowCreateModal(true)}
+              className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90"
+            >
+              <span className="mr-2">➕</span>
+              Share Recipe
+            </Button>
+            <Link href="/chat">
+              <Button variant="secondary" className="border-brand-lime/30 text-brand-lime">
+                <span className="mr-2">🤖</span>
+                AI Chef
+              </Button>
+            </Link>
+          </div>
+        </div>
       </header>
 
       {/* Stats Bar */}
@@ -413,6 +535,191 @@ export default function CommunityPage() {
                   className="flex-1"
                 >
                   📌 Save ({selectedRecipe.saves})
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Create Recipe Modal */}
+      {showCreateModal && (
+        <div
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto"
+          onClick={() => setShowCreateModal(false)}
+        >
+          <div
+            className="bg-brand-gray-900 rounded-2xl max-w-2xl w-full p-6 my-8 max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-white">Share Your Recipe</h2>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="text-brand-gray-400 hover:text-white text-2xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {/* Recipe Title */}
+              <div>
+                <label className="block text-sm text-brand-gray-400 mb-2">
+                  Recipe Title *
+                </label>
+                <input
+                  type="text"
+                  value={newRecipe.title}
+                  onChange={(e) => setNewRecipe({ ...newRecipe, title: e.target.value })}
+                  placeholder="e.g., Chicken Adobo"
+                  className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none"
+                />
+              </div>
+
+              {/* Description */}
+              <div>
+                <label className="block text-sm text-brand-gray-400 mb-2">
+                  Description
+                </label>
+                <textarea
+                  value={newRecipe.description}
+                  onChange={(e) => setNewRecipe({ ...newRecipe, description: e.target.value })}
+                  placeholder="A brief description of your dish..."
+                  rows={2}
+                  className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none resize-none"
+                />
+              </div>
+
+              {/* Time & Servings */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div>
+                  <label className="block text-sm text-brand-gray-400 mb-2">Prep Time</label>
+                  <input
+                    type="text"
+                    value={newRecipe.prepTime}
+                    onChange={(e) => setNewRecipe({ ...newRecipe, prepTime: e.target.value })}
+                    placeholder="15 mins"
+                    className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-brand-gray-400 mb-2">Cook Time</label>
+                  <input
+                    type="text"
+                    value={newRecipe.cookTime}
+                    onChange={(e) => setNewRecipe({ ...newRecipe, cookTime: e.target.value })}
+                    placeholder="30 mins"
+                    className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-brand-gray-400 mb-2">Servings</label>
+                  <input
+                    type="number"
+                    value={newRecipe.servings}
+                    onChange={(e) => setNewRecipe({ ...newRecipe, servings: parseInt(e.target.value) || 4 })}
+                    min="1"
+                    className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-brand-gray-400 mb-2">Difficulty</label>
+                  <select
+                    value={newRecipe.difficulty}
+                    onChange={(e) => setNewRecipe({ ...newRecipe, difficulty: e.target.value })}
+                    className="w-full px-3 py-2 rounded-lg bg-brand-gray-800 border border-brand-gray-700 text-white text-sm focus:border-brand-lime focus:outline-none"
+                  >
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Ingredients */}
+              <div>
+                <label className="block text-sm text-brand-gray-400 mb-2">
+                  Ingredients (one per line) *
+                </label>
+                <textarea
+                  value={newRecipe.ingredients}
+                  onChange={(e) => setNewRecipe({ ...newRecipe, ingredients: e.target.value })}
+                  placeholder="1 kg chicken&#10;1/2 cup soy sauce&#10;1/4 cup vinegar&#10;..."
+                  rows={5}
+                  className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none resize-none font-mono text-sm"
+                />
+              </div>
+
+              {/* Instructions */}
+              <div>
+                <label className="block text-sm text-brand-gray-400 mb-2">
+                  Instructions (one step per line) *
+                </label>
+                <textarea
+                  value={newRecipe.instructions}
+                  onChange={(e) => setNewRecipe({ ...newRecipe, instructions: e.target.value })}
+                  placeholder="Marinate chicken in soy sauce and vinegar for 30 minutes&#10;Heat oil in a pan over medium heat&#10;..."
+                  rows={6}
+                  className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none resize-none font-mono text-sm"
+                />
+              </div>
+
+              {/* Chef Info */}
+              <div className="pt-4 border-t border-brand-gray-800">
+                <h3 className="text-lg font-semibold text-white mb-4">About You</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm text-brand-gray-400 mb-2">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={newRecipe.chefName}
+                      onChange={(e) => setNewRecipe({ ...newRecipe, chefName: e.target.value })}
+                      placeholder="e.g., Tita Maria"
+                      className="w-full px-4 py-3 rounded-xl bg-brand-gray-800 border border-brand-gray-700 text-white placeholder-brand-gray-500 focus:border-brand-lime focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-brand-gray-400 mb-2">
+                      Choose Avatar
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {avatars.map((avatar) => (
+                        <button
+                          key={avatar}
+                          type="button"
+                          onClick={() => setNewRecipe({ ...newRecipe, avatar })}
+                          className={`text-2xl p-2 rounded-lg transition-all ${
+                            newRecipe.avatar === avatar
+                              ? 'bg-brand-lime/20 ring-2 ring-brand-lime'
+                              : 'bg-brand-gray-800 hover:bg-brand-gray-700'
+                          }`}
+                        >
+                          {avatar}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Submit */}
+              <div className="flex gap-3 pt-4">
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowCreateModal(false)}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleCreateRecipe}
+                  disabled={creating}
+                  className="flex-1 bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90"
+                >
+                  {creating ? 'Sharing...' : '🚀 Share Recipe'}
                 </Button>
               </div>
             </div>
