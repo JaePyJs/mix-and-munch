@@ -69,10 +69,10 @@ export default function RootLayout({
           'bg-brand-gray-950 text-brand-gray-200 antialiased'
         )}
       >
-        <div className="flex min-h-screen flex-col bg-[radial-gradient(circle_at_top,_rgba(163,230,53,0.06),_rgba(9,9,11,1))]">
+        <div className="flex min-h-screen flex-col bg-[radial-gradient(circle_at_top,_rgba(163,230,53,0.06),_rgba(9,9,11,1))] overflow-x-hidden w-full max-w-full">
           <I18nProvider>
             <SiteHeader />
-            <main className="flex-1 pb-12 sm:pb-16 pt-8 sm:pt-10 lg:pt-14 px-4 sm:px-0">
+            <main className="flex-1 pb-12 sm:pb-16 pt-8 sm:pt-10 lg:pt-14 px-4 sm:px-0 overflow-x-hidden w-full max-w-full">
               {children}
             </main>
             <SiteFooter />

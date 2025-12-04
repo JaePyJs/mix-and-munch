@@ -95,20 +95,20 @@ export const communityRecipesApi = {
       .select('dislikes')
       .eq('id', id)
       .single();
-    
+
     if (fetchError) {
       console.error('Error fetching recipe for dislike:', fetchError);
       // If dislikes column doesn't exist, just return true (no-op)
       return true;
     }
-    
+
     const currentDislikes = recipe?.dislikes || 0;
-    
+
     const { error } = await supabase
       .from('community_recipes')
       .update({ dislikes: currentDislikes + 1 })
       .eq('id', id);
-    
+
     if (error) {
       console.error('Error disliking recipe:', error);
       // If column doesn't exist, fail silently
@@ -118,11 +118,8 @@ export const communityRecipesApi = {
   },
 
   async delete(id: string): Promise<boolean> {
-    const { error } = await supabase
-      .from('community_recipes')
-      .delete()
-      .eq('id', id);
-    
+    const { error } = await supabase.from('community_recipes').delete().eq('id', id);
+
     if (error) {
       console.error('Error deleting recipe:', error);
       return false;
