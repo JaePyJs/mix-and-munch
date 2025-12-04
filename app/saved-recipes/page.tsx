@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Tag } from '@/components/ui/Tag';
+import { Markdown } from '@/components/ui/Markdown';
 
 interface SavedRecipe {
   id: string;
@@ -23,6 +24,7 @@ interface SavedRecipe {
 export default function SavedRecipesPage() {
   const [savedRecipes, setSavedRecipes] = useState<SavedRecipe[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [expandedRecipe, setExpandedRecipe] = useState<string | null>(null);
 
   useEffect(() => {
     loadSavedRecipes();
@@ -44,7 +46,7 @@ export default function SavedRecipesPage() {
 
   const deleteRecipe = (id: string) => {
     try {
-      const updatedRecipes = savedRecipes.filter(recipe => recipe.id !== id);
+      const updatedRecipes = savedRecipes.filter((recipe) => recipe.id !== id);
       setSavedRecipes(updatedRecipes);
       localStorage.setItem('savedRecipes', JSON.stringify(updatedRecipes));
     } catch (error) {
@@ -53,7 +55,11 @@ export default function SavedRecipesPage() {
   };
 
   const clearAllRecipes = () => {
-    if (window.confirm('Are you sure you want to delete all saved recipes? This action cannot be undone.')) {
+    if (
+      window.confirm(
+        'Are you sure you want to delete all saved recipes? This action cannot be undone.'
+      )
+    ) {
       setSavedRecipes([]);
       localStorage.removeItem('savedRecipes');
     }
@@ -96,13 +102,17 @@ export default function SavedRecipesPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               <div className="bg-brand-gray-800/50 rounded-lg p-4 text-center border border-brand-gray-700/50">
                 <span className="text-2xl block mb-2">👨‍🍳</span>
-                <div className="text-2xl font-bold text-brand-lime">{savedRecipes.length}</div>
+                <div className="text-2xl font-bold text-brand-lime">
+                  {savedRecipes.length}
+                </div>
                 <div className="text-sm text-brand-gray-400">Saved Recipes</div>
               </div>
               <div className="bg-brand-gray-800/50 rounded-lg p-4 text-center border border-brand-gray-700/50">
                 <span className="text-2xl block mb-2">⏰</span>
                 <div className="text-2xl font-bold text-brand-lime">
-                  {savedRecipes.length > 0 ? new Date(savedRecipes[0].savedAt).toLocaleDateString() : '-'}
+                  {savedRecipes.length > 0
+                    ? new Date(savedRecipes[0].savedAt).toLocaleDateString()
+                    : '-'}
                 </div>
                 <div className="text-sm text-brand-gray-400">Latest Save</div>
               </div>
@@ -141,7 +151,8 @@ export default function SavedRecipesPage() {
                 No saved recipes yet
               </h3>
               <p className="text-brand-gray-400 mb-6 max-w-md mx-auto">
-                Browse our recipes or chat with our AI to discover delicious Filipino dishes!
+                Browse our recipes or chat with our AI to discover delicious Filipino
+                dishes!
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/recipes">
@@ -151,7 +162,10 @@ export default function SavedRecipesPage() {
                   </Button>
                 </Link>
                 <Link href="/chat">
-                  <Button variant="secondary" className="border-brand-lime/30 text-brand-lime">
+                  <Button
+                    variant="secondary"
+                    className="border-brand-lime/30 text-brand-lime"
+                  >
                     <span className="mr-2">🤖</span>
                     AI Chef
                   </Button>
@@ -159,111 +173,111 @@ export default function SavedRecipesPage() {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {savedRecipes.map((recipe) => (
-                <div 
-                  key={recipe.id} 
-                  className="group relative rounded-2xl border border-brand-gray-800/70 bg-brand-gray-900/40 overflow-hidden hover:border-brand-lime/50 transition-all duration-300 hover:shadow-lg hover:shadow-brand-lime/10"
-                >
-                  {/* Recipe Image */}
-                  <div className="relative h-48 w-full overflow-hidden">
-                    {recipe.type === 'database' && recipe.image ? (
-                      <Image
-                        src={recipe.image}
-                        alt={recipe.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-brand-lime/20 to-brand-green/20 flex items-center justify-center">
-                        <span className="text-6xl">🍳</span>
-                      </div>
-                    )}
-                    {/* Type Badge */}
-                    <div className="absolute top-3 left-3">
-                      <Tag tone={recipe.type === 'ai-generated' ? 'lime' : 'gray'} className="text-xs">
-                        {recipe.type === 'ai-generated' ? '🤖 AI Recipe' : '📖 Recipe'}
-                      </Tag>
-                    </div>
-                    {/* Delete Button */}
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        deleteRecipe(recipe.id);
-                      }}
-                      className="absolute top-3 right-3 p-2 rounded-full bg-black/60 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/20"
-                      aria-label="Delete recipe"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                      </svg>
-                    </button>
-                  </div>
-                  
-                  {/* Recipe Content */}
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-white mb-2 line-clamp-1 group-hover:text-brand-lime transition-colors">
-                      {recipe.title}
-                    </h3>
-                    <p className="text-sm text-brand-gray-400 mb-3 line-clamp-2">
-                      {recipe.description || recipe.content?.substring(0, 100) || 'Delicious Filipino recipe'}
-                    </p>
-                    
-                    {/* Recipe Meta */}
-                    {recipe.type === 'database' && (recipe.prepTime || recipe.cookTime) && (
-                      <div className="flex flex-wrap gap-2 mb-3 text-xs text-brand-gray-500">
-                        {recipe.prepTime && (
-                          <span className="flex items-center gap-1">
-                            <span>⏱️</span> Prep: {recipe.prepTime}
-                          </span>
-                        )}
-                        {recipe.cookTime && (
-                          <span className="flex items-center gap-1">
-                            <span>🍳</span> Cook: {recipe.cookTime}
-                          </span>
-                        )}
-                        {recipe.servings && (
-                          <span className="flex items-center gap-1">
-                            <span>👥</span> {recipe.servings} servings
-                          </span>
+            <div className="space-y-4">
+              {savedRecipes.map((recipe) => {
+                const isExpanded = expandedRecipe === recipe.id;
+                
+                return (
+                  <div
+                    key={recipe.id}
+                    className="rounded-2xl border border-brand-gray-800/70 bg-brand-gray-900/40 overflow-hidden hover:border-brand-lime/50 transition-all duration-300"
+                  >
+                    {/* Card Header - Always Visible */}
+                    <div className="flex items-center gap-4 p-4">
+                      {/* Image/Icon */}
+                      <div className="relative h-20 w-20 flex-shrink-0 rounded-xl overflow-hidden">
+                        {recipe.type === 'database' && recipe.image ? (
+                          <Image
+                            src={recipe.image}
+                            alt={recipe.title}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-brand-lime/20 to-brand-green/20 flex items-center justify-center">
+                            <span className="text-3xl">🍳</span>
+                          </div>
                         )}
                       </div>
-                    )}
-                    
-                    {/* Saved Date */}
-                    <div className="text-xs text-brand-gray-500 mb-3">
-                      Saved {new Date(recipe.savedAt).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                      })}
+                      
+                      {/* Recipe Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <Tag
+                            tone={recipe.type === 'ai-generated' ? 'lime' : 'gray'}
+                            className="text-xs"
+                          >
+                            {recipe.type === 'ai-generated' ? '🤖 AI' : '📖 Recipe'}
+                          </Tag>
+                          <span className="text-xs text-brand-gray-500">
+                            Saved {new Date(recipe.savedAt).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-semibold text-white truncate">
+                          {recipe.title}
+                        </h3>
+                        <p className="text-sm text-brand-gray-400 line-clamp-1">
+                          {recipe.description || 'Delicious Filipino recipe'}
+                        </p>
+                        {/* Meta info for database recipes */}
+                        {recipe.type === 'database' && (recipe.prepTime || recipe.cookTime) && (
+                          <div className="flex gap-3 mt-1 text-xs text-brand-gray-500">
+                            {recipe.prepTime && <span>⏱️ {recipe.prepTime}</span>}
+                            {recipe.cookTime && <span>🍳 {recipe.cookTime}</span>}
+                            {recipe.servings && <span>👥 {recipe.servings}</span>}
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Actions */}
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        {recipe.type === 'database' ? (
+                          <Link href={`/recipes/${recipe.id}`}>
+                            <Button className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90">
+                              View
+                            </Button>
+                          </Link>
+                        ) : (
+                          <Button
+                            onClick={() => setExpandedRecipe(isExpanded ? null : recipe.id)}
+                            className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90"
+                          >
+                            {isExpanded ? 'Close' : 'View'}
+                          </Button>
+                        )}
+                        <button
+                          onClick={() => deleteRecipe(recipe.id)}
+                          className="p-2 rounded-lg text-red-400 hover:bg-red-500/20 transition-colors"
+                          aria-label="Delete recipe"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                     
-                    {/* View Button */}
-                    {recipe.type === 'database' ? (
-                      <Link href={`/recipes/${recipe.id}`} className="block">
-                        <Button className="w-full bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90">
-                          View Recipe
-                        </Button>
-                      </Link>
-                    ) : (
-                      <Link href="/chat" className="block">
-                        <Button variant="secondary" className="w-full border-brand-lime/30 text-brand-lime hover:bg-brand-lime/10">
-                          View in AI Chat
-                        </Button>
-                      </Link>
+                    {/* Expanded Content - AI Recipes */}
+                    {isExpanded && recipe.content && (
+                      <div className="border-t border-brand-gray-800/70 p-6 bg-brand-gray-900/60">
+                        <div className="prose prose-invert prose-lime max-w-none">
+                          <Markdown content={recipe.content} />
+                        </div>
+                      </div>
                     )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
           {/* Back to Chat */}
           <div className="text-center mt-12">
             <Button
-              onClick={() => window.location.href = '/chat'}
+              onClick={() => (window.location.href = '/chat')}
               variant="secondary"
               className="border-brand-lime/30 text-brand-lime hover:bg-brand-lime/10"
             >
