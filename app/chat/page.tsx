@@ -222,8 +222,10 @@ export default function ChatPage() {
       const savedRecipe = {
         id: crypto.randomUUID(),
         title: recipe.title,
+        description: recipe.description,
         content: lastRecipeMessage.content,
         savedAt: new Date().toISOString(),
+        type: 'ai-generated' as const,
       };
 
       const existingSaved = localStorage.getItem('savedRecipes');

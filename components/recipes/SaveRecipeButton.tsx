@@ -7,12 +7,22 @@ interface SaveRecipeButtonProps {
   recipeSlug: string;
   recipeTitle: string;
   recipeDescription: string;
+  recipeImage?: string;
+  prepTime?: string;
+  cookTime?: string;
+  difficulty?: string;
+  servings?: number;
 }
 
 export function SaveRecipeButton({
   recipeSlug,
   recipeTitle,
   recipeDescription,
+  recipeImage,
+  prepTime,
+  cookTime,
+  difficulty,
+  servings,
 }: SaveRecipeButtonProps) {
   const [isSaved, setIsSaved] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -33,8 +43,14 @@ export function SaveRecipeButton({
     const savedRecipe = {
       id: recipeSlug,
       title: recipeTitle,
-      content: `**${recipeTitle}**\n\n${recipeDescription}`,
+      description: recipeDescription,
+      image: recipeImage || '/images/placeholder-recipe.jpg',
+      prepTime: prepTime || '',
+      cookTime: cookTime || '',
+      difficulty: difficulty || 'Medium',
+      servings: servings || 4,
       savedAt: new Date().toISOString(),
+      type: 'database', // Mark as from database vs AI-generated
     };
 
     const existingSaved = localStorage.getItem('savedRecipes');

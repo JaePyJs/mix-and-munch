@@ -92,6 +92,11 @@ export default function RecipeDetailPage({ params }: RecipePageProps) {
               recipeSlug={recipe.slug}
               recipeTitle={recipe.title}
               recipeDescription={recipe.description}
+              recipeImage={recipe.heroImage}
+              prepTime={recipe.prepTime}
+              cookTime={recipe.cookTime}
+              difficulty={recipe.difficulty}
+              servings={recipe.servings}
             />
           </div>
         </div>

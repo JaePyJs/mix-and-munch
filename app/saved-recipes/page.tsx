@@ -1,14 +1,23 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { RecipeCard } from '@/components/chat/RecipeCard';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { Tag } from '@/components/ui/Tag';
 
 interface SavedRecipe {
   id: string;
   title: string;
-  content: string;
+  description?: string;
+  content?: string; // Legacy field for AI recipes
+  image?: string;
+  prepTime?: string;
+  cookTime?: string;
+  difficulty?: string;
+  servings?: number;
   savedAt: string;
+  type?: 'database' | 'ai-generated';
 }
 
 export default function SavedRecipesPage() {
@@ -132,43 +141,120 @@ export default function SavedRecipesPage() {
                 No saved recipes yet
               </h3>
               <p className="text-brand-gray-400 mb-6 max-w-md mx-auto">
-                Start chatting with our AI to get personalized recipe suggestions, then save your favorites here!
+                Browse our recipes or chat with our AI to discover delicious Filipino dishes!
               </p>
-              <Button
-                onClick={() => window.location.href = '/chat'}
-                className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90"
-              >
-                <span className="mr-2">👨‍🍳</span>
-                Get Recipe Suggestions
-              </Button>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link href="/recipes">
+                  <Button className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90">
+                    <span className="mr-2">📖</span>
+                    Browse Recipes
+                  </Button>
+                </Link>
+                <Link href="/chat">
+                  <Button variant="secondary" className="border-brand-lime/30 text-brand-lime">
+                    <span className="mr-2">🤖</span>
+                    AI Chef
+                  </Button>
+                </Link>
+              </div>
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {savedRecipes.map((recipe) => (
-                <div key={recipe.id} className="relative group">
-                  {/* Delete button */}
-                  <Button
-                    onClick={() => deleteRecipe(recipe.id)}
-                    variant="secondary"
-                    className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-red-500/10 border-red-500/30 text-red-400 hover:bg-red-500/20"
-                  >
-                    <span className="mr-1">🗑️</span>
-                    Delete
-                  </Button>
-
-                  {/* Recipe metadata */}
-                  <div className="mb-3 text-xs text-brand-gray-400">
-                    Saved on {new Date(recipe.savedAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
+                <div 
+                  key={recipe.id} 
+                  className="group relative rounded-2xl border border-brand-gray-800/70 bg-brand-gray-900/40 overflow-hidden hover:border-brand-lime/50 transition-all duration-300 hover:shadow-lg hover:shadow-brand-lime/10"
+                >
+                  {/* Recipe Image */}
+                  <div className="relative h-48 w-full overflow-hidden">
+                    {recipe.type === 'database' && recipe.image ? (
+                      <Image
+                        src={recipe.image}
+                        alt={recipe.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-brand-lime/20 to-brand-green/20 flex items-center justify-center">
+                        <span className="text-6xl">🍳</span>
+                      </div>
+                    )}
+                    {/* Type Badge */}
+                    <div className="absolute top-3 left-3">
+                      <Tag tone={recipe.type === 'ai-generated' ? 'lime' : 'gray'} className="text-xs">
+                        {recipe.type === 'ai-generated' ? '🤖 AI Recipe' : '📖 Recipe'}
+                      </Tag>
+                    </div>
+                    {/* Delete Button */}
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        deleteRecipe(recipe.id);
+                      }}
+                      className="absolute top-3 right-3 p-2 rounded-full bg-black/60 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/20"
+                      aria-label="Delete recipe"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    </button>
                   </div>
-
-                  {/* Recipe card */}
-                  <RecipeCard content={recipe.content} />
+                  
+                  {/* Recipe Content */}
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-white mb-2 line-clamp-1 group-hover:text-brand-lime transition-colors">
+                      {recipe.title}
+                    </h3>
+                    <p className="text-sm text-brand-gray-400 mb-3 line-clamp-2">
+                      {recipe.description || recipe.content?.substring(0, 100) || 'Delicious Filipino recipe'}
+                    </p>
+                    
+                    {/* Recipe Meta */}
+                    {recipe.type === 'database' && (recipe.prepTime || recipe.cookTime) && (
+                      <div className="flex flex-wrap gap-2 mb-3 text-xs text-brand-gray-500">
+                        {recipe.prepTime && (
+                          <span className="flex items-center gap-1">
+                            <span>⏱️</span> Prep: {recipe.prepTime}
+                          </span>
+                        )}
+                        {recipe.cookTime && (
+                          <span className="flex items-center gap-1">
+                            <span>🍳</span> Cook: {recipe.cookTime}
+                          </span>
+                        )}
+                        {recipe.servings && (
+                          <span className="flex items-center gap-1">
+                            <span>👥</span> {recipe.servings} servings
+                          </span>
+                        )}
+                      </div>
+                    )}
+                    
+                    {/* Saved Date */}
+                    <div className="text-xs text-brand-gray-500 mb-3">
+                      Saved {new Date(recipe.savedAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </div>
+                    
+                    {/* View Button */}
+                    {recipe.type === 'database' ? (
+                      <Link href={`/recipes/${recipe.id}`} className="block">
+                        <Button className="w-full bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90">
+                          View Recipe
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Link href="/chat" className="block">
+                        <Button variant="secondary" className="w-full border-brand-lime/30 text-brand-lime hover:bg-brand-lime/10">
+                          View in AI Chat
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
