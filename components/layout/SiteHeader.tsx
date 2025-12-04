@@ -23,6 +23,7 @@ export function SiteHeader() {
     { href: '/pantry', label: t('navigation.pantry') },
     { href: '/recipes', label: t('navigation.recipes') },
     { href: '/chat', label: t('navigation.aiChat') },
+    { href: '/youtube-crawler', label: 'YouTube Parser' },
     { href: '/community', label: t('navigation.community') },
     { href: '/saved-recipes', label: t('navigation.saved') },
     { href: '/profile', label: t('navigation.profile') },

@@ -59,8 +59,10 @@ export default function RecipesScreen() {
     }
 
     if (selectedCategory) {
-      filtered = filtered.filter((r) => 
-        r.dietaryTags?.some((tag: string) => tag.toLowerCase().includes(selectedCategory.toLowerCase()))
+      filtered = filtered.filter((r) =>
+        r.dietaryTags?.some((tag: string) =>
+          tag.toLowerCase().includes(selectedCategory.toLowerCase())
+        )
       );
     }
 
@@ -147,7 +149,9 @@ export default function RecipesScreen() {
                 {recipe.summary || 'A delicious Filipino recipe'}
               </Text>
               <View style={styles.recipeMeta}>
-                <Text style={styles.metaText}>⭐ {recipe.rating?.toFixed(1) || '4.5'}</Text>
+                <Text style={styles.metaText}>
+                  ⭐ {recipe.rating?.toFixed(1) || '4.5'}
+                </Text>
                 <Text style={styles.metaText}>📊 {recipe.difficulty || 'Medium'}</Text>
               </View>
               {recipe.dietaryTags && recipe.dietaryTags.length > 0 && (
