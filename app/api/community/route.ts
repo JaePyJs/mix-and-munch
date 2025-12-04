@@ -31,6 +31,7 @@ export async function GET() {
       },
       sharedAt: r.created_at,
       likes: r.likes || 0,
+      dislikes: r.dislikes || 0,
       saves: 0,
     }));
 
@@ -122,6 +123,7 @@ export async function POST(request: NextRequest) {
         },
         sharedAt: newRecipe.created_at,
         likes: 0,
+        dislikes: 0,
         saves: 0,
       },
     });
@@ -158,6 +160,26 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({
         success: true,
         likes: recipe?.likes || 0,
+        dislikes: recipe?.dislikes || 0,
+        saves: 0,
+      });
+    }
+
+    if (action === 'dislike') {
+      const success = await communityRecipesApi.dislike(recipeId);
+      if (!success) {
+        return NextResponse.json(
+          { success: false, message: 'Failed to dislike recipe' },
+          { status: 500 }
+        );
+      }
+
+      // Get updated recipe to return dislikes count
+      const recipe = await communityRecipesApi.getById(recipeId);
+      return NextResponse.json({
+        success: true,
+        likes: recipe?.likes || 0,
+        dislikes: recipe?.dislikes || 0,
         saves: 0,
       });
     }
@@ -166,10 +188,42 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({
       success: true,
       likes: 0,
+      dislikes: 0,
       saves: 1,
     });
   } catch (error: any) {
     console.error('[community-recipes] PATCH error:', error);
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  }
+}
+
+// DELETE - Delete a recipe
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const recipeId = searchParams.get('id');
+
+    if (!recipeId) {
+      return NextResponse.json(
+        { success: false, message: 'Recipe ID is required' },
+        { status: 400 }
+      );
+    }
+
+    const success = await communityRecipesApi.delete(recipeId);
+    if (!success) {
+      return NextResponse.json(
+        { success: false, message: 'Failed to delete recipe' },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Recipe deleted successfully',
+    });
+  } catch (error: any) {
+    console.error('[community-recipes] DELETE error:', error);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }

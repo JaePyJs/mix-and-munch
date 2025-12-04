@@ -26,6 +26,7 @@ interface CommunityRecipe {
   };
   sharedAt: string;
   likes: number;
+  dislikes: number;
   saves: number;
   source?: 'ai' | 'youtube' | 'manual';
   sourceUrl?: string;
@@ -173,6 +174,49 @@ export default function CommunityPage() {
       }
     } catch (error) {
       console.error('Failed to like recipe:', error);
+    }
+  }
+
+  async function handleDislike(recipeId: string) {
+    try {
+      const res = await fetch('/api/community', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipeId, action: 'dislike' }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setRecipes((prev) =>
+          prev.map((r) => (r.id === recipeId ? { ...r, dislikes: data.dislikes } : r))
+        );
+      }
+    } catch (error) {
+      console.error('Failed to dislike recipe:', error);
+    }
+  }
+
+  async function handleDelete(recipeId: string, recipeName: string) {
+    if (
+      !confirm(`Are you sure you want to delete "${recipeName}"? This cannot be undone.`)
+    ) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/community?id=${recipeId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success) {
+        setRecipes((prev) => prev.filter((r) => r.id !== recipeId));
+        setSelectedRecipe(null);
+        alert('Recipe deleted successfully!');
+      } else {
+        alert('Failed to delete recipe: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Failed to delete recipe:', error);
+      alert('Failed to delete recipe');
     }
   }
 
@@ -396,9 +440,18 @@ export default function CommunityPage() {
                   e.stopPropagation();
                   handleLike(recipe.id);
                 }}
+                className="flex items-center gap-1 text-sm text-brand-gray-400 hover:text-green-400 transition-colors"
+              >
+                👍 {recipe.likes}
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDislike(recipe.id);
+                }}
                 className="flex items-center gap-1 text-sm text-brand-gray-400 hover:text-red-400 transition-colors"
               >
-                ❤️ {recipe.likes}
+                👎 {recipe.dislikes || 0}
               </button>
               <button
                 onClick={(e) => {
@@ -409,13 +462,23 @@ export default function CommunityPage() {
               >
                 📌 {recipe.saves}
               </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(recipe.id, recipe.title);
+                }}
+                className="flex items-center gap-1 text-sm text-brand-gray-400 hover:text-red-500 transition-colors ml-auto"
+                title="Delete recipe"
+              >
+                🗑️
+              </button>
               {recipe.source === 'youtube' && recipe.sourceUrl && (
                 <a
                   href={recipe.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center gap-1 text-sm text-brand-gray-400 hover:text-red-500 transition-colors ml-auto"
+                  className="flex items-center gap-1 text-sm text-brand-gray-400 hover:text-red-500 transition-colors"
                 >
                   ▶️ Video
                 </a>
@@ -527,20 +590,34 @@ export default function CommunityPage() {
               )}
 
               {/* Actions */}
-              <div className="flex gap-3 pt-4 border-t border-brand-gray-800">
+              <div className="flex flex-wrap gap-3 pt-4 border-t border-brand-gray-800">
                 <Button
                   variant="primary"
                   onClick={() => handleLike(selectedRecipe.id)}
-                  className="flex-1"
+                  className="flex-1 min-w-[100px]"
                 >
-                  ❤️ Like ({selectedRecipe.likes})
+                  👍 Like ({selectedRecipe.likes})
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => handleDislike(selectedRecipe.id)}
+                  className="flex-1 min-w-[100px] border-red-500/30 text-red-400 hover:bg-red-500/10"
+                >
+                  👎 Dislike ({selectedRecipe.dislikes || 0})
                 </Button>
                 <Button
                   variant="secondary"
                   onClick={() => handleSave(selectedRecipe.id)}
-                  className="flex-1"
+                  className="flex-1 min-w-[100px]"
                 >
                   📌 Save ({selectedRecipe.saves})
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => handleDelete(selectedRecipe.id, selectedRecipe.title)}
+                  className="flex-1 min-w-[100px] border-red-500/30 text-red-400 hover:bg-red-500/10"
+                >
+                  🗑️ Delete
                 </Button>
               </div>
             </div>

@@ -21,6 +21,7 @@ export interface CommunityRecipe {
   difficulty?: string;
   tags: string[];
   likes: number;
+  dislikes: number;
   created_at: string;
 }
 
@@ -63,11 +64,11 @@ export const communityRecipesApi = {
   },
 
   async create(
-    recipe: Omit<CommunityRecipe, 'id' | 'created_at' | 'likes'>
+    recipe: Omit<CommunityRecipe, 'id' | 'created_at' | 'likes' | 'dislikes'>
   ): Promise<CommunityRecipe | null> {
     const { data, error } = await supabase
       .from('community_recipes')
-      .insert([{ ...recipe, likes: 0 }])
+      .insert([{ ...recipe, likes: 0, dislikes: 0 }])
       .select()
       .single();
 
@@ -82,6 +83,48 @@ export const communityRecipesApi = {
     const { error } = await supabase.rpc('increment_likes', { recipe_id: id });
     if (error) {
       console.error('Error liking recipe:', error);
+      return false;
+    }
+    return true;
+  },
+
+  async dislike(id: string): Promise<boolean> {
+    // First get current dislikes (handle case where column might not exist)
+    const { data: recipe, error: fetchError } = await supabase
+      .from('community_recipes')
+      .select('dislikes')
+      .eq('id', id)
+      .single();
+    
+    if (fetchError) {
+      console.error('Error fetching recipe for dislike:', fetchError);
+      // If dislikes column doesn't exist, just return true (no-op)
+      return true;
+    }
+    
+    const currentDislikes = recipe?.dislikes || 0;
+    
+    const { error } = await supabase
+      .from('community_recipes')
+      .update({ dislikes: currentDislikes + 1 })
+      .eq('id', id);
+    
+    if (error) {
+      console.error('Error disliking recipe:', error);
+      // If column doesn't exist, fail silently
+      return true;
+    }
+    return true;
+  },
+
+  async delete(id: string): Promise<boolean> {
+    const { error } = await supabase
+      .from('community_recipes')
+      .delete()
+      .eq('id', id);
+    
+    if (error) {
+      console.error('Error deleting recipe:', error);
       return false;
     }
     return true;
