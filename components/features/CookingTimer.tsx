@@ -46,7 +46,7 @@ export function CookingTimer() {
   const [customMinutes, setCustomMinutes] = useState('');
   const [customLabel, setCustomLabel] = useState('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Create audio context for alarm
   useEffect(() => {

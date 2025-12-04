@@ -185,7 +185,7 @@ export default function ChatPage() {
     return [...new Set(words)];
   }
 
-  // Save recipe to cache and community
+  // Save recipe to cache, community, AND localStorage (for Saved Recipes page)
   async function handleSaveRecipe() {
     const lastRecipeMessage = [...messages]
       .reverse()
@@ -203,6 +203,7 @@ export default function ChatPage() {
     const recipe = extractRecipeFromMessage(lastRecipeMessage.content);
 
     try {
+      // Save to server API (community database)
       const response = await fetch('/api/ai-recipes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -216,6 +217,20 @@ export default function ChatPage() {
       });
 
       const data = await response.json();
+
+      // Also save to localStorage for the Saved Recipes page
+      const savedRecipe = {
+        id: crypto.randomUUID(),
+        title: recipe.title,
+        content: lastRecipeMessage.content,
+        savedAt: new Date().toISOString(),
+      };
+
+      const existingSaved = localStorage.getItem('savedRecipes');
+      const savedRecipes = existingSaved ? JSON.parse(existingSaved) : [];
+      savedRecipes.unshift(savedRecipe); // Add to beginning
+      localStorage.setItem('savedRecipes', JSON.stringify(savedRecipes));
+
       if (data.success) {
         setRecipeSaved(true);
         setTimeout(() => setRecipeSaved(false), 3000);

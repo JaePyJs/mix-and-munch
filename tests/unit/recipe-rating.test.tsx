@@ -6,24 +6,39 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { RecipeRating } from '@/components/recipes/RecipeRating';
 
-// Mock localStorage
-const localStorageMock = (() => {
-  let store: { [key: string]: string } = {};
-  return {
-    getItem: jest.fn((key: string) => store[key] || null),
-    setItem: jest.fn((key: string, value: string) => {
-      store[key] = value;
-    }),
-    clear: jest.fn(() => {
-      store = {};
-    }),
-    removeItem: jest.fn((key: string) => {
-      delete store[key];
-    }),
-  };
-})();
+// Mock the supabase module
+const mockReviews: Array<{
+  id: string;
+  recipe_slug: string;
+  rating: number;
+  comment: string;
+  author_name: string;
+  created_at: string;
+}> = [];
 
-Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+jest.mock('@/lib/supabase', () => ({
+  reviewsApi: {
+    getByRecipe: jest.fn((recipeSlug: string) => {
+      return Promise.resolve(mockReviews.filter((r) => r.recipe_slug === recipeSlug));
+    }),
+    create: jest.fn(
+      (review: {
+        recipe_slug: string;
+        rating: number;
+        comment: string;
+        author_name: string;
+      }) => {
+        const newReview = {
+          id: `review-${Date.now()}`,
+          ...review,
+          created_at: new Date().toISOString(),
+        };
+        mockReviews.push(newReview);
+        return Promise.resolve(newReview);
+      }
+    ),
+  },
+}));
 
 describe('RecipeRating Component', () => {
   const mockProps = {
@@ -32,14 +47,16 @@ describe('RecipeRating Component', () => {
   };
 
   beforeEach(() => {
-    localStorageMock.clear();
+    mockReviews.length = 0; // Clear mock reviews
     jest.clearAllMocks();
   });
 
-  it('renders the rating component with empty state', () => {
+  it('renders the rating component with empty state', async () => {
     render(<RecipeRating {...mockProps} />);
 
-    expect(screen.getByText('—')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('—')).toBeInTheDocument();
+    });
     expect(screen.getByText('out of 5')).toBeInTheDocument();
     expect(screen.getByText('0 reviews')).toBeInTheDocument();
     expect(screen.getByText('Rate this recipe')).toBeInTheDocument();
@@ -48,8 +65,12 @@ describe('RecipeRating Component', () => {
     ).toBeInTheDocument();
   });
 
-  it('shows the rating form when button is clicked', () => {
+  it('shows the rating form when button is clicked', async () => {
     render(<RecipeRating {...mockProps} />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Rate this recipe')).toBeInTheDocument();
+    });
 
     const rateButton = screen.getByText('Rate this recipe');
     fireEvent.click(rateButton);
@@ -61,8 +82,12 @@ describe('RecipeRating Component', () => {
     expect(screen.getByText('Cancel')).toBeInTheDocument();
   });
 
-  it('closes the form when Cancel is clicked', () => {
+  it('closes the form when Cancel is clicked', async () => {
     render(<RecipeRating {...mockProps} />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Rate this recipe')).toBeInTheDocument();
+    });
 
     // Open form
     fireEvent.click(screen.getByText('Rate this recipe'));
@@ -73,8 +98,12 @@ describe('RecipeRating Component', () => {
     expect(screen.queryByText(`Rate "${mockProps.recipeName}"`)).not.toBeInTheDocument();
   });
 
-  it('disables submit button when no rating is selected', () => {
+  it('disables submit button when no rating is selected', async () => {
     render(<RecipeRating {...mockProps} />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Rate this recipe')).toBeInTheDocument();
+    });
 
     fireEvent.click(screen.getByText('Rate this recipe'));
 
@@ -85,12 +114,15 @@ describe('RecipeRating Component', () => {
   it('submits a review and displays it', async () => {
     render(<RecipeRating {...mockProps} />);
 
+    await waitFor(() => {
+      expect(screen.getByText('Rate this recipe')).toBeInTheDocument();
+    });
+
     // Open form
     fireEvent.click(screen.getByText('Rate this recipe'));
 
     // Click on the 4th star (using button role)
     const stars = screen.getAllByRole('button').filter((btn) => btn.querySelector('svg'));
-    // Stars are in the rating summary and in the form, find the form ones
     fireEvent.click(stars[8]); // 4th star in the form (after the 5 summary stars)
 
     // Fill in comment
@@ -114,89 +146,92 @@ describe('RecipeRating Component', () => {
     expect(screen.getByText('Reviews (1)')).toBeInTheDocument();
   });
 
-  it('displays existing reviews from localStorage', () => {
-    const existingReviews = [
-      {
-        id: 'test-review-1',
-        recipeSlug: 'adobong-baboy',
-        rating: 5,
-        comment: 'Best adobo ever!',
-        author: 'Lola Maria',
-        createdAt: new Date().toISOString(),
-      },
-    ];
-
-    localStorageMock.getItem.mockReturnValue(JSON.stringify(existingReviews));
+  it('displays existing reviews from API', async () => {
+    // Pre-populate mock reviews
+    mockReviews.push({
+      id: 'test-review-1',
+      recipe_slug: 'adobong-baboy',
+      rating: 5,
+      comment: 'Best adobo ever!',
+      author_name: 'Lola Maria',
+      created_at: new Date().toISOString(),
+    });
 
     render(<RecipeRating {...mockProps} />);
 
-    expect(screen.getByText('Lola Maria')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Lola Maria')).toBeInTheDocument();
+    });
     expect(screen.getByText('Best adobo ever!')).toBeInTheDocument();
     expect(screen.getByText('Reviews (1)')).toBeInTheDocument();
     expect(screen.getByText('5.0')).toBeInTheDocument();
   });
 
-  it('calculates average rating correctly', () => {
-    const existingReviews = [
+  it('calculates average rating correctly', async () => {
+    mockReviews.push(
       {
         id: 'test-review-1',
-        recipeSlug: 'adobong-baboy',
+        recipe_slug: 'adobong-baboy',
         rating: 4,
         comment: 'Good',
-        author: 'Chef A',
-        createdAt: new Date().toISOString(),
+        author_name: 'Chef A',
+        created_at: new Date().toISOString(),
       },
       {
         id: 'test-review-2',
-        recipeSlug: 'adobong-baboy',
+        recipe_slug: 'adobong-baboy',
         rating: 5,
         comment: 'Great',
-        author: 'Chef B',
-        createdAt: new Date().toISOString(),
-      },
-    ];
-
-    localStorageMock.getItem.mockReturnValue(JSON.stringify(existingReviews));
+        author_name: 'Chef B',
+        created_at: new Date().toISOString(),
+      }
+    );
 
     render(<RecipeRating {...mockProps} />);
 
-    expect(screen.getByText('4.5')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('4.5')).toBeInTheDocument();
+    });
     expect(screen.getByText('2 reviews')).toBeInTheDocument();
   });
 
-  it('only shows reviews for the current recipe', () => {
-    const mixedReviews = [
+  it('only shows reviews for the current recipe', async () => {
+    mockReviews.push(
       {
         id: 'review-1',
-        recipeSlug: 'adobong-baboy',
+        recipe_slug: 'adobong-baboy',
         rating: 5,
         comment: 'Love this adobo!',
-        author: 'Chef A',
-        createdAt: new Date().toISOString(),
+        author_name: 'Chef A',
+        created_at: new Date().toISOString(),
       },
       {
         id: 'review-2',
-        recipeSlug: 'sinigang',
+        recipe_slug: 'sinigang',
         rating: 4,
         comment: 'Great sinigang',
-        author: 'Chef B',
-        createdAt: new Date().toISOString(),
-      },
-    ];
-
-    localStorageMock.getItem.mockReturnValue(JSON.stringify(mixedReviews));
+        author_name: 'Chef B',
+        created_at: new Date().toISOString(),
+      }
+    );
 
     render(<RecipeRating {...mockProps} />);
 
-    expect(screen.getByText('Chef A')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Chef A')).toBeInTheDocument();
+    });
     expect(screen.getByText('Love this adobo!')).toBeInTheDocument();
     expect(screen.queryByText('Chef B')).not.toBeInTheDocument();
     expect(screen.queryByText('Great sinigang')).not.toBeInTheDocument();
     expect(screen.getByText('1 review')).toBeInTheDocument();
   });
 
-  it('shows rating text feedback when hovering/selecting stars', () => {
+  it('shows rating text feedback when hovering/selecting stars', async () => {
     render(<RecipeRating {...mockProps} />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Rate this recipe')).toBeInTheDocument();
+    });
 
     fireEvent.click(screen.getByText('Rate this recipe'));
 
@@ -217,6 +252,10 @@ describe('RecipeRating Component', () => {
 
   it('uses Anonymous Cook as default author name', async () => {
     render(<RecipeRating {...mockProps} />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Rate this recipe')).toBeInTheDocument();
+    });
 
     // Open form
     fireEvent.click(screen.getByText('Rate this recipe'));

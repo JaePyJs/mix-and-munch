@@ -6,6 +6,7 @@ import { ButtonLink } from '@/components/ui/Button';
 import { Tag } from '@/components/ui/Tag';
 import { getRecipeBySlug } from '@/lib/data';
 import { RecipeRating } from '@/components/recipes/RecipeRating';
+import { SaveRecipeButton } from '@/components/recipes/SaveRecipeButton';
 
 interface RecipePageProps {
   params: { slug: string };
@@ -85,6 +86,13 @@ export default function RecipeDetailPage({ params }: RecipePageProps) {
             >
               View source inspiration
             </a>
+          </div>
+          <div className="pt-2">
+            <SaveRecipeButton
+              recipeSlug={recipe.slug}
+              recipeTitle={recipe.title}
+              recipeDescription={recipe.description}
+            />
           </div>
         </div>
 
