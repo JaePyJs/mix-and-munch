@@ -7,16 +7,24 @@ import { Button } from '@/components/ui/Button';
 import { Tag } from '@/components/ui/Tag';
 import { Markdown } from '@/components/ui/Markdown';
 
+interface RecipeIngredient {
+  name: string;
+  amount: string;
+}
+
 interface SavedRecipe {
   id: string;
   title: string;
   description?: string;
-  content?: string; // Legacy field for AI recipes
+  content?: string; // For AI recipes
   image?: string;
   prepTime?: string;
   cookTime?: string;
   difficulty?: string;
   servings?: number;
+  ingredients?: RecipeIngredient[];
+  steps?: string[];
+  chef?: string;
   savedAt: string;
   type?: 'database' | 'ai-generated';
 }
@@ -176,7 +184,7 @@ export default function SavedRecipesPage() {
             <div className="space-y-4">
               {savedRecipes.map((recipe) => {
                 const isExpanded = expandedRecipe === recipe.id;
-                
+
                 return (
                   <div
                     key={recipe.id}
@@ -199,7 +207,7 @@ export default function SavedRecipesPage() {
                           </div>
                         )}
                       </div>
-                      
+
                       {/* Recipe Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
@@ -210,7 +218,8 @@ export default function SavedRecipesPage() {
                             {recipe.type === 'ai-generated' ? '🤖 AI' : '📖 Recipe'}
                           </Tag>
                           <span className="text-xs text-brand-gray-500">
-                            Saved {new Date(recipe.savedAt).toLocaleDateString('en-US', {
+                            Saved{' '}
+                            {new Date(recipe.savedAt).toLocaleDateString('en-US', {
                               month: 'short',
                               day: 'numeric',
                             })}
@@ -223,49 +232,160 @@ export default function SavedRecipesPage() {
                           {recipe.description || 'Delicious Filipino recipe'}
                         </p>
                         {/* Meta info for database recipes */}
-                        {recipe.type === 'database' && (recipe.prepTime || recipe.cookTime) && (
-                          <div className="flex gap-3 mt-1 text-xs text-brand-gray-500">
-                            {recipe.prepTime && <span>⏱️ {recipe.prepTime}</span>}
-                            {recipe.cookTime && <span>🍳 {recipe.cookTime}</span>}
-                            {recipe.servings && <span>👥 {recipe.servings}</span>}
-                          </div>
-                        )}
+                        {recipe.type === 'database' &&
+                          (recipe.prepTime || recipe.cookTime) && (
+                            <div className="flex gap-3 mt-1 text-xs text-brand-gray-500">
+                              {recipe.prepTime && <span>⏱️ {recipe.prepTime}</span>}
+                              {recipe.cookTime && <span>🍳 {recipe.cookTime}</span>}
+                              {recipe.servings && <span>👥 {recipe.servings}</span>}
+                            </div>
+                          )}
                       </div>
-                      
+
                       {/* Actions */}
                       <div className="flex items-center gap-2 flex-shrink-0">
-                        {recipe.type === 'database' ? (
-                          <Link href={`/recipes/${recipe.id}`}>
-                            <Button className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90">
-                              View
-                            </Button>
-                          </Link>
-                        ) : (
-                          <Button
-                            onClick={() => setExpandedRecipe(isExpanded ? null : recipe.id)}
-                            className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90"
-                          >
-                            {isExpanded ? 'Close' : 'View'}
-                          </Button>
-                        )}
+                        <Button
+                          onClick={() => setExpandedRecipe(isExpanded ? null : recipe.id)}
+                          className="bg-brand-lime text-brand-gray-900 hover:bg-brand-lime/90"
+                        >
+                          {isExpanded ? 'Close' : 'View'}
+                        </Button>
                         <button
                           onClick={() => deleteRecipe(recipe.id)}
                           className="p-2 rounded-lg text-red-400 hover:bg-red-500/20 transition-colors"
                           aria-label="Delete recipe"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
                           </svg>
                         </button>
                       </div>
                     </div>
-                    
-                    {/* Expanded Content - AI Recipes */}
-                    {isExpanded && recipe.content && (
+
+                    {/* Expanded Content */}
+                    {isExpanded && (
                       <div className="border-t border-brand-gray-800/70 p-6 bg-brand-gray-900/60">
-                        <div className="prose prose-invert prose-lime max-w-none">
-                          <Markdown content={recipe.content} />
-                        </div>
+                        {/* Database Recipe - Show ingredients and steps */}
+                        {recipe.type === 'database' &&
+                        recipe.ingredients &&
+                        recipe.steps ? (
+                          <div className="space-y-6">
+                            {/* Recipe Header */}
+                            <div className="flex flex-wrap gap-4 text-sm text-brand-gray-400">
+                              {recipe.prepTime && (
+                                <span className="flex items-center gap-1">
+                                  <span>⏱️</span> Prep: {recipe.prepTime}
+                                </span>
+                              )}
+                              {recipe.cookTime && (
+                                <span className="flex items-center gap-1">
+                                  <span>🍳</span> Cook: {recipe.cookTime}
+                                </span>
+                              )}
+                              {recipe.servings && (
+                                <span className="flex items-center gap-1">
+                                  <span>👥</span> Serves {recipe.servings}
+                                </span>
+                              )}
+                              {recipe.difficulty && (
+                                <span className="flex items-center gap-1">
+                                  <span>📊</span> {recipe.difficulty}
+                                </span>
+                              )}
+                              {recipe.chef && (
+                                <span className="flex items-center gap-1">
+                                  <span>👨‍🍳</span> Chef {recipe.chef}
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Description */}
+                            {recipe.description && (
+                              <p className="text-brand-gray-300">{recipe.description}</p>
+                            )}
+
+                            <div className="grid md:grid-cols-2 gap-6">
+                              {/* Ingredients */}
+                              <div className="space-y-3">
+                                <h4 className="text-lg font-semibold text-brand-lime flex items-center gap-2">
+                                  <span>🥘</span> Ingredients
+                                </h4>
+                                <ul className="space-y-2">
+                                  {recipe.ingredients.map((ing, idx) => (
+                                    <li
+                                      key={idx}
+                                      className="flex items-start gap-2 text-brand-gray-200"
+                                    >
+                                      <span className="text-brand-lime mt-1.5">•</span>
+                                      <span>
+                                        <span className="text-brand-lime font-medium">
+                                          {ing.amount}
+                                        </span>{' '}
+                                        {ing.name}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              {/* Instructions */}
+                              <div className="space-y-3">
+                                <h4 className="text-lg font-semibold text-brand-lime flex items-center gap-2">
+                                  <span>👨‍🍳</span> Instructions
+                                </h4>
+                                <ol className="space-y-3">
+                                  {recipe.steps.map((step, idx) => (
+                                    <li
+                                      key={idx}
+                                      className="flex gap-3 text-brand-gray-200"
+                                    >
+                                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-lime/20 text-brand-lime text-sm flex items-center justify-center font-semibold">
+                                        {idx + 1}
+                                      </span>
+                                      <span>
+                                        {typeof step === 'string'
+                                          ? step
+                                          : (step as { instruction?: string })
+                                              .instruction || ''}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ol>
+                              </div>
+                            </div>
+
+                            {/* Link to full recipe page */}
+                            <div className="pt-4 border-t border-brand-gray-800/50">
+                              <Link href={`/recipes/${recipe.id}`}>
+                                <Button
+                                  variant="secondary"
+                                  className="border-brand-lime/30 text-brand-lime hover:bg-brand-lime/10"
+                                >
+                                  View Full Recipe Page →
+                                </Button>
+                              </Link>
+                            </div>
+                          </div>
+                        ) : recipe.content ? (
+                          /* AI Recipe - Show markdown content */
+                          <div className="prose prose-invert prose-lime max-w-none">
+                            <Markdown content={recipe.content} />
+                          </div>
+                        ) : (
+                          <p className="text-brand-gray-400">
+                            No recipe details available.
+                          </p>
+                        )}
                       </div>
                     )}
                   </div>

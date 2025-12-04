@@ -3,6 +3,11 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 
+interface RecipeIngredient {
+  name: string;
+  amount: string;
+}
+
 interface SaveRecipeButtonProps {
   recipeSlug: string;
   recipeTitle: string;
@@ -12,6 +17,9 @@ interface SaveRecipeButtonProps {
   cookTime?: string;
   difficulty?: string;
   servings?: number;
+  ingredients?: RecipeIngredient[];
+  steps?: string[];
+  chef?: string;
 }
 
 export function SaveRecipeButton({
@@ -23,6 +31,9 @@ export function SaveRecipeButton({
   cookTime,
   difficulty,
   servings,
+  ingredients,
+  steps,
+  chef,
 }: SaveRecipeButtonProps) {
   const [isSaved, setIsSaved] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -49,8 +60,11 @@ export function SaveRecipeButton({
       cookTime: cookTime || '',
       difficulty: difficulty || 'Medium',
       servings: servings || 4,
+      ingredients: ingredients || [],
+      steps: steps || [],
+      chef: chef || '',
       savedAt: new Date().toISOString(),
-      type: 'database', // Mark as from database vs AI-generated
+      type: 'database' as const,
     };
 
     const existingSaved = localStorage.getItem('savedRecipes');

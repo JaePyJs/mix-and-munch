@@ -97,6 +97,9 @@ export default function RecipeDetailPage({ params }: RecipePageProps) {
               cookTime={recipe.cookTime}
               difficulty={recipe.difficulty}
               servings={recipe.servings}
+              ingredients={recipe.ingredients}
+              steps={recipe.steps}
+              chef={recipe.chef}
             />
           </div>
         </div>
