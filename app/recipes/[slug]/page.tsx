@@ -5,7 +5,6 @@ import type { Metadata } from 'next';
 import { ButtonLink } from '@/components/ui/Button';
 import { Tag } from '@/components/ui/Tag';
 import { getRecipeBySlug } from '@/lib/data';
-import { RecipeRating } from '@/components/recipes/RecipeRating';
 import { SaveRecipeButton } from '@/components/recipes/SaveRecipeButton';
 
 interface RecipePageProps {
@@ -233,14 +232,6 @@ export default function RecipeDetailPage({ params }: RecipePageProps) {
           </div>
         </section>
       )}
-
-      {/* User Reviews & Ratings */}
-      <section className="rounded-2xl sm:rounded-3xl border border-brand-gray-800/70 bg-brand-gray-900/40 p-4 sm:p-6 lg:p-8">
-        <h2 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6">
-          Reviews & Ratings
-        </h2>
-        <RecipeRating recipeSlug={recipe.slug} recipeName={recipe.title} />
-      </section>
     </div>
   );
 }
